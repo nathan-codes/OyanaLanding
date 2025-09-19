@@ -4,10 +4,78 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 export default function WaitlistPage() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async () => {
+    if (!email) return;
+
+    setIsLoading(true);
+    setError("");
+
+    // Show processing toast
+    toast.loading("Processing your request...", {
+      id: "signup-process",
+    });
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "waitlist",
+          type: "waitlist",
+        }),
+      });
+
+      if (response.ok) {
+        // Simulate processing steps
+        setTimeout(() => {
+          toast.success("Email validated successfully!", {
+            id: "signup-process",
+          });
+        }, 1000);
+
+        setTimeout(() => {
+          toast.success("Adding you to the waitlist...", {
+            id: "signup-process",
+          });
+        }, 2000);
+
+        setTimeout(() => {
+          toast.success("Welcome to Oyana! 🎉", {
+            id: "signup-process",
+            description: "We'll notify you when we launch.",
+          });
+          setSubmitted(true);
+          setEmail("");
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        toast.error("Failed to join waitlist", {
+          id: "signup-process",
+          description: errorData.error || "Please try again.",
+        });
+        setError(errorData.error || "Failed to sign up");
+      }
+    } catch (err) {
+      toast.error("Network error", {
+        id: "signup-process",
+        description: "Please check your connection and try again.",
+      });
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black">
@@ -33,10 +101,11 @@ export default function WaitlistPage() {
               className="bg-zinc-900 border-white/10 text-white"
             />
             <Button
-              onClick={() => setSubmitted(true)}
-              className="bg-primary text-black hover:brightness-110"
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="bg-primary text-black hover:brightness-110 disabled:opacity-50"
             >
-              Join Waitlist
+              {isLoading ? "Joining..." : "Join Waitlist"}
             </Button>
           </div>
           {submitted && (
@@ -44,6 +113,7 @@ export default function WaitlistPage() {
               Thanks! We'll be in touch soon.
             </div>
           )}
+          {error && <div className="mt-3 text-red-500">{error}</div>}
           <div className="mt-10">
             <a href="#demo" className="text-white/70 hover:text-white">
               Watch Demo

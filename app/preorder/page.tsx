@@ -39,13 +39,30 @@ export default function PreOrderPage() {
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
     try {
-      // For now, just log the data and show success
-      console.log("Pre-order submission:", data);
-      toast.success("Pre-order submitted successfully!");
-      reset();
+      const response = await fetch("/api/preorder", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          source: "preorder-page",
+          type: "preorder",
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Pre-order submitted successfully!");
+        reset();
+      } else {
+        const errorData = await response.json();
+        toast.error(
+          errorData.error || "Failed to submit pre-order. Please try again."
+        );
+      }
     } catch (error) {
       console.error("Error submitting pre-order:", error);
-      toast.error("Failed to submit pre-order. Please try again.");
+      toast.error("Network error. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

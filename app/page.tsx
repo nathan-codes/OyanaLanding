@@ -13,6 +13,7 @@ import {
   DialogDescription,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -43,27 +44,14 @@ function Section({
 }
 
 function Nav() {
-  const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
       <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
         <Link href="/" className="font-extrabold text-xl tracking-tight">
           <span className="text-primary">Oyana</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8 text-sm text-white/70">
-          <a href="#" className="hover:text-white transition-colors">
-            About
-          </a>
-          <a href="#" className="hover:text-white transition-colors">
-            Feedback
-          </a>
-          <a href="#" className="hover:text-white transition-colors">
-            Community
-          </a>
-          <Link href="/waitlist" className="hover:text-white transition-colors">
-            Waitlist
-          </Link>
-        </nav>
         <div className="hidden md:flex items-center gap-3">
           <Dialog>
             <DialogTrigger asChild>
@@ -83,13 +71,79 @@ function Nav() {
                   </DialogDescription>
                 </DialogHeader>
                 <form
-                  onSubmit={(e) => {
+                  onSubmit={async (e) => {
                     e.preventDefault();
                     const form = e.target as HTMLFormElement;
                     const fd = new FormData(form);
                     const email = String(fd.get("email") || "");
-                    console.log("waitlist:", email);
-                    form.reset();
+
+                    if (!email) return;
+
+                    setIsSubmitting(true);
+                    setSubmitMessage("");
+
+                    // Show processing toast
+                    toast.loading("Processing your request...", {
+                      id: "signup-process",
+                    });
+
+                    try {
+                      const response = await fetch("/api/waitlist", {
+                        method: "POST",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                          email,
+                          source: "main-page-dialog",
+                          type: "waitlist",
+                        }),
+                      });
+
+                      if (response.ok) {
+                        // Simulate processing steps
+                        setTimeout(() => {
+                          toast.success("Email validated successfully!", {
+                            id: "signup-process",
+                          });
+                        }, 500);
+
+                        setTimeout(() => {
+                          toast.success("Adding you to the waitlist...", {
+                            id: "signup-process",
+                          });
+                        }, 1500);
+
+                        setTimeout(() => {
+                          toast.success("Welcome to Oyana! 🎉", {
+                            id: "signup-process",
+                            description: "We'll notify you when we launch.",
+                          });
+                          setSubmitMessage(
+                            "Thanks! We'll notify you when we launch."
+                          );
+                          form.reset();
+                        }, 2500);
+                      } else {
+                        const errorData = await response.json();
+                        toast.error("Failed to join waitlist", {
+                          id: "signup-process",
+                          description: errorData.error || "Please try again.",
+                        });
+                        setSubmitMessage(
+                          errorData.error || "Failed to sign up"
+                        );
+                      }
+                    } catch (err) {
+                      toast.error("Network error", {
+                        id: "signup-process",
+                        description:
+                          "Please check your connection and try again.",
+                      });
+                      setSubmitMessage("Network error. Please try again.");
+                    } finally {
+                      setIsSubmitting(false);
+                    }
                   }}
                   className="mt-5 flex gap-3"
                 >
@@ -102,11 +156,23 @@ function Nav() {
                   />
                   <Button
                     type="submit"
-                    className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110"
+                    disabled={isSubmitting}
+                    className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110 disabled:opacity-50"
                   >
-                    Get Invite
+                    {isSubmitting ? "Joining..." : "Get Invite"}
                   </Button>
                 </form>
+                {submitMessage && (
+                  <div
+                    className={`mt-3 text-sm ${
+                      submitMessage.includes("Thanks")
+                        ? "text-primary"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {submitMessage}
+                  </div>
+                )}
               </div>
               <div className="h-px w-full bg-white/10" />
               <div className="p-4 text-center text-xs text-white/70">
@@ -115,28 +181,7 @@ function Nav() {
             </DialogContent>
           </Dialog>
         </div>
-        <button className="md:hidden text-white" onClick={() => setOpen(!open)}>
-          ☰
-        </button>
       </div>
-      {open && (
-        <div className="md:hidden bg-black/70 backdrop-blur">
-          <div className="px-4 py-3 space-y-2 text-white/80">
-            <a href="#" className="block">
-              About
-            </a>
-            <a href="#" className="block">
-              Feedback
-            </a>
-            <a href="#" className="block">
-              Community
-            </a>
-            <Link href="/waitlist" className="block">
-              Waitlist
-            </Link>
-          </div>
-        </div>
-      )}
     </header>
   );
 }
@@ -266,7 +311,7 @@ function Hero() {
           >
             <div className="relative overflow-hidden rounded-xl">
               <img
-                src="/images/DashboardPreview.PNG"
+                src="/images/Oyana1Preview.PNG"
                 alt="Oyana dashboard preview"
                 className="w-full h-[52vh] object-cover object-top"
               />

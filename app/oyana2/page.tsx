@@ -5,19 +5,82 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function Oyana2Page() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setSubmitted(true);
+
+    setIsLoading(true);
+    setError("");
+
+    // Show processing toast
+    toast.loading("Processing your request...", {
+      id: "signup-process",
+    });
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "oyana2",
+          type: "waitlist",
+        }),
+      });
+
+      if (response.ok) {
+        // Simulate processing steps
+        setTimeout(() => {
+          toast.success("Email validated successfully!", {
+            id: "signup-process",
+          });
+        }, 1000);
+
+        setTimeout(() => {
+          toast.success("Adding you to the waitlist...", {
+            id: "signup-process",
+          });
+        }, 2000);
+
+        setTimeout(() => {
+          toast.success("Welcome to Oyana! 🎉", {
+            id: "signup-process",
+            description: "We'll notify you when we launch.",
+          });
+          setSubmitted(true);
+          setEmail("");
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        toast.error("Failed to join waitlist", {
+          id: "signup-process",
+          description: errorData.error || "Please try again.",
+        });
+        setError(errorData.error || "Failed to sign up");
+      }
+    } catch (err) {
+      toast.error("Network error", {
+        id: "signup-process",
+        description: "Please check your connection and try again.",
+      });
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-black">
       <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
         <div className="grid min-h-[70vh] items-center gap-12 md:grid-cols-2">
           <motion.div
@@ -25,26 +88,26 @@ export default function Oyana2Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center gap-2 text-zinc-900">
-              <div className="h-7 w-7 rounded-md bg-zinc-900/90" />
+            <div className="flex items-center gap-2 text-white">
+              <div className="h-7 w-7 rounded-md bg-primary/90" />
               <span className="text-2xl font-semibold">Oyana</span>
             </div>
 
-            <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 md:text-5xl">
+            <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl">
               Turn viewers into fans.
               <span className="block md:inline"> </span>
-              <span className="text-emerald-700 underline decoration-4 underline-offset-4 decoration-emerald-600">
+              <span className="text-primary underline decoration-4 underline-offset-4 decoration-primary">
                 Boost retention with Oyana.
               </span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-base md:text-lg text-zinc-600">
+            <p className="mt-4 max-w-xl text-base md:text-lg text-white/70">
               See where attention drops, why it happens, and exactly how to fix
               it—so more people watch to the end.
             </p>
 
             <motion.ul
-              className="mt-5 grid max-w-xl gap-3 text-zinc-700"
+              className="mt-5 grid max-w-xl gap-3 text-white/80"
               initial="hidden"
               animate="show"
               variants={{
@@ -80,13 +143,14 @@ export default function Oyana2Page() {
                 onChange={(e) => setEmail(e.target.value)}
                 type="email"
                 placeholder="you@youremail.com"
-                className="h-12 bg-white text-zinc-900 placeholder:text-zinc-400"
+                className="h-12 bg-zinc-900 border-white/10 text-white placeholder:text-white/40"
               />
               <Button
                 type="submit"
-                className="h-12 bg-primary text-black hover:brightness-105"
+                disabled={isLoading}
+                className="h-12 bg-primary text-black hover:brightness-105 disabled:opacity-50"
               >
-                Join the waitlist
+                {isLoading ? "Joining..." : "Join the waitlist"}
               </Button>
             </form>
             {submitted && (
@@ -94,11 +158,12 @@ export default function Oyana2Page() {
                 Thanks! We will notify you.
               </div>
             )}
+            {error && <div className="mt-3 text-red-500">{error}</div>}
 
-            <div className="mt-4 flex items-center gap-4 text-zinc-500">
+            <div className="mt-4 flex items-center gap-4 text-white/50">
               <span className="text-sm">Follow us</span>
-              <div className="h-5 w-5 rounded-full bg-zinc-200" />
-              <div className="h-5 w-5 rounded-full bg-zinc-200" />
+              <div className="h-5 w-5 rounded-full bg-white/20" />
+              <div className="h-5 w-5 rounded-full bg-white/20" />
             </div>
           </motion.div>
 
@@ -109,18 +174,15 @@ export default function Oyana2Page() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           >
             <motion.div
-              className="h-[78vh] w-[66vw] ml-auto"
+              className="h-[78vh] w-[90vw] md:w-[66vw] ml-auto md:ml-auto"
               style={{ marginRight: "calc((100vw - 100%)/-2)" }}
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
-              <div className="h-full rounded-3xl border border-emerald-300 bg-gradient-to-br from-emerald-500 via-emerald-300 to-lime-300 p-6 shadow-[0_30px_80px_-20px_rgba(16,185,129,0.35)] overflow-hidden">
-                <Image
-                  src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop"
-                  alt="Dashboard preview"
-                  width={2000}
-                  height={1200}
-                  priority
+              <div className="h-full rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 p-6 shadow-[0_30px_80px_-20px_rgba(163,230,53,0.35)] overflow-hidden">
+                <img
+                  src="/images/Oyana2Preview2.PNG"
+                  alt="Oyana dashboard preview"
                   className="h-full w-full object-cover rounded-3xl overflow-hidden"
                   style={{ borderRadius: "inherit" }}
                 />

@@ -1,0 +1,14 @@
+# Google Sheets Configuration
+# Copy this to .env.local and fill in your values
+
+# Your Google Sheet ID (from the URL)
+GOOGLE_SHEET_ID=your_sheet_id_here
+
+# Service account email (from the JSON file)
+GOOGLE_SERVICE_ACCOUNT_EMAIL=oyana-sheets-service@your-project.iam.gserviceaccount.com
+
+# Private key (from the JSON file, keep the quotes and \n characters)
+GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour private key here\n-----END PRIVATE KEY-----\n"
+
+# Your app URL (for production)
+NEXT_PUBLIC_BASE_URL=http://localhost:3000

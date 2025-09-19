@@ -5,15 +5,78 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 
 export default function WaitlistNewPage() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
-    setSubmitted(true);
+
+    setIsLoading(true);
+    setError("");
+
+    // Show processing toast
+    toast.loading("Processing your request...", {
+      id: "signup-process",
+    });
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          source: "wailistnew",
+          type: "waitlist",
+        }),
+      });
+
+      if (response.ok) {
+        // Simulate processing steps
+        setTimeout(() => {
+          toast.success("Email validated successfully!", {
+            id: "signup-process",
+          });
+        }, 1000);
+
+        setTimeout(() => {
+          toast.success("Adding you to the waitlist...", {
+            id: "signup-process",
+          });
+        }, 2000);
+
+        setTimeout(() => {
+          toast.success("Welcome to Oyana! 🎉", {
+            id: "signup-process",
+            description: "We'll notify you when we launch.",
+          });
+          setSubmitted(true);
+          setEmail("");
+        }, 3000);
+      } else {
+        const errorData = await response.json();
+        toast.error("Failed to join waitlist", {
+          id: "signup-process",
+          description: errorData.error || "Please try again.",
+        });
+        setError(errorData.error || "Failed to sign up");
+      }
+    } catch (err) {
+      toast.error("Network error", {
+        id: "signup-process",
+        description: "Please check your connection and try again.",
+      });
+      setError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -84,9 +147,10 @@ export default function WaitlistNewPage() {
               />
               <Button
                 type="submit"
-                className="h-12 bg-primary text-black hover:brightness-105"
+                disabled={isLoading}
+                className="h-12 bg-primary text-black hover:brightness-105 disabled:opacity-50"
               >
-                Join the waitlist
+                {isLoading ? "Joining..." : "Join the waitlist"}
               </Button>
             </form>
             {submitted && (
@@ -94,6 +158,7 @@ export default function WaitlistNewPage() {
                 Thanks! We will notify you.
               </div>
             )}
+            {error && <div className="mt-3 text-red-500">{error}</div>}
 
             <div className="mt-4 flex items-center gap-4 text-zinc-500">
               <span className="text-sm">Follow us</span>
