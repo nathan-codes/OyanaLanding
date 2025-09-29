@@ -397,10 +397,13 @@ function Hero() {
             style={{ boxShadow: "0 30px 120px -20px rgba(163,230,53,0.25)" }}
           >
             <div className="relative overflow-hidden rounded-xl">
-              <img
-                src="/images/Oyana1Preview.PNG"
-                alt="Oyana dashboard preview"
+              <video
+                src="/OyanaPreviewVideo.mp4"
                 className="w-full h-[52vh] object-cover object-top"
+                autoPlay
+                muted
+                loop
+                playsInline
               />
               {/* Removed dark overlay to make preview brighter and clearer */}
             </div>

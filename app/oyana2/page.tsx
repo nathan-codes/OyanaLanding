@@ -191,11 +191,14 @@ export default function Oyana2Page() {
                 className="h-full rounded-3xl p-6 overflow-hidden card"
                 style={{ boxShadow: "0 30px 80px -20px rgba(0,151,117,0.35)" }}
               >
-                <img
-                  src="/images/Oyana2Preview2.PNG"
-                  alt="Oyana dashboard preview"
+                <video
+                  src="/OyanaPreviewVideo.mp4"
                   className="h-full w-full object-cover rounded-3xl overflow-hidden"
                   style={{ borderRadius: "inherit" }}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
                 />
               </div>
             </motion.div>
