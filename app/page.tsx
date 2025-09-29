@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -49,8 +50,15 @@ function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
       <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="font-extrabold text-xl tracking-tight">
-          <span className="text-primary">Oyana</span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/OyanaFinalLogo.png"
+            alt="Oyana logo"
+            width={155}
+            height={36}
+            className="h-9 w-auto"
+            priority
+          />
         </Link>
         <div className="hidden md:flex items-center gap-3">
           <Dialog>
@@ -187,6 +195,8 @@ function Nav() {
 }
 
 function Hero() {
+  const [isSubmittingHero, setIsSubmittingHero] = useState(false);
+  const [submitMessageHero, setSubmitMessageHero] = useState("");
   return (
     <div className="relative h-screen overflow-hidden bg-black">
       {/* Soft gradient aura */}
@@ -219,8 +229,8 @@ function Hero() {
               transition={{ duration: 0.6, delay: 0.05 }}
               className="text-5xl md:text-[64px] font-semibold tracking-tight leading-[1]"
             >
-              Stop Losing Viewers. <br />
-              <span className="text-primary">Grow Watch Time</span>.
+              Stop Guessing. <br />
+              <span className="text-primary">Start Growing</span>.
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -228,9 +238,8 @@ function Hero() {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl mx-auto"
             >
-              Oyana analyzes your YouTube retention, pinpoints drop‑offs by
-              second, and turns data into editor‑ready fixes for pacing,
-              visuals, and hooks — so more viewers finish your videos.
+              The only video analytics platform built specifically for creators
+              who want to grow their audience and increase watch time.
             </motion.p>
 
             <motion.div
@@ -257,13 +266,79 @@ function Hero() {
                       </DialogDescription>
                     </DialogHeader>
                     <form
-                      onSubmit={(e) => {
+                      onSubmit={async (e) => {
                         e.preventDefault();
                         const form = e.target as HTMLFormElement;
                         const fd = new FormData(form);
                         const email = String(fd.get("email") || "");
-                        console.log("waitlist:", email);
-                        form.reset();
+                        if (!email) return;
+
+                        setIsSubmittingHero(true);
+                        setSubmitMessageHero("");
+
+                        toast.loading("Processing your request...", {
+                          id: "signup-process-hero",
+                        });
+
+                        try {
+                          const response = await fetch("/api/waitlist", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              email,
+                              source: "main-hero-dialog",
+                              type: "waitlist",
+                            }),
+                          });
+
+                          if (response.ok) {
+                            setTimeout(() => {
+                              toast.success("Email validated successfully!", {
+                                id: "signup-process-hero",
+                              });
+                            }, 500);
+
+                            setTimeout(() => {
+                              toast.success("Adding you to the waitlist...", {
+                                id: "signup-process-hero",
+                              });
+                            }, 1500);
+
+                            setTimeout(() => {
+                              toast.success("Welcome to Oyana! 🎉", {
+                                id: "signup-process-hero",
+                                description: "We'll notify you when we launch.",
+                              });
+                              setSubmitMessageHero(
+                                "Thanks! We'll notify you when we launch."
+                              );
+                              form.reset();
+                            }, 2500);
+                          } else {
+                            const errorData = await response.json();
+                            toast.error("Failed to join waitlist", {
+                              id: "signup-process-hero",
+                              description:
+                                errorData.error || "Please try again.",
+                            });
+                            setSubmitMessageHero(
+                              errorData.error || "Failed to sign up"
+                            );
+                          }
+                        } catch (err) {
+                          toast.error("Network error", {
+                            id: "signup-process-hero",
+                            description:
+                              "Please check your connection and try again.",
+                          });
+                          setSubmitMessageHero(
+                            "Network error. Please try again."
+                          );
+                        } finally {
+                          setIsSubmittingHero(false);
+                        }
                       }}
                       className="mt-5 flex gap-3"
                     >
@@ -276,11 +351,23 @@ function Hero() {
                       />
                       <Button
                         type="submit"
-                        className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110"
+                        disabled={isSubmittingHero}
+                        className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110 disabled:opacity-50"
                       >
-                        Get Invite
+                        {isSubmittingHero ? "Joining..." : "Get Invite"}
                       </Button>
                     </form>
+                    {submitMessageHero && (
+                      <div
+                        className={`mt-3 text-sm ${
+                          submitMessageHero.includes("Thanks")
+                            ? "text-primary"
+                            : "text-red-500"
+                        }`}
+                      >
+                        {submitMessageHero}
+                      </div>
+                    )}
                   </div>
                   <div className="h-px w-full bg-white/10" />
                   <div className="p-4 text-center text-xs text-white/70">

@@ -82,39 +82,48 @@ export default function Oyana3Page() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen" style={{ background: "var(--surface)" }}>
       {/* Header with Oyana branding */}
-      <header className="fixed inset-x-0 top-0 z-50 bg-transparent">
+      <header className="relative lg:fixed inset-x-0 top-0 z-50 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <div className="font-extrabold text-xl tracking-tight">
-            <span className="text-primary">Oyana</span>
+            <Image
+              src="/images/OyanaFinalLogo.png"
+              alt="Oyana logo"
+              width={170}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
           </div>
         </div>
       </header>
 
-      <div className="mx-auto max-w-7xl px-4 py-20 md:py-24">
-        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+      <div className="mx-auto max-w-7xl px-4 pt-8 pb-16 md:py-24 min-h-screen flex items-start md:items-center">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16 w-full">
           {/* Left column */}
-          <div className="pb-10 md:pb-0 md:pr-8 md:border-r border-white/10">
+          <div className="order-2 md:order-1 pb-8 md:pb-0 md:pr-8 md:border-r border-white/10">
             <div className="text-white">
               <h1 className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight">
-                All‑in‑one retention intelligence for your videos.
+                Meet Oyana and discover hidden patterns in viewer behavior
               </h1>
             </div>
 
             <div className="mt-8 space-y-8">
               <div>
                 <div className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-black text-sm">
+                  <span
+                    className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
+                    style={{ background: "var(--gossamer-600)" }}
+                  >
                     ✓
                   </span>
                   <div>
                     <div className="font-semibold text-white">
-                      See the right moments, every time.
+                      Actionable insights
                     </div>
-                    <p className="mt-2 text-white/70 text-sm md:text-base max-w-xl">
-                      Second‑by‑second attention heatmaps with instant context,
-                      so you know exactly where viewers drop and why.
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
+                      Boost retention without sacrificing creativity
                     </p>
                   </div>
                 </div>
@@ -122,17 +131,19 @@ export default function Oyana3Page() {
 
               <div>
                 <div className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-black text-sm">
+                  <span
+                    className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
+                    style={{ background: "var(--gossamer-600)" }}
+                  >
                     ✓
                   </span>
                   <div>
                     <div className="font-semibold text-white">
-                      Ask Oyana what to fix.
+                      Trustworthy partner
                     </div>
-                    <p className="mt-2 text-white/70 text-sm md:text-base max-w-xl">
-                      AI turns your video + transcript into editor‑ready tasks —
-                      hooks, pacing, visuals, b‑roll, captions — with
-                      timestamps.
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
+                      Combines technical expertise, reliability, and genuine
+                      investment in your creative vision
                     </p>
                   </div>
                 </div>
@@ -140,16 +151,19 @@ export default function Oyana3Page() {
 
               <div>
                 <div className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-primary text-black text-sm">
+                  <span
+                    className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
+                    style={{ background: "var(--gossamer-600)" }}
+                  >
                     ✓
                   </span>
                   <div>
                     <div className="font-semibold text-white">
                       Safe and secure.
                     </div>
-                    <p className="mt-2 text-white/70 text-sm md:text-base max-w-xl">
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
                       Your videos and transcripts stay private. Export insights
-                      — not raw content — to share with your team.
+                      - not raw content - to share with your team.
                     </p>
                   </div>
                 </div>
@@ -158,28 +172,37 @@ export default function Oyana3Page() {
           </div>
 
           {/* Right column */}
-          <div className="md:pl-8 relative">
+          <div className="order-1 md:order-2 md:pl-8 relative">
             <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-white">
-              Join our journey and
-              <br className="hidden md:block" /> get early access
+              Join other creators
+              <br className="hidden md:block" /> and get early access
             </h2>
-            <p className="mt-4 text-white/70 max-w-md">
+            <p className="mt-4 text-zinc-300 max-w-md">
               Join the waitlist to get early access to Oyana and turn more views
               into watch time.
             </p>
 
             {/* Avatars */}
-            <div className="mt-6 flex -space-x-3">
-              {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+            <div className="mt-6 flex items-center -space-x-3 md:-space-x-4">
+              {[
+                "/images/avatars/avatar1.png",
+                "/images/avatars/avatar2.png",
+                "/images/avatars/avatar3.png",
+                "/images/avatars/avatar4.png",
+                "/images/avatars/avatar5.png",
+                "/images/avatars/avatar6.png",
+              ].map((src, i) => (
                 <div
-                  key={i}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full ring-2 ring-black bg-zinc-800 overflow-hidden"
+                  key={src}
+                  className="h-12 w-12 md:h-14 md:w-14 rounded-full overflow-hidden ring-2 ring-black/80 shadow-[0_6px_20px_rgba(0,0,0,0.35)]"
+                  style={{ background: "#0f141a" }}
                 >
                   <Image
-                    src={`https://i.pravatar.cc/80?img=${i}`}
-                    alt="avatar"
-                    width={40}
-                    height={40}
+                    src={src}
+                    alt="creator avatar"
+                    width={56}
+                    height={56}
+                    className="h-full w-full object-cover"
                   />
                 </div>
               ))}
@@ -191,44 +214,37 @@ export default function Oyana3Page() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Tell us your name..."
-                className="h-12 border-white/10 focus-visible:ring-primary bg-zinc-900 text-white placeholder:text-white/40"
+                className="h-12 input placeholder:text-white/40"
               />
               <Input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address..."
-                className="h-12 border-white/10 bg-zinc-900 text-white placeholder:text-white/40"
+                className="h-12 input placeholder:text-white/40"
               />
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="h-12 w-full bg-primary text-black hover:brightness-110 disabled:opacity-50"
+                className="h-12 w-full btn btn-primary disabled:opacity-50"
               >
                 {isLoading ? "Joining..." : "Continue"}
               </Button>
               {submitted && (
-                <div className="text-sm text-primary">
+                <div
+                  className="text-sm"
+                  style={{ color: "var(--gossamer-600)" }}
+                >
                   Thanks! We'll email you when we launch.
                 </div>
               )}
               {error && <div className="text-sm text-red-500">{error}</div>}
             </form>
 
-            <p className="mt-6 text-xs text-white/50 max-w-md">
-              By clicking "continue" you agree to our
-              <a className="underline decoration-dotted ml-1" href="#">
-                Privacy Policy
-              </a>
-              <span className="mx-1">and</span>
-              <a className="underline decoration-dotted" href="#">
-                Terms of Use
-              </a>
-              .
-            </p>
+            {/* Removed privacy policy/terms blurb per request */}
 
             {/* Decorative starburst */}
-            <div className="pointer-events-none absolute -bottom-10 -right-6 opacity-60">
+            <div className="hidden lg:block pointer-events-none absolute -bottom-10 -right-6 opacity-60">
               <svg
                 width="80"
                 height="80"
@@ -236,7 +252,7 @@ export default function Oyana3Page() {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g stroke="#a3e635" strokeWidth="2">
+                <g stroke="var(--gossamer-600)" strokeWidth="2">
                   {Array.from({ length: 16 }).map((_, idx) => {
                     const angle = (idx * Math.PI) / 8;
                     const x = 50 + Math.cos(angle) * 40;
@@ -244,7 +260,7 @@ export default function Oyana3Page() {
                     return <line key={idx} x1="50" y1="50" x2={x} y2={y} />;
                   })}
                 </g>
-                <circle cx="50" cy="50" r="3" fill="#a3e635" />
+                <circle cx="50" cy="50" r="3" fill="var(--gossamer-600)" />
               </svg>
             </div>
           </div>

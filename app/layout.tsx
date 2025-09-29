@@ -6,6 +6,11 @@ export const metadata: Metadata = {
   title: "Oyana — Turn Watch Data Into Watch Time",
   description:
     "Oyana analyzes YouTube retention and delivers editor-ready, time-stamped fixes to boost watch time.",
+  icons: {
+    icon: "/images/OyanaFinalLogo.png",
+    shortcut: "/images/OyanaFinalLogo.png",
+    apple: "/images/OyanaFinalLogo.png",
+  },
 };
 
 export default function RootLayout({
@@ -15,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-black text-white antialiased overflow-hidden">
+      <body className="bg-black text-white antialiased overflow-x-hidden">
         {children}
         <Toaster
           position="top-right"
@@ -25,15 +30,15 @@ export default function RootLayout({
           className="z-[9999]"
           toastOptions={{
             style: {
-              background: "#09090b",
+              background: "#0b0f14",
               color: "#ffffff",
-              border: "1px solid #27272a",
+              border: "1px solid rgba(0,151,117,0.35)",
             },
             success: {
               style: {
-                background: "#09090b",
-                color: "#a3e635",
-                border: "1px solid #a3e635",
+                background: "#0b0f14",
+                color: "#6ac49a",
+                border: "1px solid #6ac49a",
               },
             },
             error: {
@@ -45,9 +50,9 @@ export default function RootLayout({
             },
             loading: {
               style: {
-                background: "#09090b",
-                color: "#a3e635",
-                border: "1px solid #a3e635",
+                background: "#0b0f14",
+                color: "#6ac49a",
+                border: "1px solid #6ac49a",
               },
             },
           }}

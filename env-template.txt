@@ -12,3 +12,7 @@ GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYour private key here\n-----END
 
 # Your app URL (for production)
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# Google Apps Script Web App URL (deployed, accessible to anyone)
+# Example: https://script.google.com/macros/s/AKfycb.../exec
+APPS_SCRIPT_WEB_APP_URL=

@@ -22,33 +22,43 @@ export async function POST(request: Request) {
       timestamp: new Date().toISOString(),
     });
 
-    // Send data to Google Sheets
+    // Send data to Google Apps Script
     try {
-      const sheetsResponse = await fetch(
-        `${
-          process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        }/api/sheets`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            name,
-            source,
-            type,
-          }),
-        }
-      );
+      const appsScriptUrl =
+        process.env.APPS_SCRIPT_WEB_APP_URL ||
+        "https://script.google.com/macros/s/AKfycbzOFLrD9xqzXKM0ULjesBI9XOUp3R6ImgQnduRJhkDMAzu3KOD873_oQa-iSpu_1dxXyw/exec";
 
-      if (!sheetsResponse.ok) {
-        console.error("Failed to write to Google Sheets");
-        // Still return success to user, but log the error
+      const formBody = new URLSearchParams({
+        // The Apps Script expects `e.parameter.Email`
+        Email: email,
+      });
+
+      const appsScriptResponse = await fetch(appsScriptUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: formBody.toString(),
+      });
+      const text = await appsScriptResponse.text();
+      console.log("Apps Script status:", appsScriptResponse.status);
+      console.log("Apps Script response:", text);
+
+      // Treat non-OK status or HTML error payloads as upstream failures
+      const looksLikeHtmlError =
+        typeof text === "string" && /<title>Error<\/title>|Error:/i.test(text);
+      if (!appsScriptResponse.ok || looksLikeHtmlError) {
+        return NextResponse.json(
+          {
+            error: "Apps Script error",
+            status: appsScriptResponse.status,
+            response: text,
+          },
+          { status: 502 }
+        );
       }
-    } catch (sheetsError) {
-      console.error("Error writing to Google Sheets:", sheetsError);
-      // Still return success to user, but log the error
+    } catch (appsScriptError) {
+      console.error("Error sending to Google Apps Script:", appsScriptError);
     }
 
     return NextResponse.json({
