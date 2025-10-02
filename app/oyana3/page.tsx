@@ -8,7 +8,6 @@ import { toast } from "sonner";
 import TeamSection from "@/components/TeamSection";
 
 export default function Oyana3Page() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +33,6 @@ export default function Oyana3Page() {
         },
         body: JSON.stringify({
           email,
-          name,
           source: "oyana3",
           type: "waitlist",
         }),
@@ -61,7 +59,6 @@ export default function Oyana3Page() {
           });
           setSubmitted(true);
           setEmail("");
-          setName("");
         }, 3000);
       } else {
         const errorData = await response.json();
@@ -211,12 +208,6 @@ export default function Oyana3Page() {
 
             {/* Form */}
             <form onSubmit={onSubmit} className="mt-8 space-y-3 max-w-md">
-              <Input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Tell us your name..."
-                className="h-12 input placeholder:text-white/40"
-              />
               <Input
                 type="email"
                 value={email}
