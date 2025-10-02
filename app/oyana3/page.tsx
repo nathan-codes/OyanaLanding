@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
 import { toast } from "sonner";
+import TeamSection from "@/components/TeamSection";
 
 export default function Oyana3Page() {
   const [name, setName] = useState("");
@@ -266,6 +267,8 @@ export default function Oyana3Page() {
           </div>
         </div>
       </div>
+      {/* Meet the Team - under the fold */}
+      <TeamSection />
     </div>
   );
 }

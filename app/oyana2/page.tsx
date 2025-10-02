@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import TeamSection from "@/components/TeamSection";
 
 export default function Oyana2Page() {
   const [email, setEmail] = useState("");
@@ -82,9 +83,9 @@ export default function Oyana2Page() {
   return (
     <div className="min-h-screen" style={{ background: "var(--surface)" }}>
       <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
-        <div className="grid min-h-[70vh] items-center gap-12 lg:grid-cols-2">
+        <div className="grid min-h-[70vh] items-center gap-12 lg:gap-16 lg:[grid-template-columns:1.35fr_1fr]">
           <motion.div
-            className="text-center lg:text-left"
+            className="text-center lg:text-left lg:pr-16 xl:pr-24"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -93,16 +94,17 @@ export default function Oyana2Page() {
               <Image
                 src="/images/OyanaFinalLogo.png"
                 alt="Oyana logo"
-                width={170}
-                height={40}
-                className="h-10 w-auto"
+                width={220}
+                height={56}
+                className="h-12 md:h-16 w-auto"
                 priority
               />
             </div>
 
-            <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl text-center lg:text-left">
+            <h1 className="mt-7 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl lg:leading-[1.08] lg:max-w-4xl text-center lg:text-left mb-5 md:mb-6 lg:mb-8">
               Ready to Unlock Your Video's Potential?
               <span className="block md:inline"> </span>
+              <br />
               <span
                 className="text-gradient underline decoration-4 underline-offset-4"
                 style={{ textDecorationColor: "var(--gossamer-600)" }}
@@ -111,13 +113,13 @@ export default function Oyana2Page() {
               </span>
             </h1>
 
-            <p className="mt-4 max-w-xl text-base md:text-lg text-zinc-300 mx-auto lg:mx-0 text-center lg:text-left">
+            <p className="mt-3 md:mt-4 max-w-xl lg:max-w-3xl text-base md:text-lg lg:text-xl lg:leading-relaxed text-zinc-300 mx-auto lg:mx-0 text-center lg:text-left">
               Stop losing viewers at the 30-second mark. Start creating content
               that hooks them till the end.
             </p>
 
             <motion.ul
-              className="mt-5 grid max-w-xl gap-3 text-zinc-200 mx-auto lg:mx-0"
+              className="mt-7 grid max-w-xl lg:max-w-3xl gap-4 md:gap-5 text-zinc-200 lg:text-lg mx-auto lg:mx-0"
               initial="hidden"
               animate="show"
               variants={{
@@ -136,10 +138,10 @@ export default function Oyana2Page() {
                     hidden: { opacity: 0, y: 8 },
                     show: { opacity: 1, y: 0 },
                   }}
-                  className="flex items-start gap-3"
+                  className="flex items-start gap-4"
                 >
                   <span
-                    className="mt-1 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-black text-xs"
+                    className="mt-1 inline-flex h-5 w-5 lg:h-6 lg:w-6 shrink-0 items-center justify-center rounded-full text-black text-xs"
                     style={{ background: "var(--gossamer-600)" }}
                   >
                     ✓
@@ -151,7 +153,7 @@ export default function Oyana2Page() {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-7 flex max-w-md gap-2 mx-auto lg:mx-0"
+              className="mt-9 flex max-w-md gap-2 mx-auto lg:mx-0"
             >
               <Input
                 value={email}
@@ -177,7 +179,7 @@ export default function Oyana2Page() {
           </motion.div>
 
           <motion.div
-            className="relative h-full flex items-center"
+            className="relative h-full flex items-center lg:pl-4"
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
@@ -205,6 +207,9 @@ export default function Oyana2Page() {
           </motion.div>
         </div>
       </div>
+
+      {/* Meet the Team - under the fold */}
+      <TeamSection />
     </div>
   );
 }
