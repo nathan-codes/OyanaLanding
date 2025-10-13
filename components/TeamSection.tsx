@@ -63,6 +63,14 @@ export default function TeamSection({
       image: "/images/team/placeholder.jpg",
       linkedin: "#",
     },
+    {
+      name: "Tochukwu Ibeaji",
+      role: "Marketing",
+      description:
+        "Drives marketing initiatives and growth campaigns to amplify Oyana's reach.",
+      image: "/images/team/placeholder.jpg",
+      linkedin: "#",
+    },
   ];
 
   return (
