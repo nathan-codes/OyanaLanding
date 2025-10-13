@@ -185,7 +185,7 @@ export default function Oyana2Page() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           >
             <motion.div
-              className="h-[78vh] w-[90vw] md:w-[66vw] mx-auto lg:ml-auto lg:[margin-right:calc((100vw-100%)/-2)]"
+              className="h-[78vh] w-[90vw] md:w-[46vw] mx-auto lg:ml-auto lg:[margin-right:calc((100vw-100%)/-4)]"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
