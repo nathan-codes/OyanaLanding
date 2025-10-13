@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,6 +13,19 @@ export default function Oyana2Page() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isMuted, setIsMuted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !isMuted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
+    if (!nextMuted) {
+      video.play().catch(() => {});
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -190,18 +203,45 @@ export default function Oyana2Page() {
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               <div
-                className="h-full rounded-3xl p-6 overflow-hidden card"
+                className="h-full rounded-3xl p-6 overflow-hidden card relative"
                 style={{ boxShadow: "0 30px 80px -20px rgba(0,151,117,0.35)" }}
               >
                 <video
+                  ref={videoRef}
                   src="/OyanaPreviewVideo.mp4"
                   className="h-full w-full object-cover rounded-3xl overflow-hidden"
                   style={{ borderRadius: "inherit" }}
                   autoPlay
-                  muted
+                  muted={isMuted}
                   loop
                   playsInline
                 />
+                <button
+                  type="button"
+                  onClick={toggleMute}
+                  aria-label={isMuted ? "Unmute video" : "Mute video"}
+                  className="absolute top-5 left-5 z-10 rounded-xl px-3 py-2 text-sm font-medium flex items-center gap-2 transition-colors duration-200"
+                  style={{
+                    background:
+                      "color-mix(in oklab, var(--gossamer-600), transparent 82%)",
+                    color: "var(--gossamer-600)",
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    {isMuted ? (
+                      <path d="M16.5 12c0-1.77-.77-3.36-2-4.47v8.94c1.23-1.11 2-2.7 2-4.47zm3.5 0c0 2.89-1.64 5.39-4.03 6.65l-1.2-1.6C16.86 16.04 18 14.14 18 12s-1.14-4.04-3.23-5.05l1.2-1.6C18.36 6.61 20 9.11 20 12zM3 9v6h4l5 5V4L7 9H3z" />
+                    ) : (
+                      <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-.77-3.36-2-4.47v8.94c1.23-1.11 2-2.7 2-4.47zm3.5 0c0 2.89-1.64 5.39-4.03 6.65l-1.2-1.6C16.86 16.04 18 14.14 18 12s-1.14-4.04-3.23-5.05l1.2-1.6C18.36 6.61 20 9.11 20 12z" />
+                    )}
+                  </svg>
+                  {isMuted ? "Unmute" : "Mute"}
+                </button>
               </div>
             </motion.div>
           </motion.div>
