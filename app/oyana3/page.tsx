@@ -86,7 +86,7 @@ export default function Oyana3Page() {
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
           <div className="font-extrabold text-xl tracking-tight">
             <Image
-              src="/images/OyanaFinalLogo.png"
+              src="/images/OyanaFinalLogo.svg"
               alt="Oyana logo"
               width={170}
               height={40}

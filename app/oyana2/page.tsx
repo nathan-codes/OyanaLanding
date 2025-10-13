@@ -13,7 +13,7 @@ export default function Oyana2Page() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const toggleMute = () => {
@@ -22,8 +22,13 @@ export default function Oyana2Page() {
     const nextMuted = !isMuted;
     video.muted = nextMuted;
     setIsMuted(nextMuted);
+    // Ensure video plays when unmuted
     if (!nextMuted) {
-      video.play().catch(() => {});
+      video.play().catch(() => {
+        // If autoplay fails, keep it muted
+        video.muted = true;
+        setIsMuted(true);
+      });
     }
   };
 
@@ -105,7 +110,7 @@ export default function Oyana2Page() {
           >
             <div className="flex items-center gap-2 text-white justify-center lg:justify-start">
               <Image
-                src="/images/OyanaFinalLogo.png"
+                src="/images/OyanaFinalLogo.svg"
                 alt="Oyana logo"
                 width={220}
                 height={56}

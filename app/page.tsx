@@ -52,7 +52,7 @@ function Nav() {
       <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/images/OyanaFinalLogo.png"
+            src="/images/OyanaFinalLogo.svg"
             alt="Oyana logo"
             width={155}
             height={36}

@@ -7,9 +7,9 @@ export const metadata: Metadata = {
   description:
     "Oyana analyzes YouTube retention and delivers editor-ready, time-stamped fixes to boost watch time.",
   icons: {
-    icon: "/images/OyanaFinalLogo.png",
-    shortcut: "/images/OyanaFinalLogo.png",
-    apple: "/images/OyanaFinalLogo.png",
+    icon: "/images/OyanaFinalLogo.svg",
+    shortcut: "/images/OyanaFinalLogo.svg",
+    apple: "/images/OyanaFinalLogo.svg",
   },
 };
 
