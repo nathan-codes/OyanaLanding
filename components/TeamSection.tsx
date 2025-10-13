@@ -35,7 +35,7 @@ export default function TeamSection({
       name: "Dapo Bakare",
       role: "Business Development",
       description:
-        "Drives the business strategy and partnerships, bringing extensive market expertise to the table.",
+        "Previously Head of Product at YouTube. Started a content creator collective, GMPLY Africa.",
       image: "/images/team/dapo.jpg",
       linkedin: "https://www.linkedin.com/in/bakare/",
     },
@@ -68,7 +68,7 @@ export default function TeamSection({
       role: "Marketing",
       description:
         "Drives marketing initiatives and growth campaigns to amplify Oyana's reach.",
-      image: "/images/team/placeholder.jpg",
+      image: "/images/team/Tochukwu's Picture.jpg",
       linkedin: "#",
     },
   ];
