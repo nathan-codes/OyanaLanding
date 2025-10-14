@@ -20,6 +20,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Privacy-friendly analytics by Plausible */}
+        <script
+          async
+          src="https://plausible.io/js/pa-26--rQWFQ8pTcu1Y08z3t.js"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+              plausible.init()
+            `,
+          }}
+        />
+      </head>
       <body className="bg-black text-white antialiased overflow-x-hidden">
         {children}
         <Toaster
@@ -33,27 +48,6 @@ export default function RootLayout({
               background: "#0b0f14",
               color: "#ffffff",
               border: "1px solid rgba(0,151,117,0.35)",
-            },
-            success: {
-              style: {
-                background: "#0b0f14",
-                color: "#6ac49a",
-                border: "1px solid #6ac49a",
-              },
-            },
-            error: {
-              style: {
-                background: "#09090b",
-                color: "#ef4444",
-                border: "1px solid #ef4444",
-              },
-            },
-            loading: {
-              style: {
-                background: "#0b0f14",
-                color: "#6ac49a",
-                border: "1px solid #6ac49a",
-              },
             },
           }}
         />

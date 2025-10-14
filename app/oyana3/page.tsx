@@ -112,7 +112,7 @@ export default function Oyana3Page() {
                 <div className="flex items-start gap-3">
                   <span
                     className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
-                    style={{ background: "var(--gossamer-600)" }}
+                    style={{ background: "var(--silver-tree)" }}
                   >
                     ✓
                   </span>
@@ -131,7 +131,7 @@ export default function Oyana3Page() {
                 <div className="flex items-start gap-3">
                   <span
                     className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
-                    style={{ background: "var(--gossamer-600)" }}
+                    style={{ background: "var(--silver-tree)" }}
                   >
                     ✓
                   </span>
@@ -151,7 +151,7 @@ export default function Oyana3Page() {
                 <div className="flex items-start gap-3">
                   <span
                     className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full text-black text-sm"
-                    style={{ background: "var(--gossamer-600)" }}
+                    style={{ background: "var(--silver-tree)" }}
                   >
                     ✓
                   </span>
@@ -220,41 +220,15 @@ export default function Oyana3Page() {
                 disabled={isLoading}
                 className="h-12 w-full btn btn-primary disabled:opacity-50"
               >
-                {isLoading ? "Joining..." : "Continue"}
+                {isLoading ? "Joining..." : "Join the waitlist"}
               </Button>
               {submitted && (
-                <div
-                  className="text-sm"
-                  style={{ color: "var(--gossamer-600)" }}
-                >
+                <div className="text-sm" style={{ color: "var(--gossamer)" }}>
                   Thanks! We'll email you when we launch.
                 </div>
               )}
               {error && <div className="text-sm text-red-500">{error}</div>}
             </form>
-
-            {/* Removed privacy policy/terms blurb per request */}
-
-            {/* Decorative starburst */}
-            <div className="hidden lg:block pointer-events-none absolute -bottom-10 -right-6 opacity-60">
-              <svg
-                width="80"
-                height="80"
-                viewBox="0 0 100 100"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <g stroke="var(--gossamer-600)" strokeWidth="2">
-                  {Array.from({ length: 16 }).map((_, idx) => {
-                    const angle = (idx * Math.PI) / 8;
-                    const x = 50 + Math.cos(angle) * 40;
-                    const y = 50 + Math.sin(angle) * 40;
-                    return <line key={idx} x1="50" y1="50" x2={x} y2={y} />;
-                  })}
-                </g>
-                <circle cx="50" cy="50" r="3" fill="var(--gossamer-600)" />
-              </svg>
-            </div>
           </div>
         </div>
       </div>

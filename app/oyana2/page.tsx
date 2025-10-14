@@ -136,8 +136,8 @@ export default function Oyana2Page() {
               that hooks them till the end.
             </p>
 
-            <motion.ul
-              className="mt-5 grid max-w-xl lg:max-w-3xl gap-3 md:gap-4 text-zinc-200 text-sm md:text-base lg:text-base mx-auto lg:mx-0"
+            <motion.div
+              className="mt-8 space-y-8 max-w-xl lg:max-w-3xl mx-auto lg:mx-0"
               initial="hidden"
               animate="show"
               variants={{
@@ -145,29 +145,80 @@ export default function Oyana2Page() {
                 show: { transition: { staggerChildren: 0.08 } },
               }}
             >
-              {[
-                "Actionable insights for quick edits and long-term retention strategy",
-                "Audience feedback from fans and casual viewers",
-                "Combines technical skill, reliability, and preserves your creative vision",
-              ].map((item) => (
-                <motion.li
-                  key={item}
-                  variants={{
-                    hidden: { opacity: 0, y: 8 },
-                    show: { opacity: 1, y: 0 },
-                  }}
-                  className="flex items-start gap-4"
-                >
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 8 },
+                  show: { opacity: 1, y: 0 },
+                }}
+              >
+                <div className="flex items-start gap-3">
                   <span
                     className="mt-1 inline-flex h-4 w-4 lg:h-5 lg:w-5 shrink-0 items-center justify-center rounded-full text-black text-xs"
-                    style={{ background: "var(--gossamer-600)" }}
+                    style={{ background: "var(--silver-tree)" }}
                   >
                     ✓
                   </span>
-                  <span>{item}</span>
-                </motion.li>
-              ))}
-            </motion.ul>
+                  <div>
+                    <div className="font-semibold text-white">
+                      Actionable insights
+                    </div>
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
+                      Boost retention without sacrificing creativity
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 8 },
+                  show: { opacity: 1, y: 0 },
+                }}
+              >
+                <div className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-4 w-4 lg:h-5 lg:w-5 shrink-0 items-center justify-center rounded-full text-black text-xs"
+                    style={{ background: "var(--silver-tree)" }}
+                  >
+                    ✓
+                  </span>
+                  <div>
+                    <div className="font-semibold text-white">
+                      Trustworthy partner
+                    </div>
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
+                      Combines technical expertise, reliability, and genuine
+                      investment in your creative vision
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={{
+                  hidden: { opacity: 0, y: 8 },
+                  show: { opacity: 1, y: 0 },
+                }}
+              >
+                <div className="flex items-start gap-3">
+                  <span
+                    className="mt-1 inline-flex h-4 w-4 lg:h-5 lg:w-5 shrink-0 items-center justify-center rounded-full text-black text-xs"
+                    style={{ background: "var(--silver-tree)" }}
+                  >
+                    ✓
+                  </span>
+                  <div>
+                    <div className="font-semibold text-white">
+                      Safe and secure.
+                    </div>
+                    <p className="mt-2 text-zinc-300 text-sm md:text-base max-w-xl">
+                      Your videos and transcripts stay private. Export insights
+                      - not raw content - to share with your team.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
 
             <form
               onSubmit={handleSubmit}
@@ -209,7 +260,7 @@ export default function Oyana2Page() {
             >
               <div
                 className="rounded-3xl p-6 overflow-hidden card relative"
-                style={{ boxShadow: "0 30px 80px -20px rgba(0,151,117,0.35)" }}
+                style={{ boxShadow: "0 30px 80px -20px rgba(0,4,151,0.35)" }}
               >
                 <video
                   ref={videoRef}
@@ -228,8 +279,8 @@ export default function Oyana2Page() {
                   className="absolute top-5 left-5 z-10 rounded-xl px-3 py-2 text-sm font-medium flex items-center gap-2 transition-colors duration-200"
                   style={{
                     background:
-                      "color-mix(in oklab, var(--gossamer-600), transparent 82%)",
-                    color: "var(--gossamer-600)",
+                      "color-mix(in oklab, var(--silver-tree), transparent 82%)",
+                    color: "var(--silver-tree)",
                   }}
                 >
                   <svg

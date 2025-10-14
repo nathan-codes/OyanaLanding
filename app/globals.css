@@ -102,8 +102,11 @@ body {
 :root {
   color-scheme: dark;
   /* Core palette */
-  --gossamer-600: #009775; /* primary */
-  --silvertree-500: #6ac49a; /* secondary */
+  --gossamer: #009775; /* primary gossamer color */
+  --bahama-blue: #005e97; /* bahama blue */
+  --ultramarine: #000497; /* ultramarine for buttons */
+  --silver-tree: #6ac49a; /* silver tree accent */
+  --gossamer-600: var(--gossamer);
   --gossamer-700: #007158;
   --gossamer-800: #004c3b;
   --surface: #0b0f14;
@@ -112,9 +115,10 @@ body {
   --text-muted: #9aa4b2;
 
   /* Backward-compat for existing vars */
-  --blue-600: #005e97; /* subtle accents */
-  --teal-600: var(--gossamer-600);
-  --mint-500: var(--silvertree-500);
+  --blue-600: var(--bahama-blue);
+  --teal-600: var(--gossamer);
+  --mint-500: var(--silver-tree);
+  --silvertree-500: var(--silver-tree);
 }
 
 html,
@@ -139,14 +143,10 @@ body,
   @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors cursor-pointer;
 }
 .btn-primary {
-  @apply text-white shadow-lg hover:shadow-[rgba(0,151,117,0.35)] transition-shadow;
-  box-shadow: 0 10px 24px rgba(0, 151, 117, 0.25);
-  background: linear-gradient(
-    135deg,
-    var(--gossamer-600),
-    var(--silvertree-500)
-  );
-  border: 1px solid color-mix(in oklab, var(--gossamer-600), white 12%);
+  @apply text-white shadow-lg transition-shadow;
+  box-shadow: 0 10px 24px rgba(0, 4, 151, 0.25);
+  background: var(--ultramarine);
+  border: 1px solid color-mix(in oklab, var(--ultramarine), white 12%);
 }
 .btn-primary:active {
   transform: translateY(0.5px);
@@ -155,10 +155,10 @@ body,
   @apply text-white/90 backdrop-blur-md;
   background: linear-gradient(
     135deg,
-    color-mix(in oklab, var(--silvertree-500), black 12%),
-    color-mix(in oklab, var(--gossamer-600), black 8%)
+    color-mix(in oklab, var(--bahama-blue), black 12%),
+    color-mix(in oklab, var(--silver-tree), black 8%)
   );
-  border: 1px solid color-mix(in oklab, var(--silvertree-500), white 14%);
+  border: 1px solid color-mix(in oklab, var(--silver-tree), white 14%);
 }
 .btn-ghost {
   @apply bg-transparent text-white/90 hover:bg-white/5 border border-white/10;
@@ -167,23 +167,23 @@ body,
 /* Inputs */
 .input {
   @apply w-full rounded-lg border px-3 py-2 text-white placeholder:text-zinc-400 focus:outline-none focus:ring-2;
-  border-color: color-mix(in oklab, var(--gossamer-600), white 20%);
+  border-color: color-mix(in oklab, var(--gossamer), white 20%);
   background: linear-gradient(var(--surface-3), var(--surface-3)) padding-box,
     linear-gradient(
         135deg,
-        color-mix(in oklab, var(--gossamer-600), transparent 40%),
-        color-mix(in oklab, var(--silvertree-500), transparent 40%)
+        color-mix(in oklab, var(--gossamer), transparent 40%),
+        color-mix(in oklab, var(--silver-tree), transparent 40%)
       )
       border-box;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04),
     0 6px 20px rgba(0, 0, 0, 0.25);
-  --tw-ring-color: color-mix(in oklab, var(--gossamer-600), white 20%);
+  --tw-ring-color: color-mix(in oklab, var(--gossamer), white 20%);
 }
 
 /* Cards */
 .card {
   @apply rounded-xl backdrop-blur-md shadow-xl;
-  border: 1px solid color-mix(in oklab, var(--gossamer-600), white 10%);
+  border: 1px solid color-mix(in oklab, var(--gossamer), white 10%);
   background: linear-gradient(
         180deg,
         rgba(255, 255, 255, 0.04),
@@ -192,12 +192,12 @@ body,
       padding-box,
     radial-gradient(
       120% 100% at -10% -20%,
-      color-mix(in oklab, var(--gossamer-600), transparent 85%),
+      color-mix(in oklab, var(--gossamer), transparent 85%),
       transparent
     ),
     radial-gradient(
       120% 100% at 110% -20%,
-      color-mix(in oklab, var(--silvertree-500), transparent 88%),
+      color-mix(in oklab, var(--silver-tree), transparent 88%),
       transparent
     );
 }
@@ -206,12 +206,12 @@ body,
 .accent-gradient {
   background: radial-gradient(
       1200px 600px at 10% -10%,
-      color-mix(in oklab, var(--gossamer-600), transparent 78%),
+      color-mix(in oklab, var(--gossamer), transparent 78%),
       transparent
     ),
     radial-gradient(
       900px 500px at 110% 10%,
-      color-mix(in oklab, var(--silvertree-500), transparent 78%),
+      color-mix(in oklab, var(--silver-tree), transparent 78%),
       transparent
     );
 }
@@ -220,10 +220,36 @@ body,
 .text-gradient {
   background: linear-gradient(
     135deg,
-    var(--silvertree-500),
-    var(--gossamer-600)
+    var(--bahama-blue),
+    var(--gossamer),
+    var(--silver-tree)
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Silver Tree specific utilities */
+.silver-tree-accent {
+  color: var(--silver-tree);
+}
+
+.silver-tree-bg {
+  background-color: var(--silver-tree);
+}
+
+.silver-tree-border {
+  border-color: var(--silver-tree);
+}
+
+/* Enhanced button variants */
+.btn-silver-tree {
+  @apply text-white shadow-lg transition-shadow;
+  background: linear-gradient(
+    135deg,
+    var(--silver-tree),
+    color-mix(in oklab, var(--silver-tree), black 20%)
+  );
+  border: 1px solid color-mix(in oklab, var(--silver-tree), white 12%);
+  box-shadow: 0 10px 24px rgba(106, 196, 154, 0.25);
 }
