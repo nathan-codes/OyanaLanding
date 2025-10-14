@@ -101,9 +101,9 @@ export default function Oyana2Page() {
   return (
     <div className="min-h-screen" style={{ background: "var(--surface)" }}>
       <div className="mx-auto max-w-7xl px-4 py-14 md:py-20">
-        <div className="grid min-h-[70vh] items-center gap-12 lg:gap-16 lg:[grid-template-columns:1.35fr_1fr]">
+        <div className="grid min-h-[70vh] items-center justify-center gap-8 lg:gap-12 lg:grid-cols-2 max-w-7xl mx-auto">
           <motion.div
-            className="text-center lg:text-left lg:pr-16 xl:pr-24"
+            className="text-center lg:text-left flex flex-col items-center lg:items-start"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -112,14 +112,14 @@ export default function Oyana2Page() {
               <Image
                 src="/images/OyanaFinalLogo.svg"
                 alt="Oyana logo"
-                width={220}
-                height={56}
-                className="h-12 md:h-16 w-auto"
+                width={180}
+                height={45}
+                className="h-8 md:h-10 w-auto"
                 priority
               />
             </div>
 
-            <h1 className="mt-7 text-3xl font-extrabold leading-tight tracking-tight text-white md:text-5xl lg:text-6xl lg:leading-[1.08] lg:max-w-4xl text-center lg:text-left mb-5 md:mb-6 lg:mb-8">
+            <h1 className="mt-5 text-2xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-[1.08] text-center lg:text-left mb-4 md:mb-5 lg:mb-6">
               Ready to Unlock Your Video's Potential?
               <span className="block md:inline"> </span>
               <br />
@@ -131,13 +131,13 @@ export default function Oyana2Page() {
               </span>
             </h1>
 
-            <p className="mt-3 md:mt-4 max-w-xl lg:max-w-3xl text-base md:text-lg lg:text-xl lg:leading-relaxed text-zinc-300 mx-auto lg:mx-0 text-center lg:text-left">
+            <p className="mt-2 md:mt-3 max-w-xl lg:max-w-3xl text-sm md:text-base lg:text-lg lg:leading-relaxed text-zinc-300 mx-auto lg:mx-0 text-center lg:text-left">
               Stop losing viewers at the 30-second mark. Start creating content
               that hooks them till the end.
             </p>
 
             <motion.ul
-              className="mt-7 grid max-w-xl lg:max-w-3xl gap-4 md:gap-5 text-zinc-200 lg:text-lg mx-auto lg:mx-0"
+              className="mt-5 grid max-w-xl lg:max-w-3xl gap-3 md:gap-4 text-zinc-200 text-sm md:text-base lg:text-base mx-auto lg:mx-0"
               initial="hidden"
               animate="show"
               variants={{
@@ -159,7 +159,7 @@ export default function Oyana2Page() {
                   className="flex items-start gap-4"
                 >
                   <span
-                    className="mt-1 inline-flex h-5 w-5 lg:h-6 lg:w-6 shrink-0 items-center justify-center rounded-full text-black text-xs"
+                    className="mt-1 inline-flex h-4 w-4 lg:h-5 lg:w-5 shrink-0 items-center justify-center rounded-full text-black text-xs"
                     style={{ background: "var(--gossamer-600)" }}
                   >
                     ✓
@@ -171,7 +171,7 @@ export default function Oyana2Page() {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-9 flex max-w-md gap-2 mx-auto lg:mx-0"
+              className="mt-6 flex max-w-md gap-2 mx-auto lg:mx-0"
             >
               <Input
                 value={email}
@@ -197,24 +197,24 @@ export default function Oyana2Page() {
           </motion.div>
 
           <motion.div
-            className="relative h-full flex items-center lg:pl-4"
+            className="relative flex items-center justify-center"
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           >
             <motion.div
-              className="h-[78vh] w-[90vw] md:w-[46vw] mx-auto lg:ml-auto lg:[margin-right:calc((100vw-100%)/-4)]"
+              className="h-auto w-full max-w-2xl mx-auto"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
             >
               <div
-                className="h-full rounded-3xl p-6 overflow-hidden card relative"
+                className="rounded-3xl p-6 overflow-hidden card relative"
                 style={{ boxShadow: "0 30px 80px -20px rgba(0,151,117,0.35)" }}
               >
                 <video
                   ref={videoRef}
                   src="/OyanaPreviewVideo.mp4"
-                  className="h-full w-full object-cover rounded-3xl overflow-hidden"
+                  className="w-full h-[40vh] object-cover rounded-3xl overflow-hidden"
                   style={{ borderRadius: "inherit" }}
                   autoPlay
                   muted={isMuted}
