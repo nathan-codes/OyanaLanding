@@ -218,7 +218,8 @@ export default function Oyana3Page() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="h-12 w-full btn btn-primary disabled:opacity-50"
+                className="h-12 w-full disabled:opacity-50"
+                style={{ backgroundColor: "#973900" }}
               >
                 {isLoading ? "Joining..." : "Join the waitlist"}
               </Button>

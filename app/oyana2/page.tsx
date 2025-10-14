@@ -119,15 +119,15 @@ export default function Oyana2Page() {
               />
             </div>
 
-            <h1 className="mt-5 text-2xl font-extrabold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl lg:leading-[1.08] text-center lg:text-left mb-4 md:mb-5 lg:mb-6">
+            <h1 className="mt-5 text-xl font-extrabold leading-tight tracking-tight text-white md:text-3xl lg:text-4xl lg:leading-[1.08] text-center lg:text-left mb-3 md:mb-4 lg:mb-5">
               Ready to Unlock Your Video's Potential?
               <span className="block md:inline"> </span>
               <br />
               <span
-                className="text-gradient underline decoration-4 underline-offset-4"
+                className="text-gradient  decoration-4 underline-offset-4"
                 style={{ textDecorationColor: "var(--gossamer-600)" }}
               >
-                Boost retention with Oyana.
+                Grow with Oyana.
               </span>
             </h1>
 
@@ -137,7 +137,7 @@ export default function Oyana2Page() {
             </p>
 
             <motion.div
-              className="mt-8 space-y-8 max-w-xl lg:max-w-3xl mx-auto lg:mx-0"
+              className="mt-6 space-y-5 max-w-xl lg:max-w-3xl mx-auto lg:mx-0"
               initial="hidden"
               animate="show"
               variants={{
@@ -222,7 +222,7 @@ export default function Oyana2Page() {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-6 flex max-w-md gap-2 mx-auto lg:mx-0"
+              className="mt-4 flex max-w-md gap-2 mx-auto lg:mx-0"
             >
               <Input
                 value={email}
@@ -234,7 +234,8 @@ export default function Oyana2Page() {
               <Button
                 type="submit"
                 disabled={isLoading}
-                className="h-12 btn btn-primary disabled:opacity-50"
+                className="h-12 disabled:opacity-50 px-12"
+                style={{ backgroundColor: "#973900" }}
               >
                 {isLoading ? "Joining..." : "Join the waitlist"}
               </Button>
