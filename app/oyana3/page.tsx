@@ -259,7 +259,7 @@ export default function Oyana3Page() {
         </div>
       </div>
       {/* Meet the Team - under the fold */}
-      <TeamSection />
+      {/* <TeamSection /> */}
     </div>
   );
 }

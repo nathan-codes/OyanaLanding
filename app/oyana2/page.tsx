@@ -254,7 +254,7 @@ export default function Oyana2Page() {
       </div>
 
       {/* Meet the Team - under the fold */}
-      <TeamSection />
+      {/* <TeamSection /> */}
     </div>
   );
 }
