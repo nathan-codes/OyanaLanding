@@ -12,18 +12,54 @@ export default function Oyana3Page() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  // Email validation function
+  const validateEmail = (email: string): boolean => {
+    // More strict email validation
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    return (
+      emailRegex.test(email) &&
+      email.includes(".") &&
+      email.split("@")[1]?.split(".").length >= 2
+    );
+  };
+
+  // Handle email input change with validation
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // Clear previous errors
+    setEmailError("");
+    setError("");
+
+    // Validate email if it's not empty
+    if (value && !validateEmail(value)) {
+      setEmailError("Please enter a valid email address");
+    }
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+
+    // Clear previous errors
+    setError("");
+    setEmailError("");
+
+    // Validate email
+    if (!email) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
 
     setIsLoading(true);
-    setError("");
-
-    // Show processing toast
-    toast.loading("Processing your request...", {
-      id: "signup-process",
-    });
 
     try {
       const response = await fetch("/api/waitlist", {
@@ -39,38 +75,20 @@ export default function Oyana3Page() {
       });
 
       if (response.ok) {
-        // Simulate processing steps
-        setTimeout(() => {
-          toast.success("Email validated successfully!", {
-            id: "signup-process",
-          });
-        }, 1000);
-
-        setTimeout(() => {
-          toast.success("Adding you to the waitlist...", {
-            id: "signup-process",
-          });
-        }, 2000);
-
-        setTimeout(() => {
-          toast.success("Welcome to Oyana! 🎉", {
-            id: "signup-process",
-            description: "We'll notify you when we launch.",
-          });
-          setSubmitted(true);
-          setEmail("");
-        }, 3000);
+        toast.success("Welcome to Oyana! 🎉", {
+          description: "We'll notify you when we launch.",
+        });
+        setSubmitted(true);
+        setEmail("");
       } else {
         const errorData = await response.json();
         toast.error("Failed to join waitlist", {
-          id: "signup-process",
           description: errorData.error || "Please try again.",
         });
         setError(errorData.error || "Failed to sign up");
       }
     } catch (err) {
       toast.error("Network error", {
-        id: "signup-process",
         description: "Please check your connection and try again.",
       });
       setError("Network error. Please try again.");
@@ -81,24 +99,20 @@ export default function Oyana3Page() {
 
   return (
     <div className="min-h-screen" style={{ background: "var(--surface)" }}>
-      {/* Header with Oyana branding */}
-      <header className="relative lg:fixed inset-x-0 top-0 z-50 bg-transparent">
-        <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <div className="font-extrabold text-xl tracking-tight">
-            <Image
-              src="/images/OyanaFinalLogo.svg"
-              alt="Oyana logo"
-              width={170}
-              height={40}
-              className="h-10 w-auto"
-              priority
-            />
-          </div>
+      <div className="mx-auto max-w-7xl px-4 py-10 md:py-16 min-h-screen flex flex-col justify-center">
+        {/* Logo outside the main content, centered above the divider/grid */}
+        <div className="flex justify-center mb-10 md:mb-16">
+          <Image
+            src="/images/OyanaFinalLogo.svg"
+            alt="Oyana logo"
+            width={200}
+            height={48}
+            className="h-10 w-auto md:h-12"
+            priority
+          />
         </div>
-      </header>
 
-      <div className="mx-auto max-w-7xl px-4 pt-8 pb-16 md:py-24 min-h-screen flex items-start md:items-center">
-        <div className="grid gap-10 md:grid-cols-2 md:gap-16 w-full">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16 w-full items-center">
           {/* Left column */}
           <div className="order-2 md:order-1 pb-8 md:pb-0 md:pr-8 md:border-r border-white/10">
             <div className="text-white">
@@ -208,20 +222,31 @@ export default function Oyana3Page() {
 
             {/* Form */}
             <form onSubmit={onSubmit} className="mt-8 space-y-3 max-w-md">
-              <Input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email address..."
-                className="h-12 input placeholder:text-white/40"
-              />
+              <div>
+                <Input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder="Enter your email address..."
+                  className={`h-12 input placeholder:text-white/40 ${
+                    emailError ? "border-red-500 focus:border-red-500" : ""
+                  }`}
+                />
+                {emailError && (
+                  <div className="mt-1 text-red-500 text-sm">{emailError}</div>
+                )}
+              </div>
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="h-12 w-full disabled:opacity-50"
-                style={{ backgroundColor: "#973900" }}
+                disabled={isLoading || !!emailError || !email.trim()}
+                className={`h-12 w-full ${
+                  !!emailError || !email.trim() ? "cursor-not-allowed" : ""
+                }`}
+                style={{
+                  backgroundColor: "#973900",
+                }}
               >
-                {isLoading ? "Joining..." : "Join the waitlist"}
+                {isLoading ? "Adding you to the waitlist" : "Join the waitlist"}
               </Button>
               {submitted && (
                 <div className="text-sm" style={{ color: "var(--gossamer)" }}>

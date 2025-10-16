@@ -13,8 +13,36 @@ export default function Oyana2Page() {
   const [submitted, setSubmitted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Email validation function
+  const validateEmail = (email: string): boolean => {
+    // More strict email validation
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    return (
+      emailRegex.test(email) &&
+      email.includes(".") &&
+      email.split("@")[1]?.split(".").length >= 2
+    );
+  };
+
+  // Handle email input change with validation
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setEmail(value);
+
+    // Clear previous errors
+    setEmailError("");
+    setError("");
+
+    // Validate email if it's not empty
+    if (value && !validateEmail(value)) {
+      setEmailError("Please enter a valid email address");
+    }
+  };
 
   const toggleMute = () => {
     const video = videoRef.current;
@@ -34,15 +62,23 @@ export default function Oyana2Page() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+
+    // Clear previous errors
+    setError("");
+    setEmailError("");
+
+    // Validate email
+    if (!email) {
+      setEmailError("Email is required");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
 
     setIsLoading(true);
-    setError("");
-
-    // Show processing toast
-    toast.loading("Processing your request...", {
-      id: "signup-process",
-    });
 
     try {
       const response = await fetch("/api/waitlist", {
@@ -58,38 +94,20 @@ export default function Oyana2Page() {
       });
 
       if (response.ok) {
-        // Simulate processing steps
-        setTimeout(() => {
-          toast.success("Email validated successfully!", {
-            id: "signup-process",
-          });
-        }, 1000);
-
-        setTimeout(() => {
-          toast.success("Adding you to the waitlist...", {
-            id: "signup-process",
-          });
-        }, 2000);
-
-        setTimeout(() => {
-          toast.success("Welcome to Oyana! 🎉", {
-            id: "signup-process",
-            description: "We'll notify you when we launch.",
-          });
-          setSubmitted(true);
-          setEmail("");
-        }, 3000);
+        toast.success("Welcome to Oyana! 🎉", {
+          description: "We'll notify you when we launch.",
+        });
+        setSubmitted(true);
+        setEmail("");
       } else {
         const errorData = await response.json();
         toast.error("Failed to join waitlist", {
-          id: "signup-process",
           description: errorData.error || "Please try again.",
         });
         setError(errorData.error || "Failed to sign up");
       }
     } catch (err) {
       toast.error("Network error", {
-        id: "signup-process",
         description: "Please check your connection and try again.",
       });
       setError("Network error. Please try again.");
@@ -108,7 +126,7 @@ export default function Oyana2Page() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex items-center gap-2 text-white justify-center lg:justify-start">
+            <div className="flex items-center gap-2 text-white justify-center lg:justify-start mb-4 md:mb-6">
               <Image
                 src="/images/OyanaFinalLogo.svg"
                 alt="Oyana logo"
@@ -137,7 +155,7 @@ export default function Oyana2Page() {
             </p>
 
             <motion.div
-              className="mt-6 space-y-5 max-w-xl lg:max-w-3xl mx-auto lg:mx-0"
+              className="mt-6 space-y-5 max-w-xl lg:max-w-3xl mx-auto text-left lg:mx-0"
               initial="hidden"
               animate="show"
               variants={{
@@ -222,22 +240,33 @@ export default function Oyana2Page() {
 
             <form
               onSubmit={handleSubmit}
-              className="mt-4 flex max-w-md gap-2 mx-auto lg:mx-0"
+              className="mt-4 flex flex-col sm:flex-row max-w-md gap-2 mx-auto lg:mx-0"
             >
-              <Input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                type="email"
-                placeholder="you@youremail.com"
-                className="h-12 input placeholder:text-white/40"
-              />
+              <div className="flex-1">
+                <Input
+                  value={email}
+                  onChange={handleEmailChange}
+                  type="email"
+                  placeholder="you@youremail.com"
+                  className={`h-12 input placeholder:text-white/40 ${
+                    emailError ? "border-red-500 focus:border-red-500" : ""
+                  }`}
+                />
+                {emailError && (
+                  <div className="mt-1 text-red-500 text-sm">{emailError}</div>
+                )}
+              </div>
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="h-12 disabled:opacity-50 px-12"
-                style={{ backgroundColor: "#973900" }}
+                disabled={isLoading || !!emailError || !email.trim()}
+                className={`h-12 px-12 ${
+                  !!emailError || !email.trim() ? "cursor-not-allowed" : ""
+                }`}
+                style={{
+                  backgroundColor: "#973900",
+                }}
               >
-                {isLoading ? "Joining..." : "Join the waitlist"}
+                {isLoading ? "Adding you to the waitlist" : "Join the waitlist"}
               </Button>
             </form>
             {submitted && (

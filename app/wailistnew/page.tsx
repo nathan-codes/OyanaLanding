@@ -20,11 +20,6 @@ export default function WaitlistNewPage() {
     setIsLoading(true);
     setError("");
 
-    // Show processing toast
-    toast.loading("Processing your request...", {
-      id: "signup-process",
-    });
-
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
@@ -39,38 +34,20 @@ export default function WaitlistNewPage() {
       });
 
       if (response.ok) {
-        // Simulate processing steps
-        setTimeout(() => {
-          toast.success("Email validated successfully!", {
-            id: "signup-process",
-          });
-        }, 1000);
-
-        setTimeout(() => {
-          toast.success("Adding you to the waitlist...", {
-            id: "signup-process",
-          });
-        }, 2000);
-
-        setTimeout(() => {
-          toast.success("Welcome to Oyana! 🎉", {
-            id: "signup-process",
-            description: "We'll notify you when we launch.",
-          });
-          setSubmitted(true);
-          setEmail("");
-        }, 3000);
+        toast.success("Welcome to Oyana! 🎉", {
+          description: "We'll notify you when we launch.",
+        });
+        setSubmitted(true);
+        setEmail("");
       } else {
         const errorData = await response.json();
         toast.error("Failed to join waitlist", {
-          id: "signup-process",
           description: errorData.error || "Please try again.",
         });
         setError(errorData.error || "Failed to sign up");
       }
     } catch (err) {
       toast.error("Network error", {
-        id: "signup-process",
         description: "Please check your connection and try again.",
       });
       setError("Network error. Please try again.");
@@ -147,10 +124,12 @@ export default function WaitlistNewPage() {
               />
               <Button
                 type="submit"
-                disabled={isLoading}
-                className="h-12 bg-primary text-black hover:brightness-105 disabled:opacity-50"
+                disabled={isLoading || !email.trim()}
+                className={`h-12 bg-primary text-black hover:brightness-105 ${
+                  !email.trim() ? "cursor-not-allowed" : ""
+                }`}
               >
-                {isLoading ? "Joining..." : "Join the waitlist"}
+                {isLoading ? "Adding you to the waitlist" : "Join the waitlist"}
               </Button>
             </form>
             {submitted && (

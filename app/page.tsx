@@ -90,10 +90,7 @@ function Nav() {
                     setIsSubmitting(true);
                     setSubmitMessage("");
 
-                    // Show processing toast
-                    toast.loading("Processing your request...", {
-                      id: "signup-process",
-                    });
+                    // Instant submission feedback
 
                     try {
                       const response = await fetch("/api/waitlist", {
@@ -109,33 +106,16 @@ function Nav() {
                       });
 
                       if (response.ok) {
-                        // Simulate processing steps
-                        setTimeout(() => {
-                          toast.success("Email validated successfully!", {
-                            id: "signup-process",
-                          });
-                        }, 500);
-
-                        setTimeout(() => {
-                          toast.success("Adding you to the waitlist...", {
-                            id: "signup-process",
-                          });
-                        }, 1500);
-
-                        setTimeout(() => {
-                          toast.success("Welcome to Oyana! 🎉", {
-                            id: "signup-process",
-                            description: "We'll notify you when we launch.",
-                          });
-                          setSubmitMessage(
-                            "Thanks! We'll notify you when we launch."
-                          );
-                          form.reset();
-                        }, 2500);
+                        toast.success("Welcome to Oyana! 🎉", {
+                          description: "We'll notify you when we launch.",
+                        });
+                        setSubmitMessage(
+                          "Thanks! We'll notify you when we launch."
+                        );
+                        form.reset();
                       } else {
                         const errorData = await response.json();
                         toast.error("Failed to join waitlist", {
-                          id: "signup-process",
                           description: errorData.error || "Please try again.",
                         });
                         setSubmitMessage(
@@ -144,7 +124,6 @@ function Nav() {
                       }
                     } catch (err) {
                       toast.error("Network error", {
-                        id: "signup-process",
                         description:
                           "Please check your connection and try again.",
                       });
@@ -165,7 +144,7 @@ function Nav() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110 disabled:opacity-50"
+                    className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110"
                   >
                     {isSubmitting ? "Joining..." : "Get Invite"}
                   </Button>
@@ -276,9 +255,7 @@ function Hero() {
                         setIsSubmittingHero(true);
                         setSubmitMessageHero("");
 
-                        toast.loading("Processing your request...", {
-                          id: "signup-process-hero",
-                        });
+                        // Instant submission feedback
 
                         try {
                           const response = await fetch("/api/waitlist", {
@@ -294,32 +271,16 @@ function Hero() {
                           });
 
                           if (response.ok) {
-                            setTimeout(() => {
-                              toast.success("Email validated successfully!", {
-                                id: "signup-process-hero",
-                              });
-                            }, 500);
-
-                            setTimeout(() => {
-                              toast.success("Adding you to the waitlist...", {
-                                id: "signup-process-hero",
-                              });
-                            }, 1500);
-
-                            setTimeout(() => {
-                              toast.success("Welcome to Oyana! 🎉", {
-                                id: "signup-process-hero",
-                                description: "We'll notify you when we launch.",
-                              });
-                              setSubmitMessageHero(
-                                "Thanks! We'll notify you when we launch."
-                              );
-                              form.reset();
-                            }, 2500);
+                            toast.success("Welcome to Oyana! 🎉", {
+                              description: "We'll notify you when we launch.",
+                            });
+                            setSubmitMessageHero(
+                              "Thanks! We'll notify you when we launch."
+                            );
+                            form.reset();
                           } else {
                             const errorData = await response.json();
                             toast.error("Failed to join waitlist", {
-                              id: "signup-process-hero",
                               description:
                                 errorData.error || "Please try again.",
                             });
@@ -329,7 +290,6 @@ function Hero() {
                           }
                         } catch (err) {
                           toast.error("Network error", {
-                            id: "signup-process-hero",
                             description:
                               "Please check your connection and try again.",
                           });
@@ -352,7 +312,7 @@ function Hero() {
                       <Button
                         type="submit"
                         disabled={isSubmittingHero}
-                        className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110 disabled:opacity-50"
+                        className="h-12 px-6 bg-primary text-black font-semibold hover:brightness-110"
                       >
                         {isSubmittingHero ? "Joining..." : "Get Invite"}
                       </Button>
