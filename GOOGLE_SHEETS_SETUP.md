@@ -14,13 +14,14 @@ This guide will help you set up Google Sheets to automatically collect all email
    - Column C: `Name`
    - Column D: `Source`
    - Column E: `Type`
+   - Column F: `YouTube Channel`
 
 Your sheet should look like this:
 
 ```
-| Timestamp | Email | Name | Source | Type |
-|-----------|-------|------|--------|------|
-|           |       |      |        |      |
+| Timestamp | Email | Name | Source | Type | YouTube Channel |
+|-----------|-------|------|--------|------|-----------------|
+|           |       |      |        |      |                 |
 ```
 
 4. **Copy the Sheet ID** from the URL:
@@ -160,6 +161,7 @@ Each signup creates a new row with:
 - **Name**: Their name (if provided)
 - **Source**: Which page they came from (oyana1, oyana2, etc.)
 - **Type**: waitlist or preorder
+- **YouTube Channel**: Their YouTube channel URL (if provided)
 
 ## Security Notes
 

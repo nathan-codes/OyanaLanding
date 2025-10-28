@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import Image from "next/image";
 
 export default function Oyana1Page() {
   const [email, setEmail] = useState("");
@@ -57,6 +58,18 @@ export default function Oyana1Page() {
   return (
     <div className="min-h-screen" style={{ background: "var(--surface)" }}>
       <div className="mx-auto max-w-7xl px-4 pt-28 pb-16">
+        {/* Logo */}
+        <div className="flex justify-center mb-10">
+          <Image
+            src="/images/OyanaFinalLogo.svg"
+            alt="Oyana logo"
+            width={200}
+            height={48}
+            className="h-10 w-auto md:h-12"
+            priority
+          />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}

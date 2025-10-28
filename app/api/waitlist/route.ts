@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { email, name, source, type } = data;
+    const { email, name, source, type, youtubeChannel } = data;
 
     // Validate email
     if (!email || !email.includes("@")) {
@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       name: name || null,
       source: source || "unknown",
       type: type || "waitlist",
+      youtubeChannel: youtubeChannel || null,
       timestamp: new Date().toISOString(),
     });
 
@@ -31,6 +32,7 @@ export async function POST(request: Request) {
       const formBody = new URLSearchParams({
         // The Apps Script expects `e.parameter.Email`
         Email: email,
+        YoutubeChannel: youtubeChannel || "", // Always send, even if empty
       });
 
       const appsScriptResponse = await fetch(appsScriptUrl, {

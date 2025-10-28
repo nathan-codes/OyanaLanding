@@ -4,6 +4,13 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import TeamSection from "@/components/TeamSection";
@@ -16,6 +23,12 @@ export default function Oyana2Page() {
   const [emailError, setEmailError] = useState("");
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Modal state for YouTube channel collection
+  const [showYoutubeModal, setShowYoutubeModal] = useState(false);
+  const [youtubeChannel, setYoutubeChannel] = useState("");
+  const [isSubmittingYoutube, setIsSubmittingYoutube] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState("");
 
   // Email validation function
   const validateEmail = (email: string): boolean => {
@@ -98,7 +111,10 @@ export default function Oyana2Page() {
           description: "We'll notify you when we launch.",
         });
         setSubmitted(true);
+        setSubmittedEmail(email);
         setEmail("");
+        // Show modal to collect YouTube channel
+        setShowYoutubeModal(true);
       } else {
         const errorData = await response.json();
         toast.error("Failed to join waitlist", {
@@ -114,6 +130,49 @@ export default function Oyana2Page() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleYoutubeSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // If no YouTube channel provided, just close the modal
+    if (!youtubeChannel.trim()) {
+      setShowYoutubeModal(false);
+      return;
+    }
+
+    setIsSubmittingYoutube(true);
+
+    try {
+      const response = await fetch("/api/update-youtube", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: submittedEmail,
+          youtubeChannel: youtubeChannel,
+        }),
+      });
+
+      if (response.ok) {
+        toast.success("Thanks for sharing!", {
+          description: "We'll subscribe and support your channel!",
+        });
+      }
+    } catch (err) {
+      // Silently fail, not critical
+      console.error("Error submitting YouTube channel:", err);
+    } finally {
+      setIsSubmittingYoutube(false);
+      setShowYoutubeModal(false);
+      setYoutubeChannel("");
+    }
+  };
+
+  const handleSkipYoutube = () => {
+    setShowYoutubeModal(false);
+    setYoutubeChannel("");
   };
 
   return (
@@ -336,6 +395,58 @@ export default function Oyana2Page() {
 
       {/* Meet the Team - under the fold */}
       {/* <TeamSection /> */}
+
+      {/* YouTube Channel Collection Modal */}
+      <Dialog open={showYoutubeModal} onOpenChange={setShowYoutubeModal}>
+        <DialogContent className="sm:max-w-[525px]">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-white">
+              Help Us Support Your Success! 🚀
+            </DialogTitle>
+            <DialogDescription className="text-zinc-300 pt-2">
+              We'd love to support your creative journey! If you have a YouTube
+              channel, share it with us and we'll subscribe to help you grow.
+              This is completely optional.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form onSubmit={handleYoutubeSubmit} className="mt-4 space-y-4">
+            <div>
+              <Input
+                type="url"
+                value={youtubeChannel}
+                onChange={(e) => setYoutubeChannel(e.target.value)}
+                placeholder="https://youtube.com/@yourchannel"
+                className="h-12"
+                disabled={isSubmittingYoutube}
+              />
+              <p className="text-xs text-zinc-400 mt-2">
+                Paste your YouTube channel URL (optional)
+              </p>
+            </div>
+
+            <div className="flex gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleSkipYoutube}
+                className="flex-1 h-12"
+                disabled={isSubmittingYoutube}
+              >
+                Skip
+              </Button>
+              <Button
+                type="submit"
+                className="flex-1 h-12"
+                style={{ backgroundColor: "#973900" }}
+                disabled={isSubmittingYoutube}
+              >
+                {isSubmittingYoutube ? "Saving..." : "Submit"}
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

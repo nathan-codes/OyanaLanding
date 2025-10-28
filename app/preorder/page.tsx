@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const formSchema = z.object({
   firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -78,6 +79,18 @@ export default function PreOrderPage() {
           className="max-w-2xl mx-auto"
         >
           <div className="text-center mb-12">
+            {/* Logo */}
+            <div className="flex justify-center mb-8">
+              <Image
+                src="/images/OyanaFinalLogo.svg"
+                alt="Oyana logo"
+                width={200}
+                height={48}
+                className="h-10 w-auto md:h-12"
+                priority
+              />
+            </div>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

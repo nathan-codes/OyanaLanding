@@ -7,7 +7,7 @@ const sheets = google.sheets({ version: "v4" });
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { email, name, source, type } = data;
+    const { email, name, source, type, youtubeChannel } = data;
 
     // Validate email
     if (!email || !email.includes("@")) {
@@ -43,13 +43,14 @@ export async function POST(request: Request) {
         name || "", // Name (empty if not provided)
         source || "unknown",
         type || "waitlist",
+        youtubeChannel || "", // YouTube channel (empty if not provided)
       ],
     ];
 
     // Append data to the sheet
     const response = await sheets.spreadsheets.values.append({
       spreadsheetId,
-      range: "Sheet1!A:E", // Adjust range as needed
+      range: "Sheet1!A:F", // Range includes: Timestamp, Email, Name, Source, Type, YouTube Channel
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values,

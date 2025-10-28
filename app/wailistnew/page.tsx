@@ -66,8 +66,14 @@ export default function WaitlistNewPage() {
             transition={{ duration: 0.5 }}
           >
             <div className="flex items-center gap-2 text-zinc-900">
-              <div className="h-7 w-7 rounded-md bg-zinc-900/90" />
-              <span className="text-2xl font-semibold">Oyana</span>
+              <Image
+                src="/images/OyanaFinalLogo.svg"
+                alt="Oyana logo"
+                width={120}
+                height={28}
+                className="h-7 w-auto"
+                priority
+              />
             </div>
 
             <h1 className="mt-6 text-3xl font-extrabold leading-tight tracking-tight text-zinc-900 md:text-5xl">
