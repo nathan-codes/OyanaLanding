@@ -404,7 +404,7 @@ export default function Oyana2Page() {
           <form onSubmit={handleYoutubeSubmit} className="mt-4 space-y-4">
             <div>
               <Input
-                type="url"
+                type="text"
                 value={youtubeChannel}
                 onChange={(e) => setYoutubeChannel(e.target.value)}
                 placeholder="https://youtube.com/@yourchannel"
