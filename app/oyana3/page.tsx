@@ -74,43 +74,15 @@ export default function Oyana3Page() {
 
     setIsLoading(true);
 
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          source: "oyana3",
-          type: "waitlist",
-        }),
-      });
-
-      if (response.ok) {
-        toast.success("Welcome to Oyana! 🎉", {
-          description: "We'll notify you when we launch.",
-        });
-        setSubmitted(true);
-        setSubmittedEmail(email);
-        setEmail("");
-        // Show modal to collect YouTube channel
-        setShowYoutubeModal(true);
-      } else {
-        const errorData = await response.json();
-        toast.error("Failed to join waitlist", {
-          description: errorData.error || "Please try again.",
-        });
-        setError(errorData.error || "Failed to sign up");
-      }
-    } catch (err) {
-      toast.error("Network error", {
-        description: "Please check your connection and try again.",
-      });
-      setError("Network error. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    // Defer sending to Apps Script until modal submit or skip, to avoid double rows
+    toast.success("Welcome to Oyana! 🎉", {
+      description: "Almost done — optionally add your YouTube channel.",
+    });
+    setSubmitted(true);
+    setSubmittedEmail(email);
+    setEmail("");
+    setShowYoutubeModal(true);
+    setIsLoading(false);
   };
 
   const handleYoutubeSubmit = async (e: React.FormEvent) => {
@@ -125,16 +97,16 @@ export default function Oyana3Page() {
     setIsSubmittingYoutube(true);
 
     try {
-      const response = await fetch("/api/update-youtube", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: submittedEmail,
-          youtubeChannel: youtubeChannel,
-        }),
-      });
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbz09xFpFU9FRynZAQ5WI37hsLcAUkYCVEU7_Yrewz1sGRSwOhx3K4maalBPZa4UJv53/exec",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `Email=${encodeURIComponent(
+            submittedEmail
+          )}&YoutubeChannel=${encodeURIComponent(youtubeChannel)}`,
+        }
+      );
 
       if (response.ok) {
         toast.success("Thanks for sharing!", {
@@ -152,8 +124,27 @@ export default function Oyana3Page() {
   };
 
   const handleSkipYoutube = () => {
-    setShowYoutubeModal(false);
-    setYoutubeChannel("");
+    // Submit a single row with only Email when user skips
+    setIsSubmittingYoutube(true);
+    fetch(
+      "https://script.google.com/macros/s/AKfycbz09xFpFU9FRynZAQ5WI37hsLcAUkYCVEU7_Yrewz1sGRSwOhx3K4maalBPZa4UJv53/exec",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `Email=${encodeURIComponent(submittedEmail)}&YoutubeChannel=`,
+      }
+    )
+      .then(() => {
+        toast.success("You're on the list!", {
+          description: "We’ll email you when we launch.",
+        });
+      })
+      .catch(() => {})
+      .finally(() => {
+        setIsSubmittingYoutube(false);
+        setShowYoutubeModal(false);
+        setYoutubeChannel("");
+      });
   };
 
   return (
