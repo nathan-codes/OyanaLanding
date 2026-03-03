@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -176,6 +176,18 @@ function Nav() {
 function Hero() {
   const [isSubmittingHero, setIsSubmittingHero] = useState(false);
   const [submitMessageHero, setSubmitMessageHero] = useState("");
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  // Ensure video plays when loaded (fixes autoplay in some browsers)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const play = () => video.play().catch(() => {});
+    if (video.readyState >= 2) play();
+    else video.addEventListener("loadeddata", play);
+    return () => video.removeEventListener("loadeddata", play);
+  }, []);
+
   return (
     <div className="relative h-screen overflow-hidden bg-black">
       {/* Soft gradient aura */}
@@ -358,12 +370,14 @@ function Hero() {
           >
             <div className="relative overflow-hidden rounded-xl">
               <video
+                ref={videoRef}
                 src="/OyanaPreviewVideo.mp4"
                 className="w-full h-[52vh] object-cover object-top"
                 autoPlay
                 muted
                 loop
                 playsInline
+                onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
               />
               {/* Removed dark overlay to make preview brighter and clearer */}
             </div>
