@@ -1,0 +1,151 @@
+"use client";
+
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { FiMenu, FiX } from "react-icons/fi";
+
+const navLinks = [
+  { name: "Features", href: "#features" },
+  { name: "How It Works", href: "#how-it-works" },
+  { name: "Testimonials", href: "#testimonials" },
+  { name: "Get Started", href: "#signup" },
+];
+
+export default function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const handleLinkClick = (href: string) => {
+    setIsMobileMenuOpen(false);
+    if (href.startsWith("#")) {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  return (
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all ${
+        isScrolled
+          ? "bg-gray-900/80 backdrop-blur-md border-b border-[#009775]/20"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <motion.a
+            href="#"
+            className="flex items-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            <Image
+              src="/OyanaFinalLogo.svg"
+              alt="Oyana Logo"
+              width={120}
+              height={24}
+              className="h-8 w-auto"
+            />
+          </motion.a>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(link.href);
+                }}
+                className="text-gray-300 hover:text-[#6ac49a] transition-colors font-medium"
+                whileHover={{ y: -2 }}
+              >
+                {link.name}
+              </motion.a>
+            ))}
+            <motion.a
+              href="#signup"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick("#signup");
+              }}
+              className="px-6 py-2 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Start Free Trial
+            </motion.a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-300 hover:text-indigo-400 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <FiX className="w-6 h-6" />
+            ) : (
+              <FiMenu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden pb-4 space-y-4"
+          >
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(link.href);
+                }}
+                className="block text-gray-300 hover:text-indigo-400 transition-colors font-medium py-2"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="#signup"
+              onClick={(e) => {
+                e.preventDefault();
+                handleLinkClick("#signup");
+              }}
+              className="block px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full text-white font-semibold text-center"
+            >
+              Start Free Trial
+            </a>
+          </motion.div>
+        )}
+      </div>
+    </motion.nav>
+  );
+}
+
