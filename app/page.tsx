@@ -21,9 +21,9 @@ export default function Home() {
       <section id="testimonials">
         <Testimonials />
       </section>
-      <section id="pricing">
+      {/* <section id="pricing">
         <BenefitsMatrix />
-      </section>
+      </section> */}
       <CTASection />
       <Footer />
     </main>

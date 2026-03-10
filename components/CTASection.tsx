@@ -63,7 +63,7 @@ export default function CTASection() {
               </div>
               <motion.button
                 type="submit"
-                className="px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full font-semibold text-white flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
+                className=" cursor-pointer  px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full font-semibold text-white flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -102,7 +102,7 @@ export default function CTASection() {
           </motion.div>
 
           {/* Trust Indicators */}
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -121,7 +121,7 @@ export default function CTASection() {
               <span className="text-green-400">✓</span>
               <span>Cancel anytime</span>
             </div>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>

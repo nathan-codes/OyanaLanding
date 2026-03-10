@@ -139,7 +139,7 @@ export default function HowItWorks() {
         >
           <div
             ref={stepsContainerRef}
-            className="py-16 lg:py-32 space-y-32 lg:space-y-48"
+            className="py-16 lg:py-32 space-y-32 "
           >
             {steps.map((step, index) => {
               const Icon = step.icon;

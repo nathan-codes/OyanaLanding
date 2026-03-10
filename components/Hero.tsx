@@ -1,14 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import VideoEmbed, { VideoEmbedRef } from "./VideoEmbed";
 
 export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<VideoEmbedRef>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const demoVideoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
     if (textRef.current) {
@@ -28,6 +30,30 @@ export default function Hero() {
       );
     }
   }, []);
+
+  // Ensure video autoplays when loaded (muted by default)
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const play = () => video.play().catch(() => {});
+    if (video.readyState >= 2) play();
+    else video.addEventListener("loadeddata", play);
+    return () => video.removeEventListener("loadeddata", play);
+  }, []);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const nextMuted = !isMuted;
+    video.muted = nextMuted;
+    setIsMuted(nextMuted);
+    if (!nextMuted) video.play().catch(() => { video.muted = true; setIsMuted(true); });
+  };
+
+  const closeDemoModal = () => {
+    demoVideoRef.current?.pause();
+    setDemoOpen(false);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,6 +83,67 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex items-center overflow-hidden pt-20 px-4 sm:px-6 lg:px-8"
     >
+      {/* Demo video modal */}
+      <AnimatePresence>
+        {demoOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Watch demo video"
+          >
+            <button
+              type="button"
+              onClick={closeDemoModal}
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
+              aria-label="Close modal"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-4xl rounded-2xl overflow-hidden border border-[#009775]/20 bg-[var(--surface-2)] shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                onClick={closeDemoModal}
+                aria-label="Close"
+                className="absolute top-3 right-3 z-10 rounded-full p-2 text-white/80 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
+              <div className="relative aspect-video bg-black">
+                <video
+                  ref={demoVideoRef}
+                  src="/OyanaDemo.mp4"
+                  className="w-full h-full object-contain"
+                  controls
+                  playsInline
+                  onEnded={() => demoVideoRef.current?.pause()}
+                  aria-label="Oyana demo video"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-3 px-4 py-3 border-t border-white/10 bg-black/30">
+                <span className="text-sm text-[var(--text-muted)]">Oyana Demo</span>
+                <button
+                  type="button"
+                  onClick={closeDemoModal}
+                  className="rounded-lg px-4 py-2 text-sm font-medium text-white/90 bg-white/10 hover:bg-[#009775]/30 border border-white/10 hover:border-[#009775]/40 transition-colors cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Animated background gradient */}
       <div className="absolute inset-0 gradient-animated opacity-10" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,151,117,0.1),transparent_50%)]" />
@@ -118,7 +205,7 @@ export default function Hero() {
             >
               <motion.a
                 href="#signup"
-                className="group relative px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-lg font-semibold text-white text-lg overflow-hidden flex items-center justify-center"
+                className="group relative px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-lg font-semibold text-white text-lg overflow-hidden flex items-center justify-center cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -133,10 +220,8 @@ export default function Hero() {
 
               <motion.button
                 type="button"
-                onClick={() => {
-                  videoRef.current?.play();
-                }}
-                className="px-8 py-4 border-2 border-[#009775]/50 rounded-lg font-semibold text-[#6ac49a] text-lg backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center"
+                onClick={() => setDemoOpen(true)}
+                className="px-8 cursor-pointer py-4 border-2 border-[#009775]/50 rounded-lg font-semibold text-[#6ac49a] text-lg backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-all flex items-center justify-center"
                 whileHover={{ scale: 1.02, borderColor: "rgba(0, 151, 117, 0.8)" }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -151,9 +236,36 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
+            className="relative rounded-xl overflow-hidden shadow-2xl"
           >
-            <VideoEmbed ref={videoRef} videoId="7VAUDImpqGQ" className="shadow-2xl" />
+            <video
+              ref={videoRef}
+              src="/OyanaPreviewVideo.mp4"
+              className="w-full aspect-video object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+              onLoadedData={(e) => e.currentTarget.play().catch(() => {})}
+              aria-label="Oyana preview"
+            />
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute video" : "Mute video"}
+              className="absolute bottom-3 left-3 z-10 rounded-lg px-3 py-2 text-sm font-medium flex items-center gap-2 transition-colors bg-black/50 text-white/90 hover:bg-black/70 hover:text-white backdrop-blur-sm cursor-pointer"
+            >
+              {isMuted ? (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M16.5 12c0-1.77-.77-3.36-2-4.47v8.94c1.23-1.11 2-2.7 2-4.47zm3.5 0c0 2.89-1.64 5.39-4.03 6.65l-1.2-1.6C16.86 16.04 18 14.14 18 12s-1.14-4.04-3.23-5.05l1.2-1.6C18.36 6.61 20 9.11 20 12zM3 9v6h4l5 5V4L7 9H3z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-.77-3.36-2-4.47v8.94c1.23-1.11 2-2.7 2-4.47zm3.5 0c0 2.89-1.64 5.39-4.03 6.65l-1.2-1.6C16.86 16.04 18 14.14 18 12s-1.14-4.04-3.23-5.05l1.2-1.6C18.36 6.61 20 9.11 20 12z" />
+                </svg>
+              )}
+              <span className="sr-only sm:not-sr-only sm:inline">{isMuted ? "Unmute" : "Mute"}</span>
+            </button>
           </motion.div>
         </div>
       </div>

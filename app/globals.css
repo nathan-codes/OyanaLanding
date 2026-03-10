@@ -61,6 +61,13 @@ body {
   overflow-x: hidden;
 }
 
+/* Pointer cursor for all clickable elements */
+button,
+[role="button"],
+a[href] {
+  cursor: pointer;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
