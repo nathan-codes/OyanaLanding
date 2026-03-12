@@ -10,7 +10,7 @@ const footerLinks = {
     { name: "How It Works", href: "#how-it-works" },
     // { name: "Pricing", href: "#pricing" },
     { name: "Demo", href: "#demo" },
-    { name: "Privacy", href: "/terms" },
+    { name: "Privacy", href: "/terms", openInNewTab: true },
   ],
   // Resources: [
   //   { name: "Documentation", href: "#" },
@@ -64,6 +64,9 @@ export default function Footer() {
                       href={link.href}
                       className="text-gray-400 text-sm hover:text-[#6ac49a] transition-colors inline-block"
                       whileHover={{ x: 4 }}
+                      {...("openInNewTab" in link && link.openInNewTab
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                     >
                       {link.name}
                     </motion.a>
