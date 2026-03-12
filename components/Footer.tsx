@@ -8,8 +8,9 @@ const footerLinks = {
   Product: [
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
-    { name: "Pricing", href: "#pricing" },
+    // { name: "Pricing", href: "#pricing" },
     { name: "Demo", href: "#demo" },
+    { name: "Privacy", href: "/terms" },
   ],
   // Resources: [
   //   { name: "Documentation", href: "#" },
@@ -17,12 +18,12 @@ const footerLinks = {
   //   { name: "Case Studies", href: "#" },
   //   { name: "Support", href: "#" },
   // ],
-  Company: [
-    { name: "About", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Contact", href: "#contact" },
-    { name: "Privacy", href: "#" },
-  ],
+  // Company: [
+  //   { name: "About", href: "#" },
+  //   { name: "Careers", href: "#" },
+  //   { name: "Contact", href: "#contact" },
+  //   { name: "Privacy", href: "#" },
+  // ],
 };
 
 const socialLinks = [
