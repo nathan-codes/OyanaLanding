@@ -82,46 +82,7 @@ export default function CTASection() {
             </div>
           </motion.form>
 
-          {/* Secondary CTA */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <span className="text-gray-400">or</span>
-            <motion.a
-              href="#contact"
-              className="px-6 py-3 border-2 border-[#009775]/50 rounded-full font-semibold text-[#6ac49a] hover:bg-[#009775]/10 transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Let&apos;s Talk
-            </motion.a>
-          </motion.div>
-
-          {/* Trust Indicators */}
-          {/* <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-sm text-gray-400"
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-green-400">✓</span>
-              <span>Free 14-day trial</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-green-400">✓</span>
-              <span>No credit card required</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-green-400">✓</span>
-              <span>Cancel anytime</span>
-            </div>
-          </motion.div> */}
+         
         </motion.div>
       </div>
     </section>
