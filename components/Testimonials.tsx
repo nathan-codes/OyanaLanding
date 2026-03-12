@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const testimonial = {
   // Name intentionally omitted; we only describe the creator type
-  role: "Content & Growth Strategist for Creators (especially those with chronic illnesses)",
+  role: "Content & Growth Strategist for Creators ",
   avatar: "📈",
   quote:
     "I saw a 30% retention increase after I implemented a few of the recommendations from Oyana.",
