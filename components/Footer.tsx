@@ -29,7 +29,7 @@ const footerLinks = {
 const socialLinks = [
   // { icon: FiTwitter, href: "#", label: "Twitter" },
   // { icon: FiGithub, href: "#", label: "GitHub" },
-  { icon: FiLinkedin, href: "#", label: "LinkedIn" },
+  { icon: FiLinkedin, href: "https://www.linkedin.com/company/oyana26/", label: "LinkedIn", openInNewTab: true },
   { icon: FiMail, href: "#", label: "Email" },
 ];
 
@@ -37,9 +37,9 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-800/50 bg-gray-900/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10 md:gap-12 mb-8">
           {/* Logo and Description */}
-          <div className="col-span-2">
+          <div className="max-w-xs">
             <Image
               src="/OyanaFinalLogo.svg"
               alt="Oyana Logo"
@@ -47,34 +47,36 @@ export default function Footer() {
               height={24}
               className="h-8 w-auto mb-4"
             />
-            <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+            <p className="text-gray-400 text-sm leading-relaxed">
               Turn watch data into real growth. The next-generation video analytics platform for
               content creators.
             </p>
           </div>
 
           {/* Footer Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
-              <h3 className="font-semibold text-white mb-4">{category}</h3>
-              <ul className="space-y-2">
-                {links.map((link) => (
-                  <li key={link.name}>
-                    <motion.a
-                      href={link.href}
-                      className="text-gray-400 text-sm hover:text-[#6ac49a] transition-colors inline-block"
-                      whileHover={{ x: 4 }}
-                      {...("openInNewTab" in link && link.openInNewTab
-                        ? { target: "_blank", rel: "noopener noreferrer" }
-                        : {})}
-                    >
-                      {link.name}
-                    </motion.a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="flex flex-col gap-8">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="font-semibold text-white mb-4">{category}</h3>
+                <ul className="space-y-2">
+                  {links.map((link) => (
+                    <li key={link.name}>
+                      <motion.a
+                        href={link.href}
+                        className="text-gray-400 text-sm hover:text-[#6ac49a] transition-colors inline-block"
+                        whileHover={{ x: 4 }}
+                        {...("openInNewTab" in link && link.openInNewTab
+                          ? { target: "_blank", rel: "noopener noreferrer" }
+                          : {})}
+                      >
+                        {link.name}
+                      </motion.a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Bottom Section */}
@@ -95,6 +97,9 @@ export default function Footer() {
                   className="w-10 h-10 rounded-full bg-gray-800/50 border border-[#009775]/20 flex items-center justify-center text-gray-400 hover:text-[#6ac49a] hover:border-[#009775]/40 transition-all"
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
+                  {...("openInNewTab" in social && social.openInNewTab
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                 >
                   <Icon className="w-5 h-5" />
                 </motion.a>
