@@ -14,9 +14,9 @@ if (typeof window !== "undefined") {
 const features = [
   {
     icon: FiZap,
-    title: "Top Recommendations",
+    title: "ScriptLab",
     description:
-      "Get actionable, timestamped recommendations with specific fixes. Each suggestion includes the exact moment, problem description, and actionable solution to improve your content.",
+      "Iterate on your script with clear, actionable feedback before you publish. ScriptLab highlights where your hook drags, where explanations lose clarity, and where your pacing slips. Get concrete suggestions on rewording, reordering, and tightening your script so you can record with confidence—knowing every moment is working to keep viewers watching.",
     color: "from-[#009775] to-[#6ac49a]",
     gradient: "from-[#009775]/20 to-[#6ac49a]/20",
     image:
