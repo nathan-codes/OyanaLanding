@@ -78,6 +78,19 @@ export default function Hero() {
     },
   };
 
+  const taglines = [
+    { line1: "Turn Watch Data", line2: "Into Real Growth" },
+    { line1: "Stop Guessing", line2: "Start Growing" },
+  ];
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  useEffect(() => {
+    const t = setInterval(
+      () => setTaglineIndex((i) => (i + 1) % taglines.length),
+      4000
+    );
+    return () => clearInterval(t);
+  }, [taglines.length]);
+
   return (
     <section
       ref={heroRef}
@@ -161,16 +174,30 @@ export default function Hero() {
             animate="visible"
             className="space-y-8"
           >
-            {/* Headline */}
-            <motion.h1
+            {/* Headline - rotating taglines */}
+            <motion.div
               variants={itemVariants}
-              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+              className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight min-h-[2.5em] flex flex-col justify-center overflow-hidden"
+              aria-live="polite"
             >
-              <span className="block text-white">Turn Watch Data</span>
-              <span className="block bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
-                Into Real Growth
-              </span>
-            </motion.h1>
+              <AnimatePresence mode="wait">
+                <motion.h1
+                  key={taglineIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col"
+                >
+                  <span className="block text-white">
+                    {taglines[taglineIndex].line1}
+                  </span>
+                  <span className="block bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
+                    {taglines[taglineIndex].line2}
+                  </span>
+                </motion.h1>
+              </AnimatePresence>
+            </motion.div>
 
             {/* Description */}
             <motion.div

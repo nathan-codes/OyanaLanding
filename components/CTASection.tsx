@@ -37,7 +37,7 @@ export default function CTASection() {
             </span>
           </h2>
           <p className="text-lg text-gray-300 mb-12 text-center">
-            Join thousands of creators who are using data-driven insights to grow their channels. Start your free trial today.
+            Join thousands of creators who are using data-driven insights to grow their channels. <br /> Start your free trial today.
           </p>
 
           {/* Signup Form */}

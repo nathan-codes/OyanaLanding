@@ -11,12 +11,12 @@ const footerLinks = {
     { name: "Pricing", href: "#pricing" },
     { name: "Demo", href: "#demo" },
   ],
-  Resources: [
-    { name: "Documentation", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Support", href: "#" },
-  ],
+  // Resources: [
+  //   { name: "Documentation", href: "#" },
+  //   { name: "Blog", href: "#" },
+  //   { name: "Case Studies", href: "#" },
+  //   { name: "Support", href: "#" },
+  // ],
   Company: [
     { name: "About", href: "#" },
     { name: "Careers", href: "#" },
@@ -26,8 +26,8 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: FiTwitter, href: "#", label: "Twitter" },
-  { icon: FiGithub, href: "#", label: "GitHub" },
+  // { icon: FiTwitter, href: "#", label: "Twitter" },
+  // { icon: FiGithub, href: "#", label: "GitHub" },
   { icon: FiLinkedin, href: "#", label: "LinkedIn" },
   { icon: FiMail, href: "#", label: "Email" },
 ];
