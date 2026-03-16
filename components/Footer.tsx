@@ -10,7 +10,8 @@ const footerLinks = {
     { name: "How It Works", href: "#how-it-works" },
     // { name: "Pricing", href: "#pricing" },
     { name: "Demo", href: "#demo" },
-    { name: "Privacy", href: "/terms", openInNewTab: true },
+    { name: "Privacy Policy", href: "/privacy-policy", openInNewTab: true },
+    { name: "Terms of Use", href: "/privacy-policy", openInNewTab: true },
   ],
   // Resources: [
   //   { name: "Documentation", href: "#" },
@@ -48,8 +49,9 @@ export default function Footer() {
               className="h-8 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
-              Turn watch data into real growth. The next-generation video analytics platform for
-              content creators.
+              Oyana is built for YouTube creators. We use the YouTube API to securely access your
+              video captions, retention metrics, and audience data to give you timestamped,
+              actionable recommendations to grow your channel.
             </p>
           </div>
 
