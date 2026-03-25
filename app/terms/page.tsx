@@ -44,7 +44,7 @@ export default function TermsPage() {
             </div>
           </div>
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold">
-            Oyana Terms of Use
+            Oyana Terms of Use <br /> and Privacy Policy
           </h1>
           <p className="mt-3 text-sm md:text-base text-[var(--text-muted)]">
             Effective Date: <span className="font-medium text-white">January 1, 2026</span>
