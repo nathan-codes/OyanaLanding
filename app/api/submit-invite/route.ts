@@ -36,17 +36,29 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const response = await fetch(scriptUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: email.trim().toLowerCase(),
-        country: country.trim(),
-        youtubeUrl: youtubeUrl.trim(),
-      }),
+    const payload = JSON.stringify({
+      email: email.trim().toLowerCase(),
+      country: country.trim(),
+      youtubeUrl: youtubeUrl.trim(),
     });
 
+    // Google Apps Script responds with a 302 redirect. Using text/plain
+    // avoids preflight issues and the redirect is followed automatically.
+    const response = await fetch(scriptUrl, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: payload,
+      redirect: "follow",
+    });
+
+    // Google Apps Script redirects resolve to a 200 from
+    // script.googleusercontent.com — any non-2xx is a real failure.
     if (!response.ok) {
+      const text = await response.text().catch(() => "");
+      console.error(
+        `Google Script error: ${response.status} ${response.statusText}`,
+        text.slice(0, 500)
+      );
       throw new Error(`Google Script responded with ${response.status}`);
     }
 
