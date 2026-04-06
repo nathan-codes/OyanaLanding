@@ -6,13 +6,13 @@ import { FiMail, FiArrowRight } from "react-icons/fi";
 
 export default function CTASection() {
   const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+    if (!email) return;
+    window.dispatchEvent(
+      new CustomEvent("open-invite-modal", { detail: { email } })
+    );
   };
 
   return (
@@ -67,17 +67,8 @@ export default function CTASection() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {isSubmitted ? (
-                  <>
-                    <span>✓</span>
-                    <span>Signed Up!</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Get Started</span>
-                    <FiArrowRight className="w-5 h-5" />
-                  </>
-                )}
+                <span>Get Started</span>
+                <FiArrowRight className="w-5 h-5" />
               </motion.button>
             </div>
           </motion.form>

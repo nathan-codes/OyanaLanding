@@ -230,8 +230,13 @@ export default function Hero() {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 pt-4"
             >
-              <motion.a
-                href="#signup"
+              <motion.button
+                type="button"
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("open-invite-modal", { detail: {} })
+                  )
+                }
                 className="group relative px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-lg font-semibold text-white text-lg overflow-hidden flex items-center justify-center cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -243,7 +248,7 @@ export default function Hero() {
                   whileHover={{ x: 0 }}
                   transition={{ duration: 0.3 }}
                 />
-              </motion.a>
+              </motion.button>
 
               <motion.button
                 type="button"

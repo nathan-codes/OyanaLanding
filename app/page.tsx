@@ -6,10 +6,12 @@ import Testimonials from "@/components/Testimonials";
 import BenefitsMatrix from "@/components/BenefitsMatrix";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import RequestInviteModal from "@/components/RequestInviteModal";
 
 export default function Home() {
   return (
     <main className="min-h-screen">
+      <RequestInviteModal />
       <Navbar />
       <Hero />
       <section id="features">

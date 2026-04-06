@@ -83,18 +83,19 @@ export default function Navbar() {
                 {link.name}
               </motion.a>
             ))}
-            <motion.a
-              href="#signup"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#signup");
-              }}
-              className="px-6 py-2 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
+            <motion.button
+              type="button"
+              onClick={() =>
+                window.dispatchEvent(
+                  new CustomEvent("open-invite-modal", { detail: {} })
+                )
+              }
+              className="px-6 py-2 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold hover:shadow-lg hover:shadow-[#009775]/50 transition-all cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-            Request Invite
-            </motion.a>
+              Request Invite
+            </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -132,16 +133,18 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
-            <a
-              href="#signup"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick("#signup");
+            <button
+              type="button"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                window.dispatchEvent(
+                  new CustomEvent("open-invite-modal", { detail: {} })
+                );
               }}
-              className="block px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full text-white font-semibold text-center"
+              className="block w-full px-6 py-2 bg-linear-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold text-center cursor-pointer"
             >
-              Start Free Trial
-            </a>
+              Request Invite
+            </button>
           </motion.div>
         )}
       </div>
