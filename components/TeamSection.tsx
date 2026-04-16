@@ -24,52 +24,52 @@ export default function TeamSection({
 
   const members: TeamMember[] = [
     {
-      name: "Francois Bonin",
-      role: "CEO & Tech Lead",
+      name: "Daps",
+      role: "Product",
       description:
-        "Leads the tech and company vision with over 15 years of experience in IoT and software development.",
-      image: "/images/team/francois.jpg",
-      linkedin: "https://www.linkedin.com/in/fran%C3%A7ois-bonin-8942b/",
-    },
-    {
-      name: "Dapo Bakare",
-      role: "Business Development",
-      description:
-        "Previously Head of Product at YouTube. Started a content creator collective, GMPLY Africa.",
+        "Led product at YouTube and founded GMPLY Africa to support creators across the continent. After two decades of leading product development and building venture studios inside Amazon and Google, Daps is on a mission to build AI tools that actually work for creators and marketing agencies.",
       image: "/images/team/dapo.jpg",
       linkedin: "https://www.linkedin.com/in/bakare/",
     },
     {
-      name: "Arlene",
-      role: "Operations Director",
+      name: "François",
+      role: "Architect",
       description:
-        "Orchestrates operations with precision, ensuring seamless delivery of our services.",
-      image: "/images/team/arlene.jpg",
-      linkedin: "#",
+        "Architected globally distributed systems at Amazon, Google, App Dynamics and other startups. François designed the Oyana backend for scalability and security.",
+      image: "/images/team/francois.jpg",
+      linkedin: "https://www.linkedin.com/in/fran%C3%A7ois-bonin-8942b/",
     },
     {
-      name: "Nathan Turkson",
-      role: "Frontend Developer",
+      name: "Arlene",
+      role: "Operations",
       description:
-        "Builds fast, delightful interfaces and leads the front‑end craft at Oyana.",
+        "Led globally distributed teams at GE Healthcare and Royal Philips and built consulting practices in healthcare. At Oyana, she has her hands in everything, but writing codes.",
+      image: "/images/team/arlene.jpg",
+      linkedin: "https://www.linkedin.com/in/arlenesargeant/",
+    },
+    {
+      name: "Nathan",
+      role: "Engineer",
+      description:
+        "At Oyana, Nathan translates ideas into prototypes, keeps engineering moving, and supports marketing analytics.",
       image: "/images/team/nathan.jpg",
       linkedin: "https://www.linkedin.com/in/nathanturkson/",
     },
     {
-      name: "Smiles",
-      role: "Fullstack Developer",
+      name: "Samuel",
+      role: "Engineer",
       description:
-        "Builds reliable, scalable features across the stack with a keen eye for UX.",
+        "Built scalable, production-grade applications for projects across Europe and Africa. Samuel developed the core Oyana platform experience, translating complex data into intuitive, actionable interfaces for creators.",
       image: "/images/team/placeholder.jpg",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/nyamekesse-samuel",
     },
     {
-      name: "Tochukwu Ibeaji",
+      name: "Tochie",
       role: "Marketing",
       description:
-        "Drives marketing initiatives and growth campaigns to amplify Oyana's reach.",
+        "Storyteller and keen eye to detail in all things customer-facing. Tochie leads brand awareness and creator relationship at Oyana.",
       image: "/images/team/Tochukwu's Picture.jpg",
-      linkedin: "#",
+      linkedin: "https://www.linkedin.com/in/tochukwu-falola",
     },
   ];
 
@@ -112,16 +112,14 @@ export default function TeamSection({
           >
             {title}
             <br />
-            <span style={{ color: "var(--gossamer-600)" }}>
-              Behind The Innovation
-            </span>
+          
           </motion.h2>
           <motion.p
             initial={fadeInUp.initial}
             whileInView={fadeInUp.animate}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="text-lg md:text-xl text-zinc-300 max-w-3xl mx-auto mt-4"
+            className="text-lg md:text-xl text-zinc-300 mt-6 text-center"
           >
             {subtitle}
           </motion.p>
@@ -177,15 +175,15 @@ export default function TeamSection({
                 <h3 className="text-2xl font-bold text-center text-white mb-1 transition-colors duration-300 group-hover:[color:var(--gossamer-600)]">
                   {m.name}
                 </h3>
+                <p className="text-zinc-300 text-center leading-relaxed mb-3">
+                  {m.description}
+                </p>
                 <div
-                  className="text-center font-medium mb-3"
+                  className="text-center font-semibold tracking-wide uppercase text-sm"
                   style={{ color: "var(--gossamer-600)" }}
                 >
                   {m.role}
                 </div>
-                <p className="text-zinc-300 text-center leading-relaxed">
-                  {m.description}
-                </p>
               </div>
 
               <div className="mt-7 flex justify-center relative z-10">

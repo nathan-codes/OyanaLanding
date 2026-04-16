@@ -2,29 +2,19 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FiTwitter, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiLinkedin, FiMail } from "react-icons/fi";
 
 const footerLinks = {
   Product: [
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
-    // { name: "Pricing", href: "#pricing" },
     { name: "Demo", href: "#demo" },
-    { name: "Privacy Policy", href: "/privacy-policy", openInNewTab: true },
-    { name: "Terms of Use", href: "/privacy-policy", openInNewTab: true },
   ],
-  // Resources: [
-  //   { name: "Documentation", href: "#" },
-  //   { name: "Blog", href: "#" },
-  //   { name: "Case Studies", href: "#" },
-  //   { name: "Support", href: "#" },
-  // ],
-  // Company: [
-  //   { name: "About", href: "#" },
-  //   { name: "Careers", href: "#" },
-  //   { name: "Contact", href: "#contact" },
-  //   { name: "Privacy", href: "#" },
-  // ],
+  Company: [
+    { name: "About", href: "/about" },
+    { name: "Privacy Policy", href: "/privacy-policy", openInNewTab: true },
+    { name: "Terms of Use", href: "/terms", openInNewTab: true },
+  ],
 };
 
 const socialLinks = [
@@ -56,7 +46,7 @@ export default function Footer() {
           </div>
 
           {/* Footer Links */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
                 <h3 className="font-semibold text-white mb-4">{category}</h3>

@@ -79,8 +79,9 @@ export default function Hero() {
   };
 
   const taglines = [
-    { line1: "Turn Watch Data", line2: "Into Real Growth" },
-    { line1: "Stop Guessing", line2: "Start Growing" },
+    { line1: "Every creator has", line2: "a story to tell" },
+    { line1: "Oyana helps you", line2: "tell it" },
+    { line1: "So everyone", line2: "listens" },
   ];
   const [taglineIndex, setTaglineIndex] = useState(0);
   useEffect(() => {

@@ -3,18 +3,22 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const navLinks = [
   { name: "Features", href: "#features" },
   { name: "How It Works", href: "#how-it-works" },
-  { name: "Testimonials", href: "#testimonials" },
+  { name: "About", href: "/about" },
   { name: "Get Started", href: "#signup" },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,14 +28,17 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLinkClick = (href: string) => {
+  const handleHashClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    if (href.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const resolveHref = (href: string) => {
+    if (href.startsWith("#") && !isHome) return `/${href}`;
+    return href;
   };
 
   return (
@@ -48,41 +55,59 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <motion.a
-            href="#"
-            className="flex items-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-          >
-            <Image
-              src="/OyanaFinalLogo.svg"
-              alt="Oyana Logo"
-              width={120}
-              height={24}
-              className="h-8 w-auto"
-            />
-          </motion.a>
+          <Link href="/" className="flex items-center">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Image
+                src="/OyanaFinalLogo.svg"
+                alt="Oyana Logo"
+                width={120}
+                height={24}
+                className="h-8 w-auto"
+              />
+            </motion.div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <motion.a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
-                className="text-gray-300 hover:text-[#6ac49a] transition-colors font-medium"
-                whileHover={{ y: -2 }}
-              >
-                {link.name}
-              </motion.a>
-            ))}
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith("#");
+              const isActive =
+                !isHash && pathname === link.href;
+
+              if (isHash && isHome) {
+                return (
+                  <motion.a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleHashClick(link.href);
+                    }}
+                    className="text-gray-300 hover:text-[#6ac49a] transition-colors font-medium"
+                    whileHover={{ y: -2 }}
+                  >
+                    {link.name}
+                  </motion.a>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.name}
+                  href={resolveHref(link.href)}
+                  className={`hover:text-[#6ac49a] transition-colors font-medium ${
+                    isActive ? "text-[#6ac49a]" : "text-gray-300"
+                  }`}
+                >
+                  <motion.span whileHover={{ y: -2 }} className="inline-block">
+                    {link.name}
+                  </motion.span>
+                </Link>
+              );
+            })}
             <motion.button
               type="button"
               onClick={() =>
@@ -120,19 +145,40 @@ export default function Navbar() {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden pb-4 space-y-4"
           >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(link.href);
-                }}
-                className="block text-gray-300 hover:text-indigo-400 transition-colors font-medium py-2"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isHash = link.href.startsWith("#");
+
+              if (isHash && isHome) {
+                return (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleHashClick(link.href);
+                    }}
+                    className="block text-gray-300 hover:text-[#6ac49a] transition-colors font-medium py-2"
+                  >
+                    {link.name}
+                  </a>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.name}
+                  href={resolveHref(link.href)}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`block hover:text-[#6ac49a] transition-colors font-medium py-2 ${
+                    !isHash && pathname === link.href
+                      ? "text-[#6ac49a]"
+                      : "text-gray-300"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
             <button
               type="button"
               onClick={() => {
