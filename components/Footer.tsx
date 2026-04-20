@@ -28,7 +28,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-800/50 bg-gray-900/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 mb-8 items-start">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10 md:gap-12 mb-8">
           {/* Logo and Description */}
           <div className="max-w-xs">
             <Image
@@ -45,8 +45,8 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Footer Links — centered */}
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 md:justify-center">
+          {/* Footer Links — far right */}
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
             {Object.entries(footerLinks).map(([category, links]) => (
               <div key={category}>
                 <h3 className="font-semibold text-white mb-4">{category}</h3>
@@ -69,17 +69,24 @@ export default function Footer() {
               </div>
             ))}
           </div>
+        </div>
 
-          {/* Badges — right */}
-          <div className="flex flex-row md:flex-col items-center md:items-end gap-3">
+        {/* Bottom Section */}
+        <div className="pt-8 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} Oyana. All rights reserved.
+          </p>
+
+          {/* Badges + Social Links */}
+          <div className="flex items-center gap-5">
             <div className="bg-white rounded-lg p-2 flex flex-col items-center gap-1.5 w-[80px]">
               <svg width="32" height="23" viewBox="0 0 110 78" role="img">
                 <title>YouTube logo</title>
                 <rect x="0" y="0" width="110" height="78" rx="18" fill="#FF0000"/>
                 <polygon points="42,20 42,58 78,39" fill="white"/>
               </svg>
-              <span className="text-center font-bold text-[#0f0f0f] text-[7px] leading-tight">
-                Authorized<br/>YouTube Integration
+              <span className="text-center font-bold text-[#0f0f0f] text-[8px] leading-tight">
+                Authorized YouTube Integration
               </span>
             </div>
             <div className="rounded-lg overflow-hidden w-[80px]">
@@ -91,17 +98,9 @@ export default function Footer() {
                 className="w-full h-auto"
               />
             </div>
-          </div>
-        </div>
 
-        {/* Bottom Section */}
-        <div className="pt-8 border-t border-gray-800/50 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
-            © {new Date().getFullYear()} Oyana. All rights reserved.
-          </p>
+            <div className="w-px h-8 bg-gray-700/50" />
 
-          {/* Social Links */}
-          <div className="flex gap-4">
             {socialLinks.map((social) => {
               const Icon = social.icon;
               return (
