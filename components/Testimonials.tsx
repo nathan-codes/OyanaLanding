@@ -61,14 +61,13 @@ export default function Testimonials() {
           className="text-center mb-14"
         >
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">
-            Trusted by Creators Who{" "}
+            Trusted by Creators <br /> Who{" "}
             <span className="bg-gradient-to-r from-[#009775] to-[#6ac49a] bg-clip-text text-transparent">
               Actually Grow
-            </span>
+            </span>{" "}
           </h2>
           <p className="text-base text-gray-400 text-center">
-            See how content creators are using Oyana to maximize their watch
-            time and grow their channels.
+            See how content creators are using Oyana to maximize their watch time and grow their channels.
           </p>
         </motion.div>
 
