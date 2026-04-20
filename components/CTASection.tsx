@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { FiMail, FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function CTASection() {
   const [email, setEmail] = useState("");
@@ -30,40 +30,39 @@ export default function CTASection() {
           className="text-center"
         >
           {/* Headline */}
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-10 text-center">
             Ready to Transform Your{" "}
             <span className="bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
               Watch Time?
             </span>
           </h2>
-          <p className="text-lg text-gray-300 mb-12 text-center">
+          <p className="text-lg text-gray-300 mb-16 text-center">
             Join thousands of creators who are using data-driven insights to grow their channels. <br /> Start your free trial today.
           </p>
 
           {/* Signup Form */}
           <motion.form
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto mb-8"
+            className="max-w-lg mx-auto mb-8"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
             <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 relative">
-                <FiMail className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <div className="flex-1">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full pl-12 pr-4 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-[#009775]/30 text-white placeholder-gray-400 focus:outline-none focus:border-[#6ac49a] focus:ring-2 focus:ring-[#009775]/50 transition-all"
+                  className="w-full px-5 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-[#009775]/30 text-white placeholder-gray-400 focus:outline-none focus:border-[#6ac49a] focus:ring-2 focus:ring-[#009775]/50 transition-all"
                   required
                 />
               </div>
               <motion.button
                 type="submit"
-                className=" cursor-pointer  px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full font-semibold text-white flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
+                className="cursor-pointer px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full font-semibold text-white flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#009775]/50 transition-all"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

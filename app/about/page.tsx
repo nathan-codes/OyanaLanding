@@ -29,13 +29,13 @@ const values = [
     icon: FiActivity,
     title: "Retention Is A Signal",
     description:
-      "Retention is not a mystery. Every drop, skip, and replay tells a story about what your audience felt in that moment. Oyana helps you read those signals with clarity.",
+      "Retention isn\u2019t a mystery; it\u2019s a signal. Every drop, every skip, every replay tells you something about what your audience felt in that moment. We get to know you and, over time, what resonates with your audience.",
   },
   {
     icon: FiUserCheck,
     title: "Human Support Matters",
     description:
-      "Not everything has to be AI. Oyana Circle combines thoughtful human interaction with AI-enabled concierge tools to support creators and agencies in a practical way.",
+      "Not everything has to be AI and there\u2019s value in human interaction. Oyana Circle, your concierge, is enabled with AI tools to further help you.",
   },
 ];
 
@@ -145,26 +145,29 @@ export default function AboutPage() {
       />
 
       {/* ── CTA ── */}
-      <section className="py-28 md:py-36 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 gradient-animated opacity-20" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,151,117,0.25),transparent_70%)]" />
 
-        <div className="max-w-3xl mx-auto relative z-10 text-center">
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-7">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
               Ready to See What Your{" "}
               <span className="bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
                 Audience
               </span>{" "}
               Really Thinks?
             </h2>
-            <p className="text-lg text-gray-300 mb-10 text-center">
-              If you&apos;re a creator or support a creator, we would love to connect.
+            <p className="text-lg text-gray-300 mb-10 text-center max-w-2xl mx-auto leading-relaxed">
+              <span className="font-bold text-white">Oyana is built for YouTube creators and their teams.</span>{" "}
+              We use the YouTube API to securely access your video captions, retention metrics, and audience data to give you{" "}
+              <span className="font-bold text-white">timestamped, actionable recommendations</span>{" "}
+              to increase your viewership.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

@@ -178,7 +178,7 @@ export default function DataVisualizations() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+          <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
             Data That{" "}
             <span className="bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Tells a Story

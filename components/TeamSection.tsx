@@ -27,7 +27,7 @@ export default function TeamSection({
       name: "Daps",
       role: "Product",
       description:
-        "Led product at YouTube and founded GMPLY Africa to support creators across the continent. After two decades of leading product development and building venture studios inside Amazon and Google, Daps is on a mission to build AI tools that actually work for creators and marketing agencies.",
+        "Two decades shipping products at YouTube, Amazon, and Google — now building AI tools that actually work for creators.",
       image: "/images/team/dapo.jpg",
       linkedin: "https://www.linkedin.com/in/bakare/",
     },
@@ -35,7 +35,7 @@ export default function TeamSection({
       name: "François",
       role: "Architect",
       description:
-        "Architected globally distributed systems at Amazon, Google, App Dynamics and other startups. François designed the Oyana backend for scalability and security.",
+        "Designed globally distributed systems at Amazon and Google — architected Oyana's backend for scalability and security.",
       image: "/images/team/francois.jpg",
       linkedin: "https://www.linkedin.com/in/fran%C3%A7ois-bonin-8942b/",
     },
@@ -43,7 +43,7 @@ export default function TeamSection({
       name: "Arlene",
       role: "Operations",
       description:
-        "Led globally distributed teams at GE Healthcare and Royal Philips and built consulting practices in healthcare. At Oyana, she has her hands in everything, but writing codes.",
+        "Led global teams at GE Healthcare and Royal Philips — at Oyana, she has her hands in everything but writing code.",
       image: "/images/team/arlene.jpg",
       linkedin: "https://www.linkedin.com/in/arlenesargeant/",
     },
@@ -51,7 +51,7 @@ export default function TeamSection({
       name: "Nathan",
       role: "Engineer",
       description:
-        "At Oyana, Nathan translates ideas into prototypes, keeps engineering moving, and supports marketing analytics.",
+        "Translates ideas into working prototypes, keeps engineering moving, and supports marketing analytics.",
       image: "/images/team/nathan.jpg",
       linkedin: "https://www.linkedin.com/in/nathanturkson/",
     },
@@ -59,7 +59,7 @@ export default function TeamSection({
       name: "Samuel",
       role: "Engineer",
       description:
-        "Built scalable, production-grade applications for projects across Europe and Africa. Samuel developed the core Oyana platform experience, translating complex data into intuitive, actionable interfaces for creators.",
+        "Built production-grade applications across Europe and Africa — developed the core Oyana platform experience.",
       image: "/images/team/placeholder.jpg",
       linkedin: "https://www.linkedin.com/in/nyamekesse-samuel",
     },
@@ -67,7 +67,7 @@ export default function TeamSection({
       name: "Tochie",
       role: "Marketing",
       description:
-        "Storyteller and keen eye to detail in all things customer-facing. Tochie leads brand awareness and creator relationship at Oyana.",
+        "Storyteller with a keen eye for detail — leads brand awareness and creator relationships at Oyana.",
       image: "/images/team/Tochukwu's Picture.jpg",
       linkedin: "https://www.linkedin.com/in/tochukwu-falola",
     },
@@ -133,7 +133,7 @@ export default function TeamSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.35, delay: idx * 0.04 }}
-              className="group relative rounded-3xl p-12 border bg-white/5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1"
+              className="group relative rounded-3xl p-10 border bg-white/5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 flex flex-col"
               style={{
                 borderColor:
                   "color-mix(in oklab, var(--gossamer-600), transparent 85%)",
@@ -148,9 +148,9 @@ export default function TeamSection({
                 }}
               />
 
-              <div className="relative">
+              <div className="relative flex flex-col items-center flex-1">
                 <div
-                  className="w-40 h-40 mx-auto mb-8 rounded-2xl p-1 overflow-hidden transition-transform duration-500 group-hover:rotate-3"
+                  className="w-36 h-36 mb-6 rounded-2xl p-1 overflow-hidden transition-transform duration-500 group-hover:rotate-3 shrink-0"
                   style={{
                     background:
                       "linear-gradient(135deg, var(--gossamer-600), color-mix(in oklab, var(--gossamer-600), black 30%))",
@@ -160,8 +160,8 @@ export default function TeamSection({
                     <Image
                       src={m.image}
                       alt={m.name}
-                      width={160}
-                      height={160}
+                      width={144}
+                      height={144}
                       className="w-full h-full object-cover"
                       onError={(e: any) => {
                         if (e?.currentTarget) {
@@ -172,21 +172,21 @@ export default function TeamSection({
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-center text-white mb-1 transition-colors duration-300 group-hover:[color:var(--gossamer-600)]">
+                <h3 className="text-2xl font-bold text-center text-white mb-3 transition-colors duration-300 group-hover:[color:var(--gossamer-600)]">
                   {m.name}
                 </h3>
-                <p className="text-zinc-300 text-center leading-relaxed mb-3">
+                <p className="text-zinc-300 text-center leading-relaxed text-sm flex-1">
                   {m.description}
                 </p>
+              </div>
+
+              <div className="relative mt-auto pt-5 flex flex-col items-center gap-4">
                 <div
                   className="text-center font-semibold tracking-wide uppercase text-sm"
                   style={{ color: "var(--gossamer-600)" }}
                 >
                   {m.role}
                 </div>
-              </div>
-
-              <div className="mt-7 flex justify-center relative z-10">
                 <motion.a
                   href={m.linkedin}
                   target="_blank"

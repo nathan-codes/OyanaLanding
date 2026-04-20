@@ -69,7 +69,7 @@ export default function SuccessStories() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">
             Real Results from{" "}
             <span className="bg-gradient-to-r from-[#009775] to-[#6ac49a] bg-clip-text text-transparent">
               Real Creators
