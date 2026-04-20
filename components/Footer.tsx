@@ -21,7 +21,7 @@ const socialLinks = [
   // { icon: FiTwitter, href: "#", label: "Twitter" },
   // { icon: FiGithub, href: "#", label: "GitHub" },
   { icon: FiLinkedin, href: "https://www.linkedin.com/company/oyana26/", label: "LinkedIn", openInNewTab: true },
-  { icon: FiMail, href: "#", label: "Email" },
+  { icon: FiMail, href: "mailto:oyana@oyana.ai", label: "Email" },
 ];
 
 export default function Footer() {
