@@ -22,6 +22,13 @@ const testimonials: Testimonial[] = [
     youtube: "https://www.youtube.com/c/IvyProsper",
   },
   {
+    name: "Tyler",
+    role: "Creator",
+    avatar: "\uD83C\uDFA5",
+    quote:
+      "Yes, it is a pretty cool platform! Thank you for creating it!",
+  },
+  {
     role: "Content & Growth Strategist",
     avatar: "\uD83D\uDCC8",
     quote:
