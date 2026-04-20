@@ -27,7 +27,7 @@ export default function TeamSection({
       name: "Daps",
       role: "Product",
       description:
-        "Two decades shipping products at YouTube, Amazon, and Google — now building AI tools that actually work for creators.",
+        "Spent two decades building products at YouTube, Amazon, and Google before starting Oyana to help creators grow.",
       image: "/images/team/dapo.jpg",
       linkedin: "https://www.linkedin.com/in/bakare/",
     },
@@ -35,7 +35,7 @@ export default function TeamSection({
       name: "François",
       role: "Architect",
       description:
-        "Designed globally distributed systems at Amazon and Google — architected Oyana's backend for scalability and security.",
+        "Architected large-scale systems at Amazon and Google, then designed the backend that powers Oyana.",
       image: "/images/team/francois.jpg",
       linkedin: "https://www.linkedin.com/in/fran%C3%A7ois-bonin-8942b/",
     },
@@ -43,7 +43,7 @@ export default function TeamSection({
       name: "Arlene",
       role: "Operations",
       description:
-        "Led global teams at GE Healthcare and Royal Philips — at Oyana, she has her hands in everything but writing code.",
+        "Ran global teams at GE Healthcare and Royal Philips. At Oyana, she touches everything except the code.",
       image: "/images/team/arlene.jpg",
       linkedin: "https://www.linkedin.com/in/arlenesargeant/",
     },
@@ -51,7 +51,7 @@ export default function TeamSection({
       name: "Nathan",
       role: "Engineer",
       description:
-        "Translates ideas into working prototypes, keeps engineering moving, and supports marketing analytics.",
+        "Turns ideas into prototypes, keeps engineering on track, and helps with marketing analytics.",
       image: "/images/team/nathan.jpg",
       linkedin: "https://www.linkedin.com/in/nathanturkson/",
     },
@@ -59,7 +59,7 @@ export default function TeamSection({
       name: "Samuel",
       role: "Engineer",
       description:
-        "Built production-grade applications across Europe and Africa — developed the core Oyana platform experience.",
+        "Built production applications across Europe and Africa, then developed the core Oyana platform.",
       image: "/images/team/placeholder.jpg",
       linkedin: "https://www.linkedin.com/in/nyamekesse-samuel",
     },
@@ -67,7 +67,7 @@ export default function TeamSection({
       name: "Tochie",
       role: "Marketing",
       description:
-        "Storyteller with a keen eye for detail — leads brand awareness and creator relationships at Oyana.",
+        "Storyteller who sweats the details. Leads brand awareness and creator relationships at Oyana.",
       image: "/images/team/Tochukwu's Picture.jpg",
       linkedin: "https://www.linkedin.com/in/tochukwu-falola",
     },

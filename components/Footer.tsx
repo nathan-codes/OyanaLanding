@@ -6,9 +6,9 @@ import { FiLinkedin, FiMail } from "react-icons/fi";
 
 const footerLinks = {
   Product: [
-    { name: "Features", href: "#features" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Demo", href: "#demo" },
+    { name: "Features", href: "/#features" },
+    { name: "How It Works", href: "/#how-it-works" },
+    { name: "Demo", href: "/#demo" },
   ],
   Company: [
     { name: "About", href: "/about" },
@@ -39,9 +39,9 @@ export default function Footer() {
               className="h-8 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm leading-relaxed">
-              Oyana is built for YouTube creators. We use the YouTube API to securely access your
+              Oyana is built for YouTube creators and their teams. We use the YouTube API to securely access your
               video captions, retention metrics, and audience data to give you timestamped,
-              actionable recommendations to grow your channel.
+              actionable recommendations to increase your viewership.
             </p>
           </div>
 
@@ -71,23 +71,23 @@ export default function Footer() {
           </div>
 
           {/* Badges — right */}
-          <div className="flex flex-row md:flex-col items-center md:items-end gap-4">
-            <div className="bg-white rounded-xl p-3 flex flex-col items-center gap-2 w-[120px]">
-              <svg width="48" height="34" viewBox="0 0 110 78" role="img">
+          <div className="flex flex-row md:flex-col items-center md:items-end gap-3">
+            <div className="bg-white rounded-lg p-2 flex flex-col items-center gap-1.5 w-[80px]">
+              <svg width="32" height="23" viewBox="0 0 110 78" role="img">
                 <title>YouTube logo</title>
                 <rect x="0" y="0" width="110" height="78" rx="18" fill="#FF0000"/>
                 <polygon points="42,20 42,58 78,39" fill="white"/>
               </svg>
-              <span className="text-center font-bold text-[#0f0f0f] text-[10px] leading-tight">
+              <span className="text-center font-bold text-[#0f0f0f] text-[7px] leading-tight">
                 Authorized<br/>YouTube Integration
               </span>
             </div>
-            <div className="rounded-xl overflow-hidden w-[120px]">
+            <div className="rounded-lg overflow-hidden w-[80px]">
               <Image
                 src="/Google_API_Compliant_Badge.svg"
                 alt="Compliant with Google API Services"
-                width={120}
-                height={110}
+                width={80}
+                height={73}
                 className="w-full h-auto"
               />
             </div>
