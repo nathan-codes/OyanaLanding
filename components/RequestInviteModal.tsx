@@ -205,7 +205,8 @@ export default function RequestInviteModal() {
           <button
             type="button"
             onClick={close}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 backdrop-blur-sm cursor-pointer"
+            style={{ backgroundColor: "var(--overlay)" }}
             aria-label="Close modal"
           />
 
@@ -214,16 +215,21 @@ export default function RequestInviteModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-lg rounded-2xl border border-[#009775]/20 bg-[#0a0f1a]/95 backdrop-blur-xl shadow-2xl shadow-[#009775]/10"
+            className="relative w-full max-w-lg rounded-2xl backdrop-blur-xl shadow-2xl"
+            style={{
+              border: "1px solid var(--nav-border)",
+              backgroundColor: "var(--modal-bg)",
+              boxShadow: "0 25px 50px -12px var(--glow-color)",
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-2">
               <div>
-                <h2 className="text-xl font-bold text-white font-display">
+                <h2 className="text-xl font-bold text-foreground font-display">
                   Request Early Access
                 </h2>
-                <p className="text-sm text-gray-400 mt-1">
+                <p className="text-sm text-body mt-1">
                   Join the waitlist and be first to try Oyana
                 </p>
               </div>
@@ -232,7 +238,8 @@ export default function RequestInviteModal() {
                 onClick={close}
                 disabled={status === "loading"}
                 aria-label="Close"
-                className="rounded-full p-2 text-white/60 hover:text-white hover:bg-white/10 transition-colors cursor-pointer disabled:opacity-50"
+                className="rounded-full p-2 text-muted hover:text-foreground transition-colors cursor-pointer disabled:opacity-50"
+                style={{ backgroundColor: "var(--subtle-bg)" }}
               >
                 <FiX size={20} />
               </button>
@@ -245,14 +252,15 @@ export default function RequestInviteModal() {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="mx-auto w-16 h-16 rounded-full bg-[#009775]/20 flex items-center justify-center mb-4"
+                  className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4"
+                  style={{ backgroundColor: "var(--subtle-bg)" }}
                 >
-                  <FiCheck className="w-8 h-8 text-[#6ac49a]" />
+                  <FiCheck className="w-8 h-8 text-accent-text" />
                 </motion.div>
-                <h3 className="text-lg font-semibold text-white mb-2">
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   You&apos;re on the list!
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-body text-sm">
                   We&apos;ll reach out when your invite is ready.
                 </p>
               </div>
@@ -263,12 +271,12 @@ export default function RequestInviteModal() {
                 <div>
                   <label
                     htmlFor="invite-email"
-                    className="block text-sm font-medium text-gray-300 mb-1.5"
+                    className="block text-sm font-medium text-body mb-1.5"
                   >
                     Email address
                   </label>
                   <div className="relative">
-                    <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4 pointer-events-none" />
+                    <FiMail className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted w-4 h-4 pointer-events-none" />
                     <input
                       id="invite-email"
                       type="email"
@@ -279,16 +287,20 @@ export default function RequestInviteModal() {
                       }}
                       onBlur={() => validateField("email", email)}
                       placeholder="you@example.com"
-                      className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 transition-all ${
+                      className={`w-full pl-10 pr-4 py-3 rounded-xl text-foreground text-sm focus:outline-none focus:ring-2 transition-all ${
                         errors.email
                           ? "border-red-500/60 focus:ring-red-500/30"
-                          : "border-white/10 focus:border-[#6ac49a] focus:ring-[#009775]/30"
+                          : "focus:ring-[var(--primary)]/30"
                       }`}
+                      style={{
+                        backgroundColor: "var(--input-bg)",
+                        border: errors.email ? undefined : `1px solid var(--input-border)`,
+                      }}
                       required
                     />
                   </div>
                   {errors.email && (
-                    <p className="mt-1.5 text-xs text-red-400">{errors.email}</p>
+                    <p className="mt-1.5 text-xs text-red-500">{errors.email}</p>
                   )}
                 </div>
 
@@ -296,7 +308,7 @@ export default function RequestInviteModal() {
                 <div>
                   <label
                     htmlFor="invite-country"
-                    className="block text-sm font-medium text-gray-300 mb-1.5"
+                    className="block text-sm font-medium text-body mb-1.5"
                   >
                     Location
                   </label>
@@ -305,17 +317,22 @@ export default function RequestInviteModal() {
                       id="invite-country"
                       type="button"
                       onClick={() => setCountryDropdownOpen(!countryDropdownOpen)}
-                      className={`w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border text-left text-sm focus:outline-none focus:ring-2 transition-all cursor-pointer ${
+                      className={`w-full pl-10 pr-10 py-3 rounded-xl text-left text-sm focus:outline-none focus:ring-2 transition-all cursor-pointer ${
                         errors.country
                           ? "border-red-500/60 focus:ring-red-500/30"
-                          : "border-white/10 focus:border-[#6ac49a] focus:ring-[#009775]/30"
-                      } ${country ? "text-white" : "text-gray-500"}`}
+                          : "focus:ring-[var(--primary)]/30"
+                      }`}
+                      style={{
+                        backgroundColor: "var(--input-bg)",
+                        border: errors.country ? undefined : `1px solid var(--input-border)`,
+                        color: country ? "var(--foreground)" : "var(--text-muted)",
+                      }}
                     >
                       {country || "Select your country"}
                     </button>
-                    <FiMapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4 pointer-events-none" />
+                    <FiMapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted w-4 h-4 pointer-events-none" />
                     <FiChevronDown
-                      className={`absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4 pointer-events-none transition-transform ${
+                      className={`absolute right-3.5 top-1/2 -translate-y-1/2 text-muted w-4 h-4 pointer-events-none transition-transform ${
                         countryDropdownOpen ? "rotate-180" : ""
                       }`}
                     />
@@ -327,21 +344,29 @@ export default function RequestInviteModal() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -4 }}
                           transition={{ duration: 0.15 }}
-                          className="absolute z-20 mt-1.5 w-full rounded-xl border border-white/10 bg-[#0e1525] shadow-xl overflow-hidden"
+                          className="absolute z-20 mt-1.5 w-full rounded-xl shadow-xl overflow-hidden"
+                          style={{
+                            border: "1px solid var(--input-border)",
+                            backgroundColor: "var(--dropdown-bg)",
+                          }}
                         >
-                          <div className="p-2 border-b border-white/10">
+                          <div className="p-2" style={{ borderBottom: "1px solid var(--input-border)" }}>
                             <input
                               ref={searchInputRef}
                               type="text"
                               value={countrySearch}
                               onChange={(e) => setCountrySearch(e.target.value)}
                               placeholder="Search countries..."
-                              className="w-full px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-white text-sm placeholder-gray-500 focus:outline-none focus:border-[#6ac49a]"
+                              className="w-full px-3 py-2 rounded-lg text-foreground text-sm focus:outline-none"
+                              style={{
+                                backgroundColor: "var(--input-bg)",
+                                border: `1px solid var(--input-border)`,
+                              }}
                             />
                           </div>
                           <ul className="max-h-48 overflow-y-auto py-1 scrollbar-thin">
                             {filteredCountries.length === 0 ? (
-                              <li className="px-4 py-3 text-sm text-gray-500 text-center">
+                              <li className="px-4 py-3 text-sm text-muted text-center">
                                 No countries found
                               </li>
                             ) : (
@@ -355,11 +380,11 @@ export default function RequestInviteModal() {
                                       setCountrySearch("");
                                       if (errors.country) validateField("country", c);
                                     }}
-                                    className={`w-full text-left px-4 py-2.5 text-sm transition-colors cursor-pointer ${
-                                      country === c
-                                        ? "bg-[#009775]/20 text-[#6ac49a]"
-                                        : "text-gray-300 hover:bg-white/5 hover:text-white"
-                                    }`}
+                                    className="w-full text-left px-4 py-2.5 text-sm transition-colors cursor-pointer"
+                                    style={{
+                                      color: country === c ? "var(--accent-text)" : "var(--text-secondary)",
+                                      backgroundColor: country === c ? "var(--subtle-bg)" : undefined,
+                                    }}
                                   >
                                     {c}
                                   </button>
@@ -372,7 +397,7 @@ export default function RequestInviteModal() {
                     </AnimatePresence>
                   </div>
                   {errors.country && (
-                    <p className="mt-1.5 text-xs text-red-400">{errors.country}</p>
+                    <p className="mt-1.5 text-xs text-red-500">{errors.country}</p>
                   )}
                 </div>
 
@@ -380,12 +405,12 @@ export default function RequestInviteModal() {
                 <div>
                   <label
                     htmlFor="invite-youtube"
-                    className="block text-sm font-medium text-gray-300 mb-1.5"
+                    className="block text-sm font-medium text-body mb-1.5"
                   >
                     YouTube channel URL
                   </label>
                   <div className="relative">
-                    <FiYoutube className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4 pointer-events-none" />
+                    <FiYoutube className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted w-4 h-4 pointer-events-none" />
                     <input
                       id="invite-youtube"
                       type="url"
@@ -397,15 +422,19 @@ export default function RequestInviteModal() {
                       }}
                       onBlur={() => validateField("youtubeUrl", youtubeUrl)}
                       placeholder="https://youtube.com/@yourchannel"
-                      className={`w-full pl-10 pr-4 py-3 rounded-xl bg-white/5 border text-white placeholder-gray-500 text-sm focus:outline-none focus:ring-2 transition-all ${
+                      className={`w-full pl-10 pr-4 py-3 rounded-xl text-foreground text-sm focus:outline-none focus:ring-2 transition-all ${
                         errors.youtubeUrl
                           ? "border-red-500/60 focus:ring-red-500/30"
-                          : "border-white/10 focus:border-[#6ac49a] focus:ring-[#009775]/30"
+                          : "focus:ring-[var(--primary)]/30"
                       }`}
+                      style={{
+                        backgroundColor: "var(--input-bg)",
+                        border: errors.youtubeUrl ? undefined : `1px solid var(--input-border)`,
+                      }}
                     />
                   </div>
                   {errors.youtubeUrl && (
-                    <p className="mt-1.5 text-xs text-red-400">{errors.youtubeUrl}</p>
+                    <p className="mt-1.5 text-xs text-red-500">{errors.youtubeUrl}</p>
                   )}
                 </div>
 
@@ -414,7 +443,7 @@ export default function RequestInviteModal() {
                   <motion.div
                     initial={{ opacity: 0, y: -4 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400"
+                    className="rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-500"
                   >
                     Something went wrong. Please try again.
                   </motion.div>
@@ -424,7 +453,8 @@ export default function RequestInviteModal() {
                 <motion.button
                   type="submit"
                   disabled={status === "loading"}
-                  className="w-full py-3.5 rounded-xl bg-linear-to-r from-[#009775] to-[#6ac49a] font-semibold text-white text-sm flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-[#009775]/30 transition-all disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+                  className="w-full py-3.5 rounded-xl bg-linear-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] font-semibold text-white text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+                  style={{ boxShadow: "0 4px 14px var(--glow-color)" }}
                   whileHover={status !== "loading" ? { scale: 1.01 } : undefined}
                   whileTap={status !== "loading" ? { scale: 0.99 } : undefined}
                 >
@@ -456,13 +486,13 @@ export default function RequestInviteModal() {
                   )}
                 </motion.button>
 
-                <p className="text-xs text-gray-500 text-center">
+                <p className="text-xs text-muted text-center">
                   By requesting an invite, you agree to our{" "}
-                  <a href="/terms" className="text-[#6ac49a] hover:underline">
+                  <a href="/terms" className="text-accent-text hover:underline">
                     Terms
                   </a>{" "}
                   and{" "}
-                  <a href="/privacy-policy" className="text-[#6ac49a] hover:underline">
+                  <a href="/privacy-policy" className="text-accent-text hover:underline">
                     Privacy Policy
                   </a>
                   .

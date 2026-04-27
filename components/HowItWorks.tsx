@@ -51,20 +51,16 @@ export default function HowItWorks() {
     }
 
     const section = sectionRef.current;
-    const leftSide = leftSideRef.current;
     const rightSide = rightSideRef.current;
     const stepsContainer = stepsContainerRef.current;
 
-    // Wait for layout to settle
     const timeoutId = setTimeout(() => {
-      // Calculate the scroll distance needed
       const containerHeight = rightSide.clientHeight;
       const contentHeight = stepsContainer.scrollHeight;
       const scrollDistance = Math.max(0, contentHeight - containerHeight);
 
       if (scrollDistance <= 0) return;
 
-      // Create ScrollTrigger to pin the section and scroll the right side
       const scrollTrigger = ScrollTrigger.create({
         trigger: section,
         start: "top top",
@@ -73,7 +69,6 @@ export default function HowItWorks() {
         anticipatePin: 1,
         scrub: 1,
         onUpdate: (self) => {
-          // Scroll the right side content based on scroll progress
           const progress = self.progress;
           const translateY = -progress * scrollDistance;
           gsap.set(stepsContainer, {
@@ -82,7 +77,6 @@ export default function HowItWorks() {
         },
       });
 
-      // Handle window resize
       const handleResize = () => {
         ScrollTrigger.refresh();
       };
@@ -107,7 +101,7 @@ export default function HowItWorks() {
   return (
     <section ref={sectionRef} className="relative min-h-screen flex">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#009775]/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--subtle-bg)] to-transparent" />
 
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row">
         {/* Left Side - Fixed Title */}
@@ -122,10 +116,10 @@ export default function HowItWorks() {
             transition={{ duration: 0.8 }}
             className="max-w-lg"
           >
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-white leading-tight">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 text-foreground leading-tight">
               How It Works
             </h2>
-            <p className="text-lg text-gray-400 leading-relaxed">
+            <p className="text-lg text-body leading-relaxed">
               Three simple steps to transform your watch data into actionable
               growth strategies.
             </p>
@@ -155,26 +149,32 @@ export default function HowItWorks() {
                 >
                   {/* Step Number */}
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#009775] to-[#6ac49a] flex items-center justify-center text-white font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center text-white font-bold text-lg">
                       {step.number}
                     </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-[#009775] to-transparent" />
+                    <div className="h-px flex-1 bg-gradient-to-r from-primary to-transparent" />
                   </div>
 
                   {/* Step Title */}
-                  <h3 className="text-3xl lg:text-4xl font-bold mb-4 font-display text-white">
+                  <h3 className="text-3xl lg:text-4xl font-bold mb-4 font-display text-foreground">
                     {step.title}
                   </h3>
 
                   {/* Step Description */}
-                  <p className="text-lg text-gray-400 leading-relaxed">
+                  <p className="text-lg text-body leading-relaxed">
                     {step.description}
                   </p>
 
                   {/* Icon */}
                   <div className="mt-8">
-                    <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-[#009775]/20 to-[#6ac49a]/20 border border-[#009775]/30">
-                      <Icon className="w-6 h-6 text-[#6ac49a]" />
+                    <div
+                      className="inline-flex p-4 rounded-xl"
+                      style={{
+                        background: `linear-gradient(135deg, var(--subtle-bg), var(--subtle-hover))`,
+                        border: "1px solid var(--nav-border)",
+                      }}
+                    >
+                      <Icon className="w-6 h-6 text-accent-text" />
                     </div>
                   </div>
                 </motion.div>

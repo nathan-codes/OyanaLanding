@@ -45,21 +45,21 @@ export default function AboutPage() {
       <RequestInviteModal />
       <Navbar />
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="absolute inset-0 gradient-animated opacity-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,151,117,0.12),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,151,117,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,151,117,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,var(--glow-color),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(var(--subtle-bg)_1px,transparent_1px),linear-gradient(90deg,var(--subtle-bg)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
 
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-8"
+            className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-8 text-foreground"
           >
             Every creator has a story to tell.
-            <span className="bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
+            <span className="bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-end)] to-[var(--gradient-start)] bg-clip-text text-transparent glow-text">
               {" "}Oyana helps you tell it so everyone listens.
             </span>
           </motion.h1>
@@ -68,11 +68,11 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-lg md:text-xl text-gray-300 leading-relaxed text-center"
+            className="text-lg md:text-xl text-body leading-relaxed text-center"
           >
             We built Oyana because creators and agencies told us the same thing:
             they wish they knew{" "}
-            <span className="font-extrabold text-[#6ac49a]">
+            <span className="font-extrabold text-accent-text">
               why viewers left
             </span>
             , not just the numbers.
@@ -80,7 +80,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Values ── */}
+      {/* Values */}
       <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
@@ -90,13 +90,13 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="text-center mb-16"
           >
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center text-foreground">
               We{" "}
-              <span className="bg-gradient-to-r from-[#009775] to-[#6ac49a] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
                 Believe
               </span>
             </h2>
-            <p className="text-lg text-gray-400 text-center">
+            <p className="text-lg text-body text-center">
               In our name Oyana, which means to inspire and uplift, we aim to
               be the editor-coach working alongside creators and agencies.
             </p>
@@ -116,18 +116,25 @@ export default function AboutPage() {
                   key={v.title}
                   variants={fadeInUp}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group relative rounded-2xl p-8 md:p-10 border border-white/5 bg-white/[0.02] backdrop-blur-sm hover:border-[#009775]/30 transition-all duration-500"
+                  className="group relative rounded-2xl p-8 md:p-10 backdrop-blur-sm transition-all duration-500"
+                  style={{
+                    border: "1px solid var(--card-border)",
+                    backgroundColor: "var(--card-bg)",
+                  }}
                 >
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none bg-gradient-to-br from-[#009775]/[0.04] to-transparent" />
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: "linear-gradient(135deg, var(--subtle-bg), transparent)" }}
+                  />
 
                   <div className="relative">
-                    <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#009775] to-[#6ac49a] mb-5 shadow-lg">
+                    <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] mb-5 shadow-lg">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3 font-display">
+                    <h3 className="text-xl font-bold text-foreground mb-3 font-display">
                       {v.title}
                     </h3>
-                    <p className="text-gray-400 leading-relaxed">
+                    <p className="text-body leading-relaxed">
                       {v.description}
                     </p>
                   </div>
@@ -138,16 +145,16 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Team ── */}
+      {/* Team */}
       <TeamSection
         title="Meet The Team"
         subtitle="We have shipped products inside YouTube, Amazon, and Google, designed systems that handle massive scale, created companies, and supported creators across Africa leading to the founding of Oyana."
       />
 
-      {/* ── CTA ── */}
+      {/* CTA */}
       <section className="py-20 md:py-28 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 gradient-animated opacity-20" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,151,117,0.25),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,var(--glow-color),transparent_70%)]" />
 
         <div className="max-w-4xl mx-auto relative z-10 text-center">
           <motion.div
@@ -156,17 +163,17 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-8">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 text-foreground">
               Ready to See What Your{" "}
-              <span className="bg-gradient-to-r from-[#009775] via-[#6ac49a] to-[#009775] bg-clip-text text-transparent glow-text">
+              <span className="bg-gradient-to-r from-[var(--gradient-start)] via-[var(--gradient-end)] to-[var(--gradient-start)] bg-clip-text text-transparent glow-text">
                 Audience
               </span>{" "}
               Really Thinks?
             </h2>
-            <p className="text-lg text-gray-300 mb-10 text-center max-w-2xl mx-auto leading-relaxed">
-              <span className="font-bold text-white">Oyana is built for YouTube creators and their teams.</span>{" "}
+            <p className="text-lg text-body mb-10 text-center max-w-2xl mx-auto leading-relaxed">
+              <span className="font-bold text-foreground">Oyana is built for YouTube creators and their teams.</span>{" "}
               We use the YouTube API to securely access your video captions, retention metrics, and audience data to give you{" "}
-              <span className="font-bold text-white">timestamped, actionable recommendations</span>{" "}
+              <span className="font-bold text-foreground">timestamped, actionable recommendations</span>{" "}
               to increase your viewership.
             </p>
 
@@ -178,7 +185,8 @@ export default function AboutPage() {
                     new CustomEvent("open-invite-modal", { detail: {} })
                   )
                 }
-                className="px-8 py-4 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-lg font-semibold text-white text-lg flex items-center gap-2 hover:shadow-lg hover:shadow-[#009775]/50 transition-all cursor-pointer"
+                className="px-8 py-4 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-lg font-semibold text-white text-lg flex items-center gap-2 hover:shadow-lg transition-all cursor-pointer"
+                style={{ boxShadow: "0 4px 14px var(--glow-color)" }}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -188,7 +196,11 @@ export default function AboutPage() {
 
               <Link
                 href="mailto:oyana@oyana.ai"
-                className="px-8 py-4 border-2 border-[#009775]/50 rounded-lg font-semibold text-[#6ac49a] text-lg backdrop-blur-sm bg-white/5 hover:bg-white/10 transition-all inline-flex items-center gap-2"
+                className="px-8 py-4 rounded-lg font-semibold text-accent-text text-lg backdrop-blur-sm transition-all inline-flex items-center gap-2"
+                style={{
+                  border: "2px solid var(--nav-border)",
+                  backgroundColor: "var(--subtle-bg)",
+                }}
               >
                 <FiMessageSquare className="w-5 h-5" />
                 Contact Us

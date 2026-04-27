@@ -77,27 +77,21 @@ export default function TeamSection({
     <section
       id="team"
       className="py-20 md:py-28 relative overflow-hidden"
-      style={{ background: "var(--surface)" }}
+      style={{ background: "var(--background)" }}
     >
       {/* Animated background rings */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full border"
-          style={{
-            borderColor:
-              "color-mix(in oklab, var(--gossamer-600), transparent 80%)",
-          }}
+          className="absolute top-1/4 left-1/4 h-64 w-64 rounded-full"
+          style={{ border: "1px solid var(--nav-border)" }}
         />
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 right-1/4 h-48 w-48 rounded-full border"
-          style={{
-            borderColor:
-              "color-mix(in oklab, var(--gossamer-600), transparent 85%)",
-          }}
+          className="absolute bottom-1/4 right-1/4 h-48 w-48 rounded-full"
+          style={{ border: "1px solid var(--border-subtle)" }}
         />
       </div>
 
@@ -108,7 +102,7 @@ export default function TeamSection({
             whileInView={fadeInUp.animate}
             viewport={{ once: true, margin: "-80px" }}
             transition={fadeInUp.transition}
-            className="text-4xl md:text-6xl font-extrabold tracking-tight text-white"
+            className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground"
           >
             {title}
             <br />
@@ -119,7 +113,7 @@ export default function TeamSection({
             whileInView={fadeInUp.animate}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.45, delay: 0.05 }}
-            className="text-lg md:text-xl text-zinc-300 mt-6 text-center"
+            className="text-lg md:text-xl text-body mt-6 text-center"
           >
             {subtitle}
           </motion.p>
@@ -133,18 +127,17 @@ export default function TeamSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.35, delay: idx * 0.04 }}
-              className="group relative rounded-3xl p-10 border bg-white/5 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 flex flex-col"
+              className="group relative rounded-3xl p-10 backdrop-blur-md transition-all duration-500 hover:-translate-y-1 flex flex-col"
               style={{
-                borderColor:
-                  "color-mix(in oklab, var(--gossamer-600), transparent 85%)",
-                boxShadow: "0 20px 60px -20px rgba(0,151,117,0.25)",
+                backgroundColor: "var(--card-bg)",
+                border: "1px solid var(--card-border)",
+                boxShadow: "0 20px 60px -20px var(--glow-color)",
               }}
             >
               <div
                 className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                 style={{
-                  background:
-                    "linear-gradient(135deg, color-mix(in oklab, var(--gossamer-600), transparent 92%), color-mix(in oklab, var(--gossamer-600), transparent 94%))",
+                  background: `linear-gradient(135deg, var(--subtle-bg), transparent)`,
                 }}
               />
 
@@ -152,8 +145,7 @@ export default function TeamSection({
                 <div
                   className="w-36 h-36 mb-6 rounded-2xl p-1 overflow-hidden transition-transform duration-500 group-hover:rotate-3 shrink-0"
                   style={{
-                    background:
-                      "linear-gradient(135deg, var(--gossamer-600), color-mix(in oklab, var(--gossamer-600), black 30%))",
+                    background: `linear-gradient(135deg, var(--primary), var(--primary-hover))`,
                   }}
                 >
                   <div className="w-full h-full rounded-2xl overflow-hidden">
@@ -172,18 +164,17 @@ export default function TeamSection({
                   </div>
                 </div>
 
-                <h3 className="text-2xl font-bold text-center text-white mb-3 transition-colors duration-300 group-hover:[color:var(--gossamer-600)]">
+                <h3 className="text-2xl font-bold text-center text-foreground mb-3 transition-colors duration-300 group-hover:text-primary">
                   {m.name}
                 </h3>
-                <p className="text-zinc-300 text-center leading-relaxed text-sm flex-1">
+                <p className="text-body text-center leading-relaxed text-sm flex-1">
                   {m.description}
                 </p>
               </div>
 
               <div className="relative mt-auto pt-5 flex flex-col items-center gap-4">
                 <div
-                  className="text-center font-semibold tracking-wide uppercase text-sm"
-                  style={{ color: "var(--gossamer-600)" }}
+                  className="text-center font-semibold tracking-wide uppercase text-sm text-primary"
                 >
                   {m.role}
                 </div>
@@ -192,11 +183,10 @@ export default function TeamSection({
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.08 }}
-                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300 hover:[background:var(--gossamer-600)] hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:[--tw-ring-color:var(--gossamer-600)] cursor-pointer"
+                  className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors duration-300 hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 cursor-pointer"
                   style={{
-                    background:
-                      "color-mix(in oklab, var(--gossamer-600), transparent 82%)",
-                    color: "var(--gossamer-600)",
+                    background: "var(--subtle-bg)",
+                    color: "var(--primary)",
                   }}
                   aria-label={`Visit ${m.name}'s LinkedIn profile`}
                 >

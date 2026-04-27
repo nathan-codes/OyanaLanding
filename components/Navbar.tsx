@@ -48,9 +48,10 @@ export default function Navbar() {
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all ${
         isScrolled
-          ? "bg-gray-900/80 backdrop-blur-md border-b border-[#009775]/20"
+          ? "backdrop-blur-md border-b"
           : "bg-transparent"
       }`}
+      style={isScrolled ? { backgroundColor: "var(--nav-bg)", borderColor: "var(--nav-border)" } : undefined}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
@@ -61,11 +62,18 @@ export default function Navbar() {
               whileTap={{ scale: 0.95 }}
             >
               <Image
+                src="/images/svg/Black logo - no background.svg"
+                alt="Oyana Logo"
+                width={120}
+                height={24}
+                className="h-8 w-auto dark:hidden"
+              />
+              <Image
                 src="/OyanaFinalLogo.svg"
                 alt="Oyana Logo"
                 width={120}
                 height={24}
-                className="h-8 w-auto"
+                className="h-8 w-auto hidden dark:block"
               />
             </motion.div>
           </Link>
@@ -86,7 +94,7 @@ export default function Navbar() {
                       e.preventDefault();
                       handleHashClick(link.href);
                     }}
-                    className="text-gray-300 hover:text-[#6ac49a] transition-colors font-medium"
+                    className="text-body hover:text-accent-text transition-colors font-medium"
                     whileHover={{ y: -2 }}
                   >
                     {link.name}
@@ -98,8 +106,8 @@ export default function Navbar() {
                 <Link
                   key={link.name}
                   href={resolveHref(link.href)}
-                  className={`hover:text-[#6ac49a] transition-colors font-medium ${
-                    isActive ? "text-[#6ac49a]" : "text-gray-300"
+                  className={`hover:text-accent-text transition-colors font-medium ${
+                    isActive ? "text-accent-text" : "text-body"
                   }`}
                 >
                   <motion.span whileHover={{ y: -2 }} className="inline-block">
@@ -115,7 +123,8 @@ export default function Navbar() {
                   new CustomEvent("open-invite-modal", { detail: {} })
                 )
               }
-              className="px-6 py-2 bg-gradient-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold hover:shadow-lg hover:shadow-[#009775]/50 transition-all cursor-pointer"
+              className="px-6 py-2 bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full text-white font-semibold hover:shadow-lg transition-all cursor-pointer"
+              style={{ boxShadow: "0 4px 14px var(--glow-color)" }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -125,7 +134,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-300 hover:text-indigo-400 transition-colors"
+            className="md:hidden text-body hover:text-accent-text transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -157,7 +166,7 @@ export default function Navbar() {
                       e.preventDefault();
                       handleHashClick(link.href);
                     }}
-                    className="block text-gray-300 hover:text-[#6ac49a] transition-colors font-medium py-2"
+                    className="block text-body hover:text-accent-text transition-colors font-medium py-2"
                   >
                     {link.name}
                   </a>
@@ -169,10 +178,10 @@ export default function Navbar() {
                   key={link.name}
                   href={resolveHref(link.href)}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block hover:text-[#6ac49a] transition-colors font-medium py-2 ${
+                  className={`block hover:text-accent-text transition-colors font-medium py-2 ${
                     !isHash && pathname === link.href
-                      ? "text-[#6ac49a]"
-                      : "text-gray-300"
+                      ? "text-accent-text"
+                      : "text-body"
                   }`}
                 >
                   {link.name}
@@ -187,7 +196,7 @@ export default function Navbar() {
                   new CustomEvent("open-invite-modal", { detail: {} })
                 );
               }}
-              className="block w-full px-6 py-2 bg-linear-to-r from-[#009775] to-[#6ac49a] rounded-full text-white font-semibold text-center cursor-pointer"
+              className="block w-full px-6 py-2 bg-linear-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] rounded-full text-white font-semibold text-center cursor-pointer"
             >
               Request Invite
             </button>
@@ -197,4 +206,3 @@ export default function Navbar() {
     </motion.nav>
   );
 }
-

@@ -17,8 +17,6 @@ const features = [
     title: "ScriptLab",
     description:
       "Iterate on your script with clear, actionable feedback before you publish. ScriptLab highlights where your hook drags, where explanations lose clarity, and where your pacing slips. Get concrete suggestions on rewording, reordering, and tightening your script so you can record with confidence—knowing every moment is working to keep viewers watching.",
-    color: "from-[#009775] to-[#6ac49a]",
-    gradient: "from-[#009775]/20 to-[#6ac49a]/20",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
   },
@@ -27,8 +25,6 @@ const features = [
     title: "Viewer Drop Off Analysis",
     description:
       "See exactly where and when viewers leave your videos. Interactive retention charts show precise drop-off moments with clickable timestamps to jump to problem areas.",
-    color: "from-[#007158] to-[#009775]",
-    gradient: "from-[#007158]/20 to-[#009775]/20",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
   },
@@ -37,8 +33,6 @@ const features = [
     title: "Keep Doing This",
     description:
       "Identify what's working well in your videos. Get positive feedback on successful moments so you can replicate winning strategies in future content.",
-    color: "from-[#6ac49a] to-[#009775]",
-    gradient: "from-[#6ac49a]/20 to-[#009775]/20",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
   },
@@ -47,8 +41,6 @@ const features = [
     title: "Categories To Improve",
     description:
       "Organized insights into specific areas needing attention. From introductions to transitions, get categorized recommendations to systematically improve your content.",
-    color: "from-[#009775] to-[#6ac49a]",
-    gradient: "from-[#009775]/20 to-[#6ac49a]/20",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
   },
@@ -67,10 +59,10 @@ export default function Features() {
       const header = headerRef.current;
 
       const cardWidth = cards.children[0]?.clientWidth || 400;
-      const gap = 64; // gap-16 = 4rem = 64px
+      const gap = 64;
       const totalWidth =
         cardWidth * cards.children.length + gap * (cards.children.length - 1);
-      const containerPadding = 64; // pl-8 + pr-8 = 4rem each = 64px total
+      const containerPadding = 64;
       const scrollDistance =
         totalWidth - container.clientWidth + containerPadding;
 
@@ -99,7 +91,7 @@ export default function Features() {
       className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#009775]/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--subtle-bg)] to-transparent" />
 
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
@@ -111,13 +103,13 @@ export default function Features() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center text-foreground">
             Powerful Insights,{" "}
-            <span className="bg-gradient-to-r from-[#009775] to-[#6ac49a] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
               Beautifully Visualized
             </span>
           </h2>
-          <p className="text-lg text-gray-400 text-center">
+          <p className="text-lg text-body text-center">
             Go beyond basic metrics. Get the deep engagement data that actually
             drives growth.
           </p>
@@ -154,17 +146,24 @@ export default function Features() {
                       className="object-cover"
                       sizes="(max-width: 640px) 90vw, (max-width: 1024px) 600px, 700px"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--gradient-start)]/20 to-[var(--gradient-end)]/20" />
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${feature.gradient}`}
+                      className="absolute inset-0 group-hover:opacity-75 transition-opacity duration-500"
+                      style={{ backgroundColor: "var(--image-overlay)" }}
                     />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-500" />
                   </div>
 
-                  {/* Overlay Card - Bottom Left (Extends Out) */}
-                  <div className="absolute bottom-0 left-0 lg:-left-8 lg:bottom-8 right-0 lg:right-auto lg:w-[75%] rounded-t-2xl lg:rounded-2xl bg-gradient-to-br from-gray-900/95 via-gray-800/95 to-gray-900/95 backdrop-blur-md border border-[#009775]/40 p-6 lg:p-8 shadow-2xl">
+                  {/* Overlay Card - Bottom Left */}
+                  <div
+                    className="absolute bottom-0 left-0 lg:-left-8 lg:bottom-8 right-0 lg:right-auto lg:w-[75%] rounded-t-2xl lg:rounded-2xl backdrop-blur-md p-6 lg:p-8 shadow-2xl"
+                    style={{
+                      background: `linear-gradient(135deg, var(--card-glass), var(--card-glass-mid), var(--card-glass))`,
+                      border: "1px solid var(--nav-border)",
+                    }}
+                  >
                     {/* Icon */}
                     <motion.div
-                      className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${feature.color} mb-4 w-fit shadow-lg`}
+                      className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] mb-4 w-fit shadow-lg"
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -172,12 +171,12 @@ export default function Features() {
                     </motion.div>
 
                     {/* Title */}
-                    <h3 className="text-2xl lg:text-3xl font-bold mb-3 font-display text-white">
+                    <h3 className="text-2xl lg:text-3xl font-bold mb-3 font-display text-foreground">
                       {feature.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-base lg:text-lg text-gray-300 leading-relaxed">
+                    <p className="text-base lg:text-lg text-body leading-relaxed">
                       {feature.description}
                     </p>
                   </div>

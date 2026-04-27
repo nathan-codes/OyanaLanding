@@ -1,37 +1,144 @@
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────
+   Light mode (default)
+   Color palette aligned with app.oyana.ai light scheme
+   ────────────────────────────────────────────── */
 :root {
-  color-scheme: dark;
-  /* Core palette from provided colors */
-  --gossamer-600: #009775; /* primary */
-  --silvertree-500: #6ac49a; /* secondary */
-  --gossamer-700: #007158; /* darker shade */
-  --gossamer-800: #004c3b;
-  --surface: #0b0f14;
-  --surface-2: #10161d;
-  --surface-3: #0f141a;
-  --text-muted: #9aa4b2;
-  --background: var(--surface);
-  --foreground: #f5f5f7;
+  color-scheme: light;
 
-  /* Backward-compat for existing vars */
-  --blue-600: #005e97; /* used in subtle accents */
-  --teal-600: var(--gossamer-600);
-  --mint-500: var(--silvertree-500);
-  --primary: var(--gossamer-600);
-  --primary-dark: var(--gossamer-700);
-  --accent: var(--silvertree-500);
-  --gradient-start: var(--gossamer-600);
-  --gradient-end: var(--silvertree-500);
+  --primary: #00795e;
+  --primary-hover: #005b46;
+  --accent: #6ac49a;
+  --accent-text: #005b46;
+
+  --background: #fcfcfc;
+  --foreground: #101828;
+  --surface: #ffffff;
+  --surface-2: #f3f4f6;
+  --surface-3: #e5e7eb;
+
+  --text-secondary: #475467;
+  --text-muted: #667085;
+
+  --border-color: #eaecf0;
+  --border-subtle: rgba(0, 0, 0, 0.06);
+
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(0, 121, 94, 0.12);
+  --footer-bg: #f9fafb;
+  --footer-border: #eaecf0;
+
+  --card-bg: #ffffff;
+  --card-border: #eaecf0;
+  --card-glass: rgba(255, 255, 255, 0.95);
+  --card-glass-mid: rgba(249, 250, 251, 0.95);
+
+  --input-bg: #ffffff;
+  --input-border: #d0d5dd;
+
+  --subtle-bg: rgba(0, 121, 94, 0.04);
+  --subtle-hover: rgba(0, 121, 94, 0.08);
+  --overlay: rgba(0, 0, 0, 0.4);
+  --image-overlay: rgba(0, 0, 0, 0.25);
+
+  --gradient-start: #00795e;
+  --gradient-end: #6ac49a;
+
+  --glow-color: rgba(0, 121, 94, 0.15);
+  --glow-text-color: rgba(0, 121, 94, 0.3);
+
+  --dot-inactive: #d0d5dd;
+  --social-bg: #f3f4f6;
+  --social-border: rgba(0, 121, 94, 0.15);
+
+  --modal-bg: rgba(255, 255, 255, 0.97);
+  --dropdown-bg: #ffffff;
 }
 
+/* ──────────────────────────────────────────────
+   Dark mode (OS preference)
+   Original landing page color scheme
+   ────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    --primary: #009775;
+    --primary-hover: #007158;
+    --accent: #6ac49a;
+    --accent-text: #6ac49a;
+
+    --background: #0b0f14;
+    --foreground: #f5f5f7;
+    --surface: #0b0f14;
+    --surface-2: #10161d;
+    --surface-3: #0f141a;
+
+    --text-secondary: #9aa4b2;
+    --text-muted: #667085;
+
+    --border-color: #1f2937;
+    --border-subtle: rgba(255, 255, 255, 0.05);
+
+    --nav-bg: rgba(17, 24, 39, 0.8);
+    --nav-border: rgba(0, 151, 117, 0.2);
+    --footer-bg: rgba(17, 24, 39, 0.5);
+    --footer-border: rgba(31, 41, 55, 0.5);
+
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.05);
+    --card-glass: rgba(17, 24, 39, 0.95);
+    --card-glass-mid: rgba(31, 41, 55, 0.95);
+
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --input-border: rgba(255, 255, 255, 0.1);
+
+    --subtle-bg: rgba(255, 255, 255, 0.05);
+    --subtle-hover: rgba(255, 255, 255, 0.1);
+    --overlay: rgba(0, 0, 0, 0.7);
+    --image-overlay: rgba(0, 0, 0, 0.4);
+
+    --gradient-start: #009775;
+    --gradient-end: #6ac49a;
+
+    --glow-color: rgba(0, 151, 117, 0.3);
+    --glow-text-color: rgba(0, 151, 117, 0.5);
+
+    --dot-inactive: #374151;
+    --social-bg: rgba(31, 41, 55, 0.5);
+    --social-border: rgba(0, 151, 117, 0.2);
+
+    --modal-bg: rgba(10, 15, 26, 0.95);
+    --dropdown-bg: #0e1525;
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Tailwind v4 theme bridge
+   ────────────────────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-body: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-border: var(--border-color);
+  --color-border-subtle: var(--border-subtle);
+  --color-card: var(--card-bg);
+  --color-card-border: var(--card-border);
   --font-sans: var(--font-inter);
   --font-family-display: var(--font-space-grotesk);
 }
 
+/* ──────────────────────────────────────────────
+   Base resets
+   ────────────────────────────────────────────── */
 @layer base {
   *,
   *::before,
@@ -62,14 +169,15 @@ body {
   overflow-x: hidden;
 }
 
-/* Pointer cursor for all clickable elements */
 button,
 [role="button"],
 a[href] {
   cursor: pointer;
 }
 
-/* Custom scrollbar */
+/* ──────────────────────────────────────────────
+   Custom scrollbar
+   ────────────────────────────────────────────── */
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -79,15 +187,17 @@ a[href] {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--gossamer-600);
+  background: var(--primary);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--gossamer-700);
+  background: var(--primary-hover);
 }
 
-/* Smooth animations */
+/* ──────────────────────────────────────────────
+   Animations & utilities
+   ────────────────────────────────────────────── */
 @keyframes gradient-shift {
   0%, 100% {
     background-position: 0% 50%;
@@ -98,21 +208,19 @@ a[href] {
 }
 
 .gradient-animated {
-  background: linear-gradient(-45deg, var(--gossamer-600), var(--silvertree-500), var(--gossamer-700), var(--gossamer-600));
+  background: linear-gradient(-45deg, var(--gradient-start), var(--gradient-end), var(--primary-hover), var(--gradient-start));
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
 
-/* Glow effects */
 .glow {
-  box-shadow: 0 0 20px rgba(0, 151, 117, 0.3), 0 0 40px rgba(0, 151, 117, 0.2);
+  box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
 }
 
 .glow-text {
-  text-shadow: 0 0 20px rgba(0, 151, 117, 0.5);
+  text-shadow: 0 0 20px var(--glow-text-color);
 }
 
-/* Custom font utility */
 .font-display {
   font-family: var(--font-space-grotesk), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }

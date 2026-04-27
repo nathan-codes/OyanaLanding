@@ -50,7 +50,7 @@ export default function Testimonials() {
 
   return (
     <section className="py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#009775]/5 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--subtle-bg)] to-transparent" />
 
       <div className="max-w-4xl mx-auto relative z-10">
         <motion.div
@@ -60,19 +60,25 @@ export default function Testimonials() {
           transition={{ duration: 0.8 }}
           className="text-center mb-14"
         >
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-center text-foreground">
             Trusted by Creators <br /> Who{" "}
-            <span className="bg-gradient-to-r from-[#009775] to-[#6ac49a] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[var(--gradient-start)] to-[var(--gradient-end)] bg-clip-text text-transparent">
               Actually Grow
             </span>{" "}
           </h2>
-          <p className="text-base text-gray-400 text-center">
+          <p className="text-base text-body text-center">
             See how content creators are using Oyana to maximize their watch time and grow their channels.
           </p>
         </motion.div>
 
-        <div className="rounded-2xl border border-[#009775]/15 bg-white/[0.03] backdrop-blur-sm overflow-hidden">
-          {/* Quote area — fixed height, content fades inside */}
+        <div
+          className="rounded-2xl overflow-hidden"
+          style={{
+            border: "1px solid var(--card-border)",
+            backgroundColor: "var(--card-bg)",
+          }}
+        >
+          {/* Quote area */}
           <div className="relative h-[240px] sm:h-[200px] p-8 sm:p-10">
             <AnimatePresence mode="wait">
               <motion.div
@@ -84,21 +90,22 @@ export default function Testimonials() {
                 className="absolute inset-0 p-8 sm:p-10 flex items-center gap-4"
               >
                 <svg
-                  className="w-7 h-7 text-[#009775]/40 shrink-0 mt-0.5"
+                  className="w-7 h-7 shrink-0 mt-0.5 opacity-40"
+                  style={{ color: "var(--primary)" }}
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
                   <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.984zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.432.917-3.995 3.638-3.995 5.849h3.983v10h-9.984z" />
                 </svg>
-                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                <p className="text-sm sm:text-base text-body leading-relaxed">
                   {testimonials[current].quote}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Author row — always at the same position */}
-          <div className="border-t border-white/5 px-8 sm:px-10 py-5 flex items-center gap-3">
+          {/* Author row */}
+          <div className="px-8 sm:px-10 py-5 flex items-center gap-3" style={{ borderTop: "1px solid var(--border-subtle)" }}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -108,23 +115,23 @@ export default function Testimonials() {
                 transition={{ duration: 0.4 }}
                 className="flex items-center gap-3 flex-1 min-w-0"
               >
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#009775] to-[#6ac49a] flex items-center justify-center text-lg shrink-0">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--gradient-start)] to-[var(--gradient-end)] flex items-center justify-center text-lg shrink-0">
                   {testimonials[current].avatar}
                 </div>
                 <div className="min-w-0">
                   {testimonials[current].name && (
-                    <div className="text-white font-medium text-sm">
+                    <div className="text-foreground font-medium text-sm">
                       {testimonials[current].name}
                     </div>
                   )}
-                  <div className="text-gray-500 text-xs">
+                  <div className="text-muted text-xs">
                     {testimonials[current].role}
                   </div>
                 </div>
               </motion.div>
             </AnimatePresence>
 
-            {/* Dots — always visible, centered */}
+            {/* Dots */}
             {testimonials.length > 1 && (
               <div className="flex gap-1.5 mx-auto">
                 {testimonials.map((_, i) => (
@@ -132,18 +139,18 @@ export default function Testimonials() {
                     key={i}
                     type="button"
                     onClick={() => setCurrent(i)}
-                    className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
-                      i === current
-                        ? "bg-[#6ac49a] w-6"
-                        : "bg-gray-700 hover:bg-gray-500 w-3"
-                    }`}
+                    className="h-1.5 rounded-full transition-all duration-300 cursor-pointer"
+                    style={{
+                      width: i === current ? "1.5rem" : "0.75rem",
+                      backgroundColor: i === current ? "var(--primary)" : "var(--dot-inactive)",
+                    }}
                     aria-label={`Go to testimonial ${i + 1}`}
                   />
                 ))}
               </div>
             )}
 
-            {/* YouTube link — always same spot */}
+            {/* YouTube link */}
             <div className="shrink-0 w-20 flex justify-end">
               <AnimatePresence mode="wait">
                 {testimonials[current].youtube && (
@@ -156,7 +163,7 @@ export default function Testimonials() {
                     href={testimonials[current].youtube}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs text-[#6ac49a] hover:text-white transition-colors"
+                    className="inline-flex items-center gap-1.5 text-xs text-accent-text hover:text-foreground transition-colors"
                   >
                     <FiYoutube className="w-3.5 h-3.5" />
                     <span>YouTube</span>

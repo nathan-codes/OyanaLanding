@@ -21,9 +21,10 @@ export default function PrivacyPolicyPage() {
         >
           <Link
             href="/"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-4 py-2 text-sm text-[var(--text-muted)] hover:text-white hover:border-[#009775]/60 hover:bg-black/50 transition-colors"
+            className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm text-body hover:text-foreground transition-colors"
+            style={{ borderColor: "var(--card-border)", backgroundColor: "var(--subtle-bg)" }}
           >
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-xs">
+            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full text-xs" style={{ backgroundColor: "var(--subtle-bg)" }}>
               ←
             </span>
             <span>Back to Home</span>
@@ -38,8 +39,8 @@ export default function PrivacyPolicyPage() {
           className="mb-10 md:mb-12 text-center"
         >
           <div className="mb-4 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[var(--surface-2)] px-4 py-1.5 text-xs font-medium text-[var(--text-muted)] border border-white/5">
-              <span className="inline-block h-2 w-2 rounded-full bg-[#6ac49a]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-[var(--surface-2)] px-4 py-1.5 text-xs font-medium text-[var(--text-muted)]" style={{ border: "1px solid var(--card-border)" }}>
+              <span className="inline-block h-2 w-2 rounded-full bg-primary" />
               <span>Legal Document</span>
             </div>
           </div>
@@ -47,7 +48,7 @@ export default function PrivacyPolicyPage() {
             Oyana Terms of Use <br /> and Privacy Policy
           </h1>
           <p className="mt-3 text-sm md:text-base text-[var(--text-muted)]">
-            Effective Date: <span className="font-medium text-white">January 1, 2026</span>
+            Effective Date: <span className="font-medium text-foreground">January 1, 2026</span>
           </p>
         </motion.header>
 
@@ -58,7 +59,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               1. Acceptance of Terms
@@ -68,8 +69,8 @@ export default function PrivacyPolicyPage() {
               bound by these Terms of Use (&quot;Terms&quot;). If you do not agree to these Terms, you
               may not use our Service.
             </p>
-            <div className="mt-4 rounded-xl border border-[#009775]/35 bg-[#009775]/10 px-4 py-3 text-sm md:text-base">
-              <p className="font-semibold text-white mb-1">
+            <div className="mt-4 rounded-xl border border-primary/35 bg-primary/10 px-4 py-3 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1">
                 YouTube API Services
               </p>
               <p className="text-[var(--text-muted)]">
@@ -77,7 +78,7 @@ export default function PrivacyPolicyPage() {
                 <Link
                   href="https://developers.google.com/youtube/terms/api-services-terms-of-service"
                   target="_blank"
-                  className="text-[#6ac49a] underline underline-offset-2 hover:text-[#8adcb3]"
+                  className="text-accent-text underline underline-offset-2 hover:text-primary"
                 >
                   YouTube Terms of Service
                 </Link>
@@ -92,7 +93,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.05 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               2. Description of Service
@@ -104,14 +105,14 @@ export default function PrivacyPolicyPage() {
               insights to improve retention and engagement.
             </p>
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2">
-              <span className="font-semibold text-white">Free and Paid Plans:</span> We offer both
+              <span className="font-semibold text-foreground">Free and Paid Plans:</span> We offer both
               free and paid subscription tiers. Free accounts have limited features and usage caps.
               Paid subscriptions provide additional features, higher limits, and priority support.
               We may change plan features, pricing, or availability with reasonable notice.
               Subscription fees are non-refundable except as required by law.
             </p>
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
-              <span className="font-semibold text-white">Disclaimer:</span> The feedback and
+              <span className="font-semibold text-foreground">Disclaimer:</span> The feedback and
               suggestions are recommendations only. Oyana does not guarantee improved views,
               engagement, or monetization.
             </p>
@@ -123,7 +124,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               3. Age &amp; Parental Requirements
@@ -134,7 +135,7 @@ export default function PrivacyPolicyPage() {
               with concerns should contact{" "}
               <Link
                 href="mailto:oyana@oyana.ai"
-                className="text-[#6ac49a] underline underline-offset-2 hover:text-[#8adcb3]"
+                className="text-accent-text underline underline-offset-2 hover:text-primary"
               >
                 oyana@oyana.ai
               </Link>
@@ -148,14 +149,14 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               4. Video Privacy &amp; Your Consent
             </h2>
-            <div className="mb-4 rounded-xl border border-[#009775]/35 bg-[#009775]/10 px-4 py-3 text-sm md:text-base">
+            <div className="mb-4 rounded-xl border border-primary/35 bg-primary/10 px-4 py-3 text-sm md:text-base">
               <p className="text-[var(--text-muted)]">
-                <span className="font-semibold text-white">Important: </span>
+                <span className="font-semibold text-foreground">Important: </span>
                 Federal law Video Protection Privacy Act (VPPA) requires your explicit consent
                 before we collect video viewing data. By checking the consent box during
                 registration, you agree we may collect and analyze:
@@ -178,7 +179,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               5. Your Privacy Rights General Data Protection Regulation (GDPR)
@@ -196,7 +197,7 @@ export default function PrivacyPolicyPage() {
               Contact{" "}
               <Link
                 href="mailto:oyana@oyana.ai"
-                className="text-[#6ac49a] underline underline-offset-2 hover:text-[#8adcb3]"
+                className="text-accent-text underline underline-offset-2 hover:text-primary"
               >
                 oyana@oyana.ai
               </Link>{" "}
@@ -211,7 +212,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.25 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               6. Your Content &amp; Our Rights
@@ -221,8 +222,8 @@ export default function PrivacyPolicyPage() {
               it, generate insights, and provide the Service. This license ends when you delete
               content, except for anonymized analytics.
             </p>
-            <div className="mb-4 rounded-xl border border-[#009775]/35 bg-[#009775]/10 px-4 py-3 text-sm md:text-base">
-              <p className="font-semibold text-white mb-1">We will not:</p>
+            <div className="mb-4 rounded-xl border border-primary/35 bg-primary/10 px-4 py-3 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1">We will not:</p>
               <ul className="list-disc pl-5 space-y-1 text-[var(--text-muted)]">
                 <li>Sell, license, or distribute your content to third parties</li>
                 <li>Use your content to train AI models for other users or products</li>
@@ -233,7 +234,7 @@ export default function PrivacyPolicyPage() {
               Our platform, software, algorithms, and analytics belong to us. You get access to use
               the Service, not ownership of our technology.
             </p>
-            <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2 font-semibold text-white">
+            <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2 font-semibold text-foreground">
               You promise:
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)] mb-3">
@@ -265,7 +266,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.3 }}
-            className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
+            className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
               7. How We Use &amp; Share Data
@@ -280,14 +281,14 @@ export default function PrivacyPolicyPage() {
               our Service.
             </p>
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-3">
-              <span className="font-semibold text-white">No AI Training:</span> We do not use your
+              <span className="font-semibold text-foreground">No AI Training:</span> We do not use your
               videos, content, or personal data to train artificial intelligence models, machine
               learning algorithms, or any systems that would benefit other users or third parties.
               Your data stays yours.
             </p>
 
-            <div className="mt-4 mb-4 rounded-xl border border-[#009775]/35 bg-[#009775]/10 px-4 py-3 text-sm md:text-base">
-              <p className="font-semibold text-white mb-1">YouTube API Data</p>
+            <div className="mt-4 mb-4 rounded-xl border border-primary/35 bg-primary/10 px-4 py-3 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1">YouTube API Data</p>
               <p className="text-[var(--text-muted)] mb-2">
                 Our Service uses YouTube API Services to access your YouTube analytics data. When
                 you connect your YouTube account:
@@ -314,7 +315,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="mb-3">
-              <p className="font-semibold text-white mb-1 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                 We share only:
               </p>
               <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
@@ -330,7 +331,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="mt-3 mb-3">
-              <p className="font-semibold text-white mb-1 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                 Cookies and Tracking
               </p>
               <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2">
@@ -349,23 +350,23 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="mt-3">
-              <p className="font-semibold text-white mb-1 text-sm md:text-base">
+              <p className="font-semibold text-foreground mb-1 text-sm md:text-base">
                 Data Retention
               </p>
               <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
                 <li>
-                  <span className="font-semibold text-white">
+                  <span className="font-semibold text-foreground">
                     Personal data &amp; content:
                   </span>{" "}
                   Retained while your account is active and up to 3 years after closure (or as
                   legally required).
                 </li>
                 <li>
-                  <span className="font-semibold text-white">YouTube API data:</span> Refreshed every
+                  <span className="font-semibold text-foreground">YouTube API data:</span> Refreshed every
                   24 hours and deleted within 30 days of access revocation or account closure.
                 </li>
                 <li>
-                  <span className="font-semibold text-white">Anonymized data:</span> May be
+                  <span className="font-semibold text-foreground">Anonymized data:</span> May be
                   retained indefinitely for analytics, product improvement, and industry research.
                   This data cannot identify you or your specific content and is never used to train
                   AI models for external purposes.
@@ -387,7 +388,7 @@ export default function PrivacyPolicyPage() {
             className="grid gap-6 md:gap-7"
           >
             {/* 8. Account Responsibilities */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 8. Your Account Responsibilities
               </h2>
@@ -400,7 +401,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 9. Service Availability */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 9. Service Availability
               </h2>
@@ -411,7 +412,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 10. Liability */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 10. Our Liability Limits
               </h2>
@@ -426,7 +427,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 11. Ending Account */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 11. Ending Your Account
               </h2>
@@ -449,7 +450,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 12. Disputes */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 12. Disputes
               </h2>
@@ -463,7 +464,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 13. Security */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 13. Security &amp; Data Protection
               </h2>
@@ -474,7 +475,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 14. Changes to Terms */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 14. Changes to Terms
               </h2>
@@ -485,7 +486,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             {/* 15. Contact */}
-            <div className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
+            <div className="rounded-2xl border border-card-border bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl">
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 15. Contact Us
               </h2>
@@ -493,7 +494,7 @@ export default function PrivacyPolicyPage() {
                 Please contact{" "}
                 <Link
                   href="mailto:oyana@oyana.ai"
-                  className="text-[#6ac49a] underline underline-offset-2 hover:text-[#8adcb3]"
+                  className="text-accent-text underline underline-offset-2 hover:text-primary"
                 >
                   oyana@oyana.ai
                 </Link>{" "}
@@ -508,7 +509,7 @@ export default function PrivacyPolicyPage() {
             initial="hidden"
             animate="visible"
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="mt-2 rounded-2xl border border-[#009775]/40 bg-[#009775]/10 px-5 py-5 md:px-7 md:py-6 text-center shadow-xl"
+            className="mt-2 rounded-2xl border border-primary/40 bg-primary/10 px-5 py-5 md:px-7 md:py-6 text-center shadow-xl"
           >
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
               By using our Service, you acknowledge that you have read, understood, and agree to be
