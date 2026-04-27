@@ -154,18 +154,13 @@ export default function TermsPage() {
               4. Video Privacy &amp; Your Consent
             </h2>
             <div className="mb-4 rounded-xl border border-[#009775]/35 bg-[#009775]/10 px-4 py-3 text-sm md:text-base">
-              <p className="font-semibold text-white mb-1">
-                Important: Video Protection Privacy Act (VPPA)
-              </p>
               <p className="text-[var(--text-muted)]">
-                Federal law requires your explicit consent before we collect video viewing data. By
-                checking the consent box during registration, you agree we may collect and analyze
-                your viewing data as described below.
+                <span className="font-semibold text-white">Important: </span>
+                Federal law Video Protection Privacy Act (VPPA) requires your explicit consent
+                before we collect video viewing data. By checking the consent box during
+                registration, you agree we may collect and analyze:
               </p>
             </div>
-            <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-3">
-              By checking the consent box during registration, you agree we may collect and analyze:
-            </p>
             <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
               <li>Video performance metrics and viewer behavior</li>
               <li>Content preferences and viewing patterns</li>
@@ -186,7 +181,7 @@ export default function TermsPage() {
             className="rounded-2xl border border-white/5 bg-[var(--surface-2)]/90 px-5 py-6 md:px-7 md:py-7 shadow-xl"
           >
             <h2 className="text-lg md:text-xl font-semibold mb-3">
-              5. Your Privacy Rights – General Data Protection Regulation (GDPR)
+              5. Your Privacy Rights General Data Protection Regulation (GDPR)
             </h2>
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-3">
               European Union users have the right to:
@@ -250,7 +245,7 @@ export default function TermsPage() {
               </li>
             </ul>
             <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed font-semibold mb-2">
-              Prohibited content includes, but is not limited to:
+              Prohibited content includes, but not limited to:
             </p>
             <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
               <li>Copyright/trademark violations</li>
@@ -258,8 +253,8 @@ export default function TermsPage() {
               <li>Content violating privacy rights</li>
               <li>Malware or malicious code</li>
               <li>
-                Content violating a connecting account&apos;s policy (e.g., Google, TikTok,
-                Instagram), including but not limited to clickbait ads
+                Content violating connecting account&apos;s policy (ie Google, TikTok, Instagram),
+                including but not limited to clickbait ads
               </li>
             </ul>
           </motion.section>
@@ -303,25 +298,24 @@ export default function TermsPage() {
                   demographics, and performance metrics.
                 </li>
                 <li>This data is used solely to provide you with analytics and insights.</li>
-                <li>We refresh YouTube data approximately every 24 hours.</li>
+                <li>We refresh YouTube data every 24 hours.</li>
                 <li>
-                  You can revoke our access to your YouTube data at any time via your Google
-                  Account security settings.
+                  You can revoke our access to your YouTube data at any time via the Google
+                  security settings page.
                 </li>
                 <li>
                   When you revoke access or delete your account, we delete all stored YouTube API
                   data within 30 days.
                 </li>
                 <li>
-                  Google&apos;s Privacy Policy applies to data accessed through YouTube API and other
-                  Google services.
+                  Google&apos;s Privacy Policy applies to data accessed through YouTube API.
                 </li>
               </ul>
             </div>
 
             <div className="mb-3">
               <p className="font-semibold text-white mb-1 text-sm md:text-base">
-                We share data only:
+                We share only:
               </p>
               <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
                 <li>With your consent</li>
@@ -349,8 +343,8 @@ export default function TermsPage() {
                 <li>Enable third-party integrations (like YouTube)</li>
               </ul>
               <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
-                You can control cookies through your browser settings. Disabling cookies may limit
-                some functionality of the Service.
+                You can control cookies through your browser settings. Note that disabling cookies
+                may limit Service functionality.
               </p>
             </div>
 
@@ -367,8 +361,8 @@ export default function TermsPage() {
                   legally required).
                 </li>
                 <li>
-                  <span className="font-semibold text-white">YouTube API data:</span> Refreshed
-                  regularly and deleted within 30 days of access revocation or account closure.
+                  <span className="font-semibold text-white">YouTube API data:</span> Refreshed every
+                  24 hours and deleted within 30 days of access revocation or account closure.
                 </li>
                 <li>
                   <span className="font-semibold text-white">Anonymized data:</span> May be
@@ -421,6 +415,9 @@ export default function TermsPage() {
               <h2 className="text-lg md:text-xl font-semibold mb-3">
                 10. Our Liability Limits
               </h2>
+              <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2">
+                To the maximum extent permitted by law:
+              </p>
               <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
                 <li>Our liability is limited to what you paid us in the past 12 months.</li>
                 <li>We&apos;re not liable for indirect or consequential damages.</li>
@@ -434,11 +431,11 @@ export default function TermsPage() {
                 11. Ending Your Account
               </h2>
               <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed mb-2">
-                You can close your account anytime. We may terminate accounts for Terms violations
-                or suspected illegal activity.
+                You can close your account anytime. We may terminate for Terms violations or
+                suspected illegal activity.
               </p>
               <ul className="list-disc pl-6 space-y-1 text-sm md:text-base text-[var(--text-muted)]">
-                <li>Your access ends immediately upon termination.</li>
+                <li>Your access ends immediately</li>
                 <li>Personal data is deleted within 30 days (except as legally required).</li>
                 <li>
                   Anonymized, aggregated data may be retained indefinitely for analytics, research,
@@ -483,7 +480,7 @@ export default function TermsPage() {
               </h2>
               <p className="text-sm md:text-base text-[var(--text-muted)] leading-relaxed">
                 We&apos;ll notify you of material changes via email or in-app notice. Continued use
-                of the Service after changes go into effect means you accept the updated Terms.
+                means you accept the updates.
               </p>
             </div>
 
@@ -500,7 +497,7 @@ export default function TermsPage() {
                 >
                   oyana@oyana.ai
                 </Link>{" "}
-                for any questions or concerns about these Terms.
+                for any questions and concerns.
               </p>
             </div>
           </motion.section>
