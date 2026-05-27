@@ -2,12 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
   FiMail,
   FiMapPin,
   FiYoutube,
   FiX,
-  FiCheck,
   FiChevronDown,
 } from "react-icons/fi";
 
@@ -49,9 +49,10 @@ const YOUTUBE_URL_REGEX =
   /^https?:\/\/(www\.)?youtube\.com\/(@[\w.-]+|channel\/[\w-]+|c\/[\w.-]+|user\/[\w.-]+)(\/.*)?$/i;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-type FormStatus = "idle" | "loading" | "success" | "error";
+type FormStatus = "idle" | "loading" | "error";
 
 export default function RequestInviteModal() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("");
@@ -169,14 +170,14 @@ export default function RequestInviteModal() {
         throw new Error(data.error || "Submission failed");
       }
 
-      setStatus("success");
-      setTimeout(() => {
-        setIsOpen(false);
-        setEmail("");
-        setCountry("");
-        setYoutubeUrl("");
-        setStatus("idle");
-      }, 2500);
+      setIsOpen(false);
+      setEmail("");
+      setCountry("");
+      setYoutubeUrl("");
+      setCountrySearch("");
+      setStatus("idle");
+      setErrors({});
+      router.push("/success");
     } catch {
       setStatus("error");
     }
@@ -245,28 +246,7 @@ export default function RequestInviteModal() {
               </button>
             </div>
 
-            {/* Success state */}
-            {status === "success" ? (
-              <div className="px-6 py-12 text-center">
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                  className="mx-auto w-16 h-16 rounded-full flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "var(--subtle-bg)" }}
-                >
-                  <FiCheck className="w-8 h-8 text-accent-text" />
-                </motion.div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">
-                  You&apos;re on the list!
-                </h3>
-                <p className="text-body text-sm">
-                  We&apos;ll reach out when your invite is ready.
-                </p>
-              </div>
-            ) : (
-              /* Form */
-              <form onSubmit={handleSubmit} className="px-6 pb-6 pt-4 space-y-5">
+            <form onSubmit={handleSubmit} className="px-6 pb-6 pt-4 space-y-5">
                 {/* Email */}
                 <div>
                   <label
@@ -497,8 +477,7 @@ export default function RequestInviteModal() {
                   </a>
                   .
                 </p>
-              </form>
-            )}
+            </form>
           </motion.div>
         </motion.div>
       )}
