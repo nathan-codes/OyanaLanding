@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 // import CustomCursor from "@/components/CustomCursor";
 
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}
       >
+        <GoogleAnalytics />
         {/* <CustomCursor /> */}
         {children}
       </body>
