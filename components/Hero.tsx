@@ -8,9 +8,10 @@ export default function Hero() {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const demoVideoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
   const [demoOpen, setDemoOpen] = useState(false);
+  const demoDriveFileId = "1MlxRqCvf5Y9Xk8-RjL7A4fwHpO0P-pXX";
+  const demoEmbedUrl = `https://drive.google.com/file/d/${demoDriveFileId}/preview?autoplay=1`;
 
   useEffect(() => {
     if (textRef.current) {
@@ -50,7 +51,6 @@ export default function Hero() {
   };
 
   const closeDemoModal = () => {
-    demoVideoRef.current?.pause();
     setDemoOpen(false);
   };
 
@@ -140,14 +140,12 @@ export default function Hero() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
               </button>
               <div className="relative aspect-video bg-black">
-                <video
-                  ref={demoVideoRef}
-                  src="/OyanaDemo.mp4"
-                  className="w-full h-full object-contain"
-                  controls
-                  playsInline
-                  onEnded={() => demoVideoRef.current?.pause()}
-                  aria-label="Oyana demo video"
+                <iframe
+                  src={demoEmbedUrl}
+                  title="Oyana demo video"
+                  className="w-full h-full"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
                 />
               </div>
               <div
